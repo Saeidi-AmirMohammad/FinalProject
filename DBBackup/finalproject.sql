@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2021 at 10:13 PM
+-- Generation Time: Oct 19, 2021 at 09:39 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -111,6 +111,7 @@ INSERT INTO `educational_group` (`id`, `name`, `created_at`, `updated_at`) VALUE
 CREATE TABLE `employee` (
   `id` int(10) UNSIGNED NOT NULL,
   `codeStandard` char(50) COLLATE utf8_persian_ci NOT NULL,
+  `userType_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
@@ -313,8 +314,8 @@ CREATE TABLE `presentation` (
   `lessonCourse_id` int(10) UNSIGNED NOT NULL,
   `educationalGroup_id` int(10) UNSIGNED NOT NULL,
   `teacher_id` int(10) UNSIGNED NOT NULL,
-  `capacity` smallint(5) UNSIGNED NOT NULL,
   `classRoom_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `capacity` smallint(5) UNSIGNED NOT NULL,
   `class_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `presentation_code` char(50) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -330,6 +331,8 @@ CREATE TABLE `presentation` (
 CREATE TABLE `reshte_tahsili` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(150) COLLATE utf8_persian_ci NOT NULL DEFAULT '0',
+  `code` char(5) COLLATE utf8_persian_ci NOT NULL,
+  `status` bit(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
@@ -343,6 +346,7 @@ CREATE TABLE `reshte_tahsili` (
 CREATE TABLE `student` (
   `id` int(10) UNSIGNED NOT NULL,
   `codeDaneshjo` char(50) COLLATE utf8_persian_ci NOT NULL,
+  `userType_id` int(10) UNSIGNED NOT NULL,
   `maghtae_id` int(10) UNSIGNED NOT NULL,
   `reshteTahsili_id` int(10) UNSIGNED NOT NULL,
   `termVorod_id` int(10) UNSIGNED NOT NULL,
@@ -532,7 +536,9 @@ INSERT INTO `vazeiate_nezam_vazife` (`id`, `name`, `created_at`, `updated_at`) V
 -- Indexes for table `choose_lesson`
 --
 ALTER TABLE `choose_lesson`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `stuednt_id` (`stuednt_id`),
+  ADD KEY `presentation_id` (`presentation_id`);
 
 --
 -- Indexes for table `classroom`
@@ -551,7 +557,8 @@ ALTER TABLE `educational_group`
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userType_id` (`userType_id`);
 
 --
 -- Indexes for table `employment_type`
@@ -563,7 +570,9 @@ ALTER TABLE `employment_type`
 -- Indexes for table `garde`
 --
 ALTER TABLE `garde`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `chooseLesson_id` (`chooseLesson_id`);
 
 --
 -- Indexes for table `hoze_doroos`
@@ -599,7 +608,8 @@ ALTER TABLE `martabe_elmi`
 -- Indexes for table `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `nobate_paziresh`
@@ -612,7 +622,10 @@ ALTER TABLE `nobate_paziresh`
 --
 ALTER TABLE `presentation`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `classCode_id` (`classRoom_id`);
+  ADD KEY `classCode_id` (`classRoom_id`),
+  ADD KEY `lessonCourse_id` (`lessonCourse_id`),
+  ADD KEY `educationalGroup_id` (`educationalGroup_id`),
+  ADD KEY `teacher_id` (`teacher_id`);
 
 --
 -- Indexes for table `reshte_tahsili`
@@ -629,7 +642,8 @@ ALTER TABLE `student`
   ADD KEY `reshteTahsili_id` (`reshteTahsili_id`),
   ADD KEY `termVorod_id` (`termVorod_id`),
   ADD KEY `nobatePaziresh_id` (`nobatePaziresh_id`),
-  ADD KEY `vazeiateNezamVazife_id` (`vazeiateNezamVazife_id`);
+  ADD KEY `vazeiateNezamVazife_id` (`vazeiateNezamVazife_id`),
+  ADD KEY `userType_id` (`userType_id`);
 
 --
 -- Indexes for table `teacher`
@@ -829,10 +843,39 @@ ALTER TABLE `vazeiate_nezam_vazife`
 --
 
 --
+-- Constraints for table `choose_lesson`
+--
+ALTER TABLE `choose_lesson`
+  ADD CONSTRAINT `FK_choose_lesson_presentation` FOREIGN KEY (`presentation_id`) REFERENCES `presentation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_choose_lesson_student` FOREIGN KEY (`stuednt_id`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `employee`
+--
+ALTER TABLE `employee`
+  ADD CONSTRAINT `FK_employee_user_type` FOREIGN KEY (`userType_id`) REFERENCES `user_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `garde`
+--
+ALTER TABLE `garde`
+  ADD CONSTRAINT `FK_garde_choose_lesson` FOREIGN KEY (`chooseLesson_id`) REFERENCES `choose_lesson` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_garde_student` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `news`
+--
+ALTER TABLE `news`
+  ADD CONSTRAINT `FK_news_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `presentation`
 --
 ALTER TABLE `presentation`
-  ADD CONSTRAINT `FK_presentation_classroom` FOREIGN KEY (`classRoom_id`) REFERENCES `classroom` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_presentation_classroom` FOREIGN KEY (`classRoom_id`) REFERENCES `classroom` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_presentation_educational_group` FOREIGN KEY (`educationalGroup_id`) REFERENCES `educational_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_presentation_lesson_course` FOREIGN KEY (`lessonCourse_id`) REFERENCES `lesson_course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_presentation_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student`
@@ -842,6 +885,7 @@ ALTER TABLE `student`
   ADD CONSTRAINT `FK_student_nobate_paziresh` FOREIGN KEY (`nobatePaziresh_id`) REFERENCES `nobate_paziresh` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_student_reshte_tahsili` FOREIGN KEY (`reshteTahsili_id`) REFERENCES `reshte_tahsili` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_student_term_vorod` FOREIGN KEY (`termVorod_id`) REFERENCES `term_vorod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_student_user_type` FOREIGN KEY (`userType_id`) REFERENCES `user_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_student_vazeiate_nezam_vazife` FOREIGN KEY (`vazeiateNezamVazife_id`) REFERENCES `vazeiate_nezam_vazife` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
