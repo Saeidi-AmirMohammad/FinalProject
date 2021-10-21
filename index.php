@@ -1,7 +1,7 @@
 	<?php
     require "./Section/index/header.php";
     ?>
-    <body class="img js-fullheight" style="background-image: url(../../Public/IndexAssist/Image/login_bg.jpg);">
+    <body class="img js-fullheight" style="background-image: url(../../Public/IndexAssist/Image/login_bg_2.jpg);">
 	    <section class="ftco-section">
 	        <div class="container">
 	            <div class="row justify-content-center">
