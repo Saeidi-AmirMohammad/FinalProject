@@ -127,7 +127,7 @@
 
   <!-- Main Sidebar Container -->
   <?php
-    require "../Section/Home/SideBar.php";
+    require "../Section/Home/sideBar.php";
     ?>
 
   <!-- Content Wrapper. Contains page content -->

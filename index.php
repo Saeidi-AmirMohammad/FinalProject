@@ -1,7 +1,7 @@
 	<?php
     require "./Section/index/header.php";
     ?>
-    <body class="img js-fullheight" style="background-image: url(../../Public/IndexAssist/Image/login_bg_2.jpg);">
+    <body class="img js-fullheight" style="background-image: url(../../Public/IndexAssist/Image/login_bg.jpg);">
 	    <section class="ftco-section">
 	        <div class="container">
 	            <div class="row justify-content-center">
@@ -12,12 +12,12 @@
 	            <div class="row justify-content-center">
 	                <div class="col-md-6 col-lg-4">
 	                    <div class="login-wrap p-0">
-	                        <form action="#" class="signin-form">
+	                        <form action="./Controll/Login/loginController.php" method="POST" class="signin-form">
 	                            <div class="form-group">
-	                                <input type="text" class="form-control" placeholder="کد ملی" required>
+	                                <input type="text" name="m_code" class="form-control" placeholder="کد ملی" required>
 	                            </div>
 	                            <div class="form-group">
-	                                <input id="password-field" type="password" class="form-control" placeholder="سریال شناسنامه" required>
+	                                <input id="password-field" type="password" name="serial_number" class="form-control" placeholder="سریال شناسنامه" required>
 	                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 	                            </div>
 	                            <div class="form-group">

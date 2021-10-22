@@ -10887,15 +10887,23 @@ textarea.form-control {
   outline: none;
 }
 .btn.btn-primary {
-  background: #fbceb5 !important;
-  border: 1px solid #fbceb5 !important;
+  /* background: #fbceb5 !important;
+  border: 1px solid #fbceb5 !important; */
+  background: #FFAFBD;
+  background: -webkit-linear-gradient(to right, #ffc3a0, #FFAFBD);
+  background: linear-gradient(to right, #ffc3a0, #FFAFBD);
+  transition: all 3s ease-in; 
   color: #000 !important;
 }
-.btn.btn-primary:hover {
+
+.btn.btn-primary:hover{
+  background: linear-gradient(to left, #ffc3a0, #FFAFBD);
+}
+/* .btn.btn-primary:hover {
   border: 1px solid #fbceb5;
   background: transparent;
   color: #fbceb5;
-}
+} */
 .btn.btn-primary.btn-outline-primary {
   border: 1px solid #fbceb5;
   background: transparent;
@@ -10905,4 +10913,11 @@ textarea.form-control {
   border: 1px solid transparent;
   background: #fbceb5;
   color: #fff;
+}
+
+/* ---------- Media Screen ---------- */
+@media screen and (max-width: 768px) {
+  body.img {
+    background-position: 100% 50%;
+  }
 }
