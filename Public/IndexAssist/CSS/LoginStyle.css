@@ -10889,15 +10889,17 @@ textarea.form-control {
 .btn.btn-primary {
   /* background: #fbceb5 !important;
   border: 1px solid #fbceb5 !important; */
+
   background: #FFAFBD;
   background: -webkit-linear-gradient(to right, #ffc3a0, #FFAFBD);
   background: linear-gradient(to right, #ffc3a0, #FFAFBD);
   transition: all 3s ease-in; 
   color: #000 !important;
+  transition: all .4s ease-in;
 }
 
 .btn.btn-primary:hover{
-  background: linear-gradient(to left, #ffc3a0, #FFAFBD);
+transform: scale(1.04);
 }
 /* .btn.btn-primary:hover {
   border: 1px solid #fbceb5;
