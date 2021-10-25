@@ -3,16 +3,23 @@
 
 require_once "../../Model/dataBase.php";
 $connect = DBConnection();
-$uGet = getAll($connect);
+$getAllUser = getAllUserData($connect);
 echo "<pre>";
-var_dump($uGet);
+var_dump($getAllUser);
 echo "</pre>";
-$user = userGet($connect, $_POST['m_code']);
+$user = getLoginUser($connect, $_POST['m_code']);
 
 if ($user) {
     if ($_POST['serial_number'] == $user->serial_number) {
         $_SESSION['m_code'] = $user->m_code;
+
+        echo $user->fname . " " . $user->lname . " " . "خوش آمدید";
+
+    } else {
+        echo "سریال شناسنامه اشتباه است*";
     }
+} else {
+    echo "کاربری با کد ملی وارد شده یافت نشد*";
 }
 
-var_dump($_SESSION);
+//var_dump($_SESSION);

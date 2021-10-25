@@ -16,7 +16,7 @@ function DBConnection()
     }
 }
 
-function getAll($connection)
+function getAllUserData($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM user");
     $stmt->execute();
@@ -24,11 +24,11 @@ function getAll($connection)
 
 }
 
-function userGet($connection , $m_code)
+function getLoginUser($connection, $m_code)
 {
     $stmt = $connection->prepare("SELECT * FROM user where `m_code`= :m_code");
-    $stmt->bindparam("m_code",$m_code);
+    $stmt->bindparam(':m_code', $m_code);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_OBJ); //Convert Tabel To Array
-    return $user ? $user:false;
+    return $user ? $user : false;
 }
