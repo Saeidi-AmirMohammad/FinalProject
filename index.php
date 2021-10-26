@@ -15,7 +15,7 @@ session_start();
                 <div class="login-wrap p-0">
                     <form action="./Controll/Login/loginController.php" method="POST" class="signin-form">
                         <div class="form-group">
-                            <input type="text" name="m_code" class="form-control" placeholder="کد ملی" required>
+                            <input type="text" name="m_code" class="form-control" placeholder="کد ملی" maxlength="10" required>
                         </div>
                         <div class="form-group">
                             <input id="password-field" type="password" name="serial_number" class="form-control"
@@ -27,7 +27,7 @@ session_start();
                         </div>
                         <div class="form-group d-flex">
                             <div class="w-50 text-md-left">
-                                <a href="#" style="color: #fff">فراموشی رمز عبور</a>
+                                <a href="./View/ResetLoginPassword.php" style="color: #fff">فراموشی رمز عبور</a>
                             </div>
                             <div class="w-50">
                                 <label class="checkbox-wrap checkbox-primary">مرا به خاطر بسپار

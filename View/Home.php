@@ -1,5 +1,6 @@
 <?php
 require "../Section/Home/header.php";
+
 ?>
     <div class="wrapper">
 
@@ -149,9 +150,14 @@ require "../Section/Home/header.php";
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+                <?php
+                require "../View/user/create.php"
+                ?>
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+
+
     </div>
     <!-- /.content-wrapper -->
 <?php
