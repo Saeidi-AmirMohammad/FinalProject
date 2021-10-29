@@ -13,7 +13,7 @@ session_start();
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
-                    <form action="./Controll/Login/loginController.php" method="POST" class="signin-form">
+                    <form action="./app/Controll/Login/loginController.php" method="POST" class="signin-form">
                         <div class="form-group">
                             <input type="text" name="m_code" class="form-control" placeholder="کد ملی" maxlength="10" required>
                         </div>

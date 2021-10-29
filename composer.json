@@ -1,0 +1,19 @@
+{
+    "name": "saeidi-amirmohammad/final-project",
+    "autoload": {
+        "psr-4": {
+            "SaeidiAmirmohammad\\FinalProject\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "SaeidiAmirMohammad",
+            "email": "amirmohammad1379.saeidi@gmail.com"
+        }
+    ],
+    "require": {
+        "nesbot/carbon": "^2.53",
+        "beberlei/assert": "^3.3",
+        "morilog/jalali": "^3.2"
+    }
+}

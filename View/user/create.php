@@ -1,7 +1,7 @@
 <?php
 ?>
 
-<form role="form">
+<form role="form" action="../../app/Controll/User/userController.php" method="post">
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
@@ -25,12 +25,12 @@
                     <label for="exampleInputEmail1">شماره همراه</label>
                     <input type="text" class="form-control" id="exampleInputEmail1"
                            placeholder="شماره همراه را وارد کنید"
-                           name="tell">
+                           name="tell" maxlength="11">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">کد ملی</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="کد ملی را وارد کنید"
-                           name="m_code">
+                           name="m_code" maxlength="10">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">آدرس</label>
@@ -54,8 +54,8 @@
                 <div class="form-group">
                     <label for="jender">جنسیت</label>
                     <select class="form-control" id="jender" name="jender">
-                        <option>مرد</option>
-                        <option>زن</option>
+                        <option value="1">مرد</option>
+                        <option value="0">زن</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -81,10 +81,10 @@
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
                     <select class="form-control" id="type" name="type">
-                        <option>استاد</option>
-                        <option>دانشجو</option>
-                        <option>کارمند</option>
-                        <option>ادمین</option>
+                        <option value="1">استاد</option>
+                        <option value="2">کارمند</option>
+                        <option value="3">دانشجو</option>
+                        <option value="4">ادمین</option>
                     </select>
                 </div>
             </div>
