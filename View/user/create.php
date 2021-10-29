@@ -1,6 +1,5 @@
 <?php
 ?>
-
 <form role="form" action="../../app/Controll/User/userController.php" method="post">
     <div class="card-body">
         <div class="row">
@@ -53,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <label for="jender">جنسیت</label>
-                    <select class="form-control" id="jender" name="jender">
+                    <select class="form-control" id="jender" name="jender" >
                         <option value="1">مرد</option>
                         <option value="0">زن</option>
                     </select>
@@ -76,7 +75,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">دانشگاه</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="دانشگاه را وارد کنید"
-                           name="university">
+                          name="university">
                 </div>
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
