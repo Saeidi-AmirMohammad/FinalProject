@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php
+    require __DIR__."/../../bootstrap/autoload.php";
+    ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>پنل مدیریت | داشبورد اول</title>

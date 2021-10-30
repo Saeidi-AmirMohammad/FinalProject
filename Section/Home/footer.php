@@ -47,5 +47,15 @@
 <script src="../../Public/HomeAssist/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../Public/HomeAssist/dist/js/demo.js"></script>
+
+<script src="jquery-3.3.1.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>>
+<?php
+$_SESSION['error'] = true;
+alertMe(isset($_SESSION['error']) ? $_SESSION['error'] : "");
+//$_SESSION['error'] = false;
+//session_destroy();
+?>
 </body>
 </html>

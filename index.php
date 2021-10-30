@@ -1,6 +1,5 @@
 <?php
 require "./Section/index/header.php";
-session_start();
 ?>
 <body class="img js-fullheight" style="background-image: url(./Public/IndexAssist/Image/login_bg.jpg);">
 <section class="ftco-section">
