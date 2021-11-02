@@ -41,17 +41,37 @@ function old($field)
     return  $a;
 }
 
-function alertMe($error = false , $title = "عمليات موفقيت آميز بود" , $type = "info"){
+//function alertMe($error = false , $title = "عمليات موفقيت آميز بود" , $type = "info"){
+//    if ($error == false){
+//        return "";
+//    }
+//echo "<script type=\"text/javascript\">$(document).ready(function(){
+//  swal({
+//    position: \"top-end\",
+//    type: '{$type}',
+//    title: '{$title}',
+//    showConfirmButton: false,
+////    timer: 1500
+//  })
+//});</script>";
+//}
+function alertMe($error = false , $title  , $type){
     if ($error == false){
         return "";
     }
-echo "<script type=\"text/javascript\">$(document).ready(function(){
-  swal({
-    position: \"top-end\",
-    type: '{$type}',
-    title: '{$title}',
-    showConfirmButton: false,
-//    timer: 1500
-  })
-});</script>";
+    if (empty($title) ){
+        $title = "عمليات موفقيت آميز بود";
+    }
+    if (empty($type)){
+        $type='success';
+    }
+echo "
+   <div class=\"alert alert-{$type} alert-dismissible fade show\" role=\"alert\">
+  {$title}
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button>
+</div>
+";
+
 }

@@ -151,6 +151,11 @@ require "../Section/Home/header.php";
                     </div><!-- /.col -->
                 </div><!-- /.row -->
                 <?php
+                alertMe(isset($_SESSION['error']) ? $_SESSION['error'] : "",isset($_SESSION['massage'])? $_SESSION['massage']:"",isset($_SESSION['type'])? $_SESSION['type']:"");
+                $_SESSION['error'] = false;
+                //session_destroy();
+                ?>
+                <?php
                 require "../View/user/create.php"
                 ?>
             </div><!-- /.container-fluid -->

@@ -1,5 +1,5 @@
 <?php
-require __DIR__."/../../function/function.php";
+
 $fname = old('fname');
 $lname = old('lname');
 $email = old('email');
