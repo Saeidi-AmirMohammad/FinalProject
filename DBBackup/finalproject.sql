@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2021 at 09:39 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Nov 03, 2021 at 07:51 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -111,7 +112,6 @@ INSERT INTO `educational_group` (`id`, `name`, `created_at`, `updated_at`) VALUE
 CREATE TABLE `employee` (
   `id` int(10) UNSIGNED NOT NULL,
   `codeStandard` char(50) COLLATE utf8_persian_ci NOT NULL,
-  `userType_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
@@ -346,7 +346,6 @@ CREATE TABLE `reshte_tahsili` (
 CREATE TABLE `student` (
   `id` int(10) UNSIGNED NOT NULL,
   `codeDaneshjo` char(50) COLLATE utf8_persian_ci NOT NULL,
-  `userType_id` int(10) UNSIGNED NOT NULL,
   `maghtae_id` int(10) UNSIGNED NOT NULL,
   `reshteTahsili_id` int(10) UNSIGNED NOT NULL,
   `termVorod_id` int(10) UNSIGNED NOT NULL,
@@ -365,7 +364,6 @@ CREATE TABLE `student` (
 CREATE TABLE `teacher` (
   `id` int(10) UNSIGNED NOT NULL,
   `codeModares` char(50) COLLATE utf8_persian_ci NOT NULL,
-  `userType_id` int(10) UNSIGNED NOT NULL,
   `martabeElmi_id` int(11) UNSIGNED NOT NULL,
   `employmentType_id` int(10) UNSIGNED NOT NULL,
   `teachingType_id` int(11) UNSIGNED NOT NULL,
@@ -459,6 +457,7 @@ INSERT INTO `type` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `user` (
   `id` int(10) UNSIGNED NOT NULL,
+  `type_id` int(10) UNSIGNED NOT NULL,
   `fname` varchar(50) COLLATE utf8_persian_ci NOT NULL,
   `lname` varchar(100) COLLATE utf8_persian_ci NOT NULL,
   `email` varchar(120) COLLATE utf8_persian_ci NOT NULL,
@@ -480,29 +479,10 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `fname`, `lname`, `email`, `tell`, `m_code`, `address`, `serial_number`, `birthday`, `jender`, `father_name`, `birthday_place`, `mazhab`, `university`, `created_at`, `updated_at`) VALUES
-(1, 'ali', 'alavi', 'alavi@info.com', '09368132334', '0925345678', 'alahiye 3', '98233', '2021-10-18 18:17:34', b'1', 'mehdi', 'mashhad', 'shiyee', 'montazeri', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_type`
---
-
-CREATE TABLE `user_type` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `type_id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
-
---
--- Dumping data for table `user_type`
---
-
-INSERT INTO `user_type` (`id`, `user_id`, `type_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, NULL, NULL);
+INSERT INTO `user` (`id`, `type_id`, `fname`, `lname`, `email`, `tell`, `m_code`, `address`, `serial_number`, `birthday`, `jender`, `father_name`, `birthday_place`, `mazhab`, `university`, `created_at`, `updated_at`) VALUES
+(22, 1, 'امیر', 'احمدی', 'ahmadi@gmail.com', '09356787779', '0934567882', 'قاسم آباد امیریه 31', '11111', '0000-00-00 00:00:00', b'1', 'رضا', 'مشهد', 'شیعه', 'منتظری', NULL, NULL),
+(44, 1, 'fghghfh', 'fghfghfghfh', 'amirreza.moghaddampoor@gmail.com', '454554', '45454554', 'frdgfgdfgdfg', '34534534', '0000-00-00 00:00:00', b'1', 'fdgdfg', 'dfgdfgdg', 'dfgdfg', 'dfgdfgdfg', NULL, NULL),
+(49, 1, 'ccvcvcvc', 'cvcvcvcvcvcv', 'afgfg4w@gmail.com', '8877898788', '7873456786', 'dfggddggdgdg', '567956353', '0000-00-00 00:00:00', b'1', 'gfhfghfgh', 'fghfghfghfghf', 'fhfghfh', 'fhfhfh', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -558,7 +538,7 @@ ALTER TABLE `educational_group`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userType_id` (`userType_id`);
+  ADD UNIQUE KEY `codeStandard` (`codeStandard`);
 
 --
 -- Indexes for table `employment_type`
@@ -638,20 +618,20 @@ ALTER TABLE `reshte_tahsili`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codeDaneshjo` (`codeDaneshjo`),
   ADD KEY `maghtae_id` (`maghtae_id`),
   ADD KEY `reshteTahsili_id` (`reshteTahsili_id`),
   ADD KEY `termVorod_id` (`termVorod_id`),
   ADD KEY `nobatePaziresh_id` (`nobatePaziresh_id`),
-  ADD KEY `vazeiateNezamVazife_id` (`vazeiateNezamVazife_id`),
-  ADD KEY `userType_id` (`userType_id`);
+  ADD KEY `vazeiateNezamVazife_id` (`vazeiateNezamVazife_id`);
 
 --
 -- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codeModares` (`codeModares`),
   ADD KEY `martabeElmi_id` (`martabeElmi_id`),
-  ADD KEY `userType_id` (`userType_id`),
   ADD KEY `employmentType_id` (`employmentType_id`),
   ADD KEY `teachingType_id` (`teachingType_id`),
   ADD KEY `madrak_id` (`madrak_id`),
@@ -680,14 +660,11 @@ ALTER TABLE `type`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_type`
---
-ALTER TABLE `user_type`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
+  ADD UNIQUE KEY `m_code` (`m_code`),
+  ADD UNIQUE KEY `serial_number` (`serial_number`),
+  ADD UNIQUE KEY `tell` (`tell`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `type_id` (`type_id`);
 
 --
@@ -824,13 +801,7 @@ ALTER TABLE `type`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `user_type`
---
-ALTER TABLE `user_type`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `vazeiate_nezam_vazife`
@@ -848,12 +819,6 @@ ALTER TABLE `vazeiate_nezam_vazife`
 ALTER TABLE `choose_lesson`
   ADD CONSTRAINT `FK_choose_lesson_presentation` FOREIGN KEY (`presentation_id`) REFERENCES `presentation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_choose_lesson_student` FOREIGN KEY (`stuednt_id`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `employee`
---
-ALTER TABLE `employee`
-  ADD CONSTRAINT `FK_employee_user_type` FOREIGN KEY (`userType_id`) REFERENCES `user_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `garde`
@@ -885,7 +850,6 @@ ALTER TABLE `student`
   ADD CONSTRAINT `FK_student_nobate_paziresh` FOREIGN KEY (`nobatePaziresh_id`) REFERENCES `nobate_paziresh` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_student_reshte_tahsili` FOREIGN KEY (`reshteTahsili_id`) REFERENCES `reshte_tahsili` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_student_term_vorod` FOREIGN KEY (`termVorod_id`) REFERENCES `term_vorod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_student_user_type` FOREIGN KEY (`userType_id`) REFERENCES `user_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_student_vazeiate_nezam_vazife` FOREIGN KEY (`vazeiateNezamVazife_id`) REFERENCES `vazeiate_nezam_vazife` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -897,15 +861,13 @@ ALTER TABLE `teacher`
   ADD CONSTRAINT `FK_teacher_hoze_doroos` FOREIGN KEY (`hozeDoroos_id`) REFERENCES `hoze_doroos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_teacher_madrak` FOREIGN KEY (`madrak_id`) REFERENCES `madrak` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_teacher_martabe_elmi` FOREIGN KEY (`martabeElmi_id`) REFERENCES `martabe_elmi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_teacher_teaching_type` FOREIGN KEY (`teachingType_id`) REFERENCES `teaching_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_teacher_user_type` FOREIGN KEY (`userType_id`) REFERENCES `user_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_teacher_teaching_type` FOREIGN KEY (`teachingType_id`) REFERENCES `teaching_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `user_type`
+-- Constraints for table `user`
 --
-ALTER TABLE `user_type`
-  ADD CONSTRAINT `FK__type` FOREIGN KEY (`type_id`) REFERENCES `type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user`
+  ADD CONSTRAINT `FK_user_type` FOREIGN KEY (`type_id`) REFERENCES `type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
