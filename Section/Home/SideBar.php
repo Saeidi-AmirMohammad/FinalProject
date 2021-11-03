@@ -34,15 +34,15 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="./index.html" class="nav-link active">
+                  <a href="/view/home.php" class="nav-link active">
                     <i class="fa fa-circle-o nav-icon"></i>
-                    <p>داشبورد اول</p>
+                    <p>خانه</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
+                  <a href="/view/user/create.php" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
-                    <p>داشبورد دوم</p>
+                    <p>ایجاد کابر</p>
                   </a>
                 </li>
                 <li class="nav-item">

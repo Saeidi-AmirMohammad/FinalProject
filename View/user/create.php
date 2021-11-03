@@ -1,20 +1,9 @@
 <?php
-
-$fname = old('fname');
-$lname = old('lname');
-$email = old('email');
-$tell = old('tell');
-$m_code = old('m_code');
-$address = old('address');
-$serial_number = old('serial_number');
-$birthday = old('birthday');
-$jender = old('jender');
-$father_name = old('father_name');
-$birthday_place = old('birthday_place');
-$mazhab = old('mazhab');
-$university = old('university');
-
+require '../layout/haeder.php';
 ?>
+
+
+
 <form role="form" action="../../app/Controll/User/userController.php" method="post">
     <div class="card-body">
         <div class="row">
@@ -22,39 +11,39 @@ $university = old('university');
                 <div class="form-group">
                     <label for="exampleInputEmail1">نام</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید"
-                           name="fname" value="<?= $fname;?>">
+                           name="fname" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">نام خانوادگی</label>
                     <input type="text" class="form-control" id="exampleInputEmail1"
                            placeholder="نام خانوادگی را وارد کنید"
-                           name="lname" value="<?= $lname;?>">
+                           name="lname" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">ایمیل</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="ایمیل را وارد کنید"
-                           name="email" value="<?= $email;?>">
+                           name="email" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">شماره همراه</label>
                     <input type="text" class="form-control" id="exampleInputEmail1"
                            placeholder="شماره همراه را وارد کنید"
-                           name="tell" maxlength="11" value="<?= $tell;?>">
+                           name="tell" maxlength="11" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">کد ملی</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="کد ملی را وارد کنید"
-                           name="m_code" maxlength="10" value="<?= $m_code;?>">
+                           name="m_code" maxlength="10" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">آدرس</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="آدرس را وارد کنید"
-                           name="address" value="<?= $address;?>">
+                           name="address" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">شماره شناسنامه</label>
                     <input type="text" class="form-control" id="exampleInputPassword1"
-                           placeholder="شماره شناسنامه را وارد کنید" name="serial_number" value="<?= $serial_number;?>">
+                           placeholder="شماره شناسنامه را وارد کنید" name="serial_number" value="">
                 </div>
             </div>
             <div class="col-md-6">
@@ -62,7 +51,7 @@ $university = old('university');
                     <label for="exampleInputEmail1">تاریخ تولد</label>
                     <input type="text" class="form-control" id="exampleInputEmail1"
                            placeholder="تاریخ تولد را وارد کنید"
-                           name="birthday" value="<?= $birthday;?>">
+                           name="birthday" value="">
                     <span class="text-muted small">فرمت تاریخ تولد : ۱۳۷۹/۵/۱۱</span>
                 </div>
                 <div class="form-group">
@@ -75,22 +64,22 @@ $university = old('university');
                 <div class="form-group">
                     <label for="exampleInputEmail1">نام پدر</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="نام پدر را وارد کنید"
-                           name="father_name" value="<?= $father_name;?>">
+                           name="father_name" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">مکان تولد</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="مکان تولد را وارد کنید"
-                           name="birthday_place" value="<?= $birthday_place;?>">
+                           name="birthday_place" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">مذهب</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="مذهب را وارد کنید"
-                           name="mazhab" value="<?= $mazhab;?>">
+                           name="mazhab" value="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">دانشگاه</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="دانشگاه را وارد کنید"
-                          name="university" value="<?= $university;?>">
+                           name="university" value="">
                 </div>
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
@@ -110,3 +99,9 @@ $university = old('university');
         <button type="submit" class="btn btn-primary">ارسال</button>
     </div>
 </form>
+
+
+
+<?php
+require __DIR__.'/../../View/layout/footer.php';
+?>

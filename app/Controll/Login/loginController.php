@@ -1,25 +1,34 @@
 <?php
-// var_dump($_POST);
-require_once "../../../app/Model/dataBase.php";
-require "../../../function/function.php";
-$connect = DBConnection();
-$getAllUser = getAllUserData($connect);
-echo "<pre>";
-var_dump($getAllUser);
-echo "</pre>";
-$user = getLoginUser($connect, $_POST['m_code']);
+require __DIR__ . '/../../../bootstrap/autoload.php';
+if (ispost()) {
+    extract($_POST);
+    if (validation_requre([
+            htmlspecialchars($m_code),
+            htmlspecialchars($serial_number)]
+    )) {
+        $connect = DBConnection();
+        $user = getLoginUser($connect, $_POST['m_code']);
+        if ($user) {
+            if ($_POST['serial_number'] == $user->serial_number) {
+                $_SESSION['m_code'] = $user->m_code;
+                reDirect("../../../View/home.php");
+                echo $user->fname . " " . $user->lname . " " . "خوش آمدید";
 
-if ($user) {
-    if ($_POST['serial_number'] == $user->serial_number) {
-        $_SESSION['m_code'] = $user->m_code;
-        reDirect("../../../View/home.php");
-        echo $user->fname . " " . $user->lname . " " . "خوش آمدید";
-
-    } else {
-        echo "سریال شناسنامه اشتباه است*";
+            } else {
+                $_SESSION['error'] = true;
+                $_SESSION['massage'] = 'سریال شناسنامه اشتباه است';
+                $_SESSION['type'] = 'danger';
+            }
+        } else {
+            $_SESSION['error'] = true;
+            $_SESSION['massage'] = 'کاربری با کد ملی وارد شده یافت نشد';
+            $_SESSION['type'] = 'danger';
+        }
     }
-} else {
-    echo "کاربری با کد ملی وارد شده یافت نشد*";
 }
+    $_SESSION['error'] = true;
+    $_SESSION['massage'] = 'باموفقیت ثبت شد';
+    $_SESSION['type'] = 'success';
 
-var_dump($_SESSION);
+reDirect("../../../View/home.php");
+

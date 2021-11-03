@@ -73,5 +73,14 @@ echo "
   </button>
 </div>
 ";
+}
 
+function validation_requre($item){
+    $counter_error=0;
+    foreach ($item as $item){
+        if(empty($item)){
+            $counter_error++;
+        }
+    }
+    return $counter_error==0;
 }
