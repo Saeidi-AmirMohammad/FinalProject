@@ -24,6 +24,17 @@ function getAllUserData($connection)
 
 }
 
+
+function user_Get_id($id , $conn){
+    $statement=$conn->prepare("SELECT * FROM user where `id`= :id");
+    $statement->bindparam("id",$id);
+    $statement->execute();
+    $user_id     = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $user_id ? $user_id:false;
+}
+
+
 function getLoginUser($connection, $m_code)
 {
     $stmt = $connection->prepare("SELECT * FROM user where `m_code`= :m_code");

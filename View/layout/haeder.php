@@ -1,6 +1,11 @@
 <?php
+
 require __DIR__."/../../Section/Home/header.php";
 require __DIR__."/../../bootstrap/autoload.php";
+login_before('../../index.php');
+//http_response_code(404);
+//include('../../404.html'); // provide your own HTML for the error page
+//die();
 ?>
 <div class="wrapper">
 
@@ -122,8 +127,8 @@ require __DIR__."/../../bootstrap/autoload.php";
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-                        class="fa fa-th-large"></i></a>
+                <a class="nav-link" href="/app/Controll/Logout/logout.php"><i
+                        class="fa fa-power-off"></i></a>
             </li>
         </ul>
     </nav>

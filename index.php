@@ -1,5 +1,6 @@
 <?php
 require "./Section/index/header.php";
+require  __DIR__."/bootstrap/autoload.php";
 ?>
 <body class="img js-fullheight" style="background-image: url(./Public/IndexAssist/Image/login_bg.jpg);">
 <section class="ftco-section">
@@ -12,7 +13,13 @@ require "./Section/index/header.php";
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
-                    <form action="./app/Controll/Login/loginController.php" method="POST" class="signin-form">
+
+
+                    <form action="app/Controll/Login/loginController.php" method="POST" class="signin-form">
+                        <?php
+                        alertMe(isset($_SESSION['error']) ? $_SESSION['error'] : "",isset($_SESSION['massage'])? $_SESSION['massage']:"",isset($_SESSION['type'])? $_SESSION['type']:"");
+                           $_SESSION['error'] = false;
+                        ?>
                         <div class="form-group">
                             <input type="text" name="m_code" class="form-control" placeholder="کد ملی" maxlength="10" required>
                         </div>
@@ -34,10 +41,6 @@ require "./Section/index/header.php";
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                        </div>
-                        <div class="alert alert-danger alert-dismissible">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            *کاربری با کد ملی وارد شده یافت نشد
                         </div>
                     </form>
                     <!-- <p class="w-100 text-center">وارد شوید با</p>

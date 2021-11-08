@@ -1,9 +1,9 @@
 <?php
 require __DIR__ . '/../../../bootstrap/autoload.php';
-
-//\Carbon\Carbon::now();
-$date = jdate();
-
+login_before("../../../index.php");
+//$n=\Carbon\Carbon::now();
+//$date = jdate();
+$out_date= convert($_POST["birthday"]);
 if (isPost()) {
     extract($_POST);
     if (validation_requre([
@@ -11,11 +11,11 @@ if (isPost()) {
         htmlspecialchars($fname),
         htmlspecialchars($lname),
         htmlspecialchars($email),
-        htmlspecialchars($tell),
-        htmlspecialchars($m_code),
+        is_numeric(htmlspecialchars($tell)),
+        is_numeric( htmlspecialchars($m_code)),
         htmlspecialchars($address),
-        htmlspecialchars($serial_number),
-        htmlspecialchars($birthday),
+        is_numeric(htmlspecialchars($serial_number)),
+        htmlspecialchars($out_date),
         htmlspecialchars($jender),
         htmlspecialchars($father_name),
         htmlspecialchars($birthday_place),
@@ -23,6 +23,7 @@ if (isPost()) {
         htmlspecialchars($university)
     ])) {
         $connect = DBConnection();
+        $_POST['birthday']=$out_date;
         $user = createUser($connect, $_POST);
         if ($user){
             $error=true;
@@ -38,7 +39,7 @@ if (isPost()) {
     }else{
         $error=false;
         $_SESSION['error'] = true;
-        $_SESSION['massage'] = 'مقدار صحیحی را وارد کنید';
+        $_SESSION['massage'] = 'لطفا فیلد ها را پر نمایید یا مقادیر صحیح وارد نمایید.';
         $_SESSION['type'] = 'danger';
     }
 }else{

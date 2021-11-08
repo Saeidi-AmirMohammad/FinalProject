@@ -1,8 +1,20 @@
 <?php
-function reDirect($location = "../index.php")
+
+function reDirect($location = __DIR__."/../index.php")
 {
     header("Location:{$location}");
     die;
+}
+
+function login_after($location= "../view/home.php"){
+    if(isset($_SESSION['user'])){
+        reDirect($location);
+    }
+}
+function login_before($location=__DIR__."/../index.php"){
+    if(! isset($_SESSION['user'])){
+        reDirect($location);
+    }
 }
 
 function isPost()
@@ -74,6 +86,30 @@ echo "
 </div>
 ";
 }
+
+
+function convert($in_post_date){
+    if (str_contains($in_post_date,'/')){
+        $re =str_replace( '/', '', $in_post_date);
+        $n4 =str_split( $re , 4) ;
+        $Y=$n4[0] . $n4[1];
+        $M=$n4[2];
+        $D=$n4[3];
+        $e =\Morilog\Jalali\CalendarUtils::toGregorian(toEnNumber($Y), toEnNumber($M), toEnNumber($D));
+        return  $e[0].'/'.$e[1].'/'.$e[2];
+    }
+}
+
+
+function toEnNumber($input) {
+    $replace_pairs = array(
+        '۰' => '0', '۱' => '1', '۲' => '2', '۳' => '3', '۴' => '4', '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9',
+        '٠' => '0', '١' => '1', '٢' => '2', '٣' => '3', '٤' => '4', '٥' => '5', '٦' => '6', '٧' => '7', '٨' => '8', '٩' => '9'
+    );
+
+    return strtr( $input, $replace_pairs );
+}
+
 
 function validation_requre($item){
     $counter_error=0;
