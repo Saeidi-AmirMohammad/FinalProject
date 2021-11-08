@@ -57,7 +57,7 @@ if (isPost()) {
 //    $_SESSION['massage'] = 'خطایی رخ داده است لطفا برسی نمایید';
 //    $_SESSION['type'] = 'danger';
 //}
-reDirect("../../../View/user/create.php");
+reDirect("../../../View/user/all.php");
 //echo "<pre>";
 //var_dump($_POST);
 //echo "</pre>";

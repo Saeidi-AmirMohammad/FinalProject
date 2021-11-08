@@ -15,11 +15,10 @@
           <div class="info">
               <?php
 
-              if (isset($_SESSION['user'])){
+              if (! is_null($_SESSION['user'])){
                   $connect = DBConnection();
                   $user = getLoginUser($connect, $_SESSION['user']);
-
-         echo " <a href=\"#\" class=\"d-block\"><?= $user->fname.' '.$user->lname  ?></a> ";
+         echo " <a href=\"#\" class=\"d-block\">{$user->fname } {$user->lname}</a> ";
 
               }
          ?>
@@ -34,9 +33,9 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-            <li class="nav-item has-treeview menu-open">
-              <a href="#" class="nav-link active ">
-                <i class="nav-icon fa fa-dashboard"></i>
+            <li class="nav-item has-treeview <?php if ($url=='/view/home.php'){ echo 'menu-open';}else {echo '';} ?>">
+              <a href="#" class="nav-link  <?php if ($url=='/view/home.php'){ echo 'active';}else {echo '';} ?>">
+                <i class="nav-icon fa fa-user"></i>
                 <p>
                   داشبورد
                   <i class="right fa fa-angle-left"></i>
@@ -49,15 +48,32 @@
                     <p>خانه</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="/view/user/create.php" class="nav-link <?php if ($url=='/view/user/create.php'){ echo 'active';}else {echo '';} ?>">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ایجاد کابر</p>
-                  </a>
-                </li>
 
               </ul>
             </li>
+              <li class="nav-item has-treeview  <?php if ($url=='/view/user/create.php' | $url=='/view/user/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/user/create.php' | $url=='/view/user/all.php'){ echo 'active';}else {echo '';} ?>">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                          کاربران
+                          <i class="right fa fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/user/create.php" class="nav-link <?php if ($url=='/view/user/create.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>همه کابران</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/view/user/all.php" class="nav-link <?php if ($url=='/view/user/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>ایجاد کابر</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

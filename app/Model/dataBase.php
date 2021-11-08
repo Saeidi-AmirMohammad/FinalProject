@@ -16,6 +16,8 @@ function DBConnection()
     }
 }
 
+
+
 function getAllUserData($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM user");
@@ -33,6 +35,36 @@ function user_Get_id($id , $conn){
 
     return $user_id ? $user_id:false;
 }
+
+function user_delete_id($id , $conn){
+    $statement=$conn->prepare("DELETE FROM `finalproject`.`user` WHERE  `id`=:id;");
+    $statement->bindparam("id",$id);
+    $statement->execute();
+    return $statement ? $statement:false;
+}
+
+function user_update($id , $data , $conn){
+    extract($data);
+    $statement=$conn->prepare("UPDATE `user` SET `type_id `=:type_id  ,   `fname`=:fname  ,  `lname `=:lname  ,   `email `=:email  ,   `tell `=:tell  ,   `m_code `=:m_code  ,   `address `=:address  ,   `serial_number `=:serial_number  ,   `birthday `=:birthday  ,   `jender `=:jender  ,   `father_name `=:father_name  ,   `birthday_place `=:birthday_place  ,   `mazhab `=:mazhab  ,   `university `=:university   
+WHERE  `id`=:id;");
+    $statement->bindparam("id",$id,PDO::PARAM_INT);
+    $statement->bindparam("type_id",$type_id,PDO::PARAM_INT);
+    $statement->bindparam("fname",$fname);
+    $statement->bindparam("lname",$lname);
+    $statement->bindparam("email",$email);
+    $statement->bindparam("tell",$tell);
+    $statement->bindparam("m_code",$m_code);
+    $statement->bindparam("address",$address);
+    $statement->bindparam("serial_number",$serial_number);
+    $statement->bindparam("birthday",$birthday);
+    $statement->bindparam("jender",$jender,PDO::PARAM_INT);
+    $statement->bindparam("father_name",$father_name);
+    $statement->bindparam("birthday_place",$birthday_place,);
+    $statement->bindparam("mazhab",$mazhab);
+    $statement->bindparam("university",$university);
+    $statement->execute()? true : false;
+}
+
 
 
 function getLoginUser($connection, $m_code)
