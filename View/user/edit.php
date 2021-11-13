@@ -5,10 +5,10 @@ require '../layout/haeder.php';
 
 $connect = DBConnection();
 //$_POST['birthday']=$out_date;
-
 //$user=getAllUserData($connect);
-$user= user_Get_id(54,$connect);
-
+//var_dump($_GET['edit']);die;
+$id=$_GET['edit'];
+$user= user_Get_id($id,$connect);
 ?>
 
 
@@ -18,15 +18,22 @@ $user= user_Get_id(54,$connect);
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
+                    <label for="exampleInputEmail1">شناسه کاربر در سیستم</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1"
+                           name="id_view" value="<?= $user->id?>" disabled>
+                    <input type="hidden" class="form-control"
+                           name="id" value="<?= $user->id?>">
+                </div>
+                <div class="form-group">
                     <label for="exampleInputEmail1">نام</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید"
-                           name="fname" value="<?=$user->fname?>">
+                           name="fname" value="<?= $user->fname?>">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">نام خانوادگی</label>
                     <input type="text" class="form-control" id="exampleInputEmail1"
                            placeholder="نام خانوادگی را وارد کنید"
-                           name="lname" value="<?=$user->lname?>">
+                           name="lname" value="<?= $user->lname?>">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">ایمیل</label>
@@ -73,9 +80,9 @@ $user= user_Get_id(54,$connect);
 <!--            -->
                 <div class="form-group">
                     <label for="jender">جنسیت</label>
-                    <select class="form-control" id="jender" name="jender" >
-                        <option value="1" <?= $user->jender==='1' ? 'selected':'' ?>  >مرد</option>
-                        <option value="0" <?= $user->jender==='0' ? 'selected' :'' ?>>زن</option>
+                    <select class="form-control" id="jender" name="jender"  >
+                        <option value="1" <?= $user->jender=='1' ? 'selected':'' ?>  >مرد</option>
+                        <option value="0" <?= $user->jender=='0' ? 'selected' :'' ?>>زن</option>
                     </select>
                 </div>
                 <div class="form-group">

@@ -89,6 +89,7 @@ echo "
 
 
 function convert($in_post_date){
+    //شمسی به میلادی
     if (str_contains($in_post_date,'/')){
         $re =str_replace( '/', '', $in_post_date);
         $n4 =str_split( $re , 4) ;
@@ -97,6 +98,24 @@ function convert($in_post_date){
         $D=$n4[3];
         $e =\Morilog\Jalali\CalendarUtils::toGregorian(toEnNumber($Y), toEnNumber($M), toEnNumber($D));
         return  $e[0].'/'.$e[1].'/'.$e[2];
+    }
+}
+
+function convert_to_Jalali($in_post_date){
+    //شمسی به میلادی
+  // return var_dump(toEnNumber($in_post_date));
+    if (str_contains($in_post_date,'-')){
+        $re =str_replace( '-', '', $in_post_date);
+        $n4 =str_split( $re , 4);
+        $n2 =str_split( $n4[1] , 2);
+
+        $Y=$n4[0];
+        $M=$n2[0];
+        $D=$n2[1];
+       // return  var_dump(intval($D));
+        $e =  \Morilog\Jalali\CalendarUtils::toJalali(intval($Y), intval($M), intval($D)); // [1395, 2, 18]
+       //echo $e[0] ;
+       echo  $e[0] . "/"  . $e[1] . "/" .$e[2];
     }
 }
 

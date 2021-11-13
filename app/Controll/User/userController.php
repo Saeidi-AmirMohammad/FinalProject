@@ -3,6 +3,8 @@ require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
 //$n=\Carbon\Carbon::now();
 //$date = jdate();
+
+
 $out_date= convert($_POST["birthday"]);
 if (isPost()) {
     extract($_POST);
@@ -16,7 +18,7 @@ if (isPost()) {
         htmlspecialchars($address),
         is_numeric(htmlspecialchars($serial_number)),
         htmlspecialchars($out_date),
-        htmlspecialchars($jender),
+        is_numeric(htmlspecialchars($jender)),
         htmlspecialchars($father_name),
         htmlspecialchars($birthday_place),
         htmlspecialchars($mazhab),

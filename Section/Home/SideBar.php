@@ -63,17 +63,41 @@
                       <li class="nav-item">
                           <a href="/view/user/create.php" class="nav-link <?php if ($url=='/view/user/create.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>
-                              <p>همه کابران</p>
+                              <p>ایجاد کاربر</p>
                           </a>
                       </li>
                       <li class="nav-item">
                           <a href="/view/user/all.php" class="nav-link <?php if ($url=='/view/user/all.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>
-                              <p>ایجاد کابر</p>
+                              <p>همه کابران</p>
                           </a>
                       </li>
                   </ul>
               </li>
+              <li class="nav-item has-treeview  <?php if ($url=='/view/user/create.php' | $url=='/view/user/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/user/create.php' | $url=='/view/user/all.php'){ echo 'active';}else {echo '';} ?>">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                          کاربران
+                          <i class="right fa fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/user/create.php" class="nav-link <?php if ($url=='/view/user/create.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>ایجاد کاربر</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/view/user/all.php" class="nav-link <?php if ($url=='/view/user/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>همه کابران</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

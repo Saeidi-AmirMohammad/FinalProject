@@ -16,8 +16,6 @@ function DBConnection()
     }
 }
 
-
-
 function getAllUserData($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM user");
@@ -43,26 +41,50 @@ function user_delete_id($id , $conn){
     return $statement ? $statement:false;
 }
 
-function user_update($id , $data , $conn){
+function user_update($id, $data , $conn){
     extract($data);
-    $statement=$conn->prepare("UPDATE `user` SET `type_id `=:type_id  ,   `fname`=:fname  ,  `lname `=:lname  ,   `email `=:email  ,   `tell `=:tell  ,   `m_code `=:m_code  ,   `address `=:address  ,   `serial_number `=:serial_number  ,   `birthday `=:birthday  ,   `jender `=:jender  ,   `father_name `=:father_name  ,   `birthday_place `=:birthday_place  ,   `mazhab `=:mazhab  ,   `university `=:university   
-WHERE  `id`=:id;");
-    $statement->bindparam("id",$id,PDO::PARAM_INT);
-    $statement->bindparam("type_id",$type_id,PDO::PARAM_INT);
-    $statement->bindparam("fname",$fname);
-    $statement->bindparam("lname",$lname);
-    $statement->bindparam("email",$email);
-    $statement->bindparam("tell",$tell);
-    $statement->bindparam("m_code",$m_code);
-    $statement->bindparam("address",$address);
-    $statement->bindparam("serial_number",$serial_number);
-    $statement->bindparam("birthday",$birthday);
-    $statement->bindparam("jender",$jender,PDO::PARAM_INT);
-    $statement->bindparam("father_name",$father_name);
-    $statement->bindparam("birthday_place",$birthday_place,);
-    $statement->bindparam("mazhab",$mazhab);
-    $statement->bindparam("university",$university);
-    $statement->execute()? true : false;
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement=$conn->prepare("UPDATE `user` SET 
+`type_id`=:type_id
+,  `fname`=:fname  
+,  `lname`=:lname  
+,   `email`=:email  
+,   `tell`=:tell  
+,   `birthday`=:birthday
+,   `m_code`=:m_code  
+,   `birthday_place`=:birthday_place
+,   `address`=:address  
+,   `jender`=:jender
+,   `serial_number`=:serial_number  
+,   `father_name`=:father_name  
+,   `mazhab`=:mazhab  
+,   `university`=:university   
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+         $statement->bindparam("id",$id,PDO::PARAM_INT);
+         $statement->bindparam("type_id",$type_id,PDO::PARAM_INT);
+        $statement->bindparam("fname",$fname);
+        $statement->bindparam("lname",$lname);
+        $statement->bindparam("email",$email);
+        $statement->bindparam("tell",$tell);
+        $statement->bindparam("m_code",$m_code);
+        $statement->bindparam("address",$address);
+        $statement->bindparam("serial_number",$serial_number);
+        $statement->bindparam("birthday",$birthday);
+        $statement->bindparam("jender",$jender,PDO::PARAM_INT);
+        $statement->bindparam("father_name",$father_name);
+        $statement->bindparam("birthday_place",$birthday_place);
+        $statement->bindparam("mazhab",$mazhab);
+        $statement->bindparam("university",$university);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return  $statement->execute()? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch(PDOException $e) {
+        echo   "<br>" . $e->getMessage();
+    }
 }
 
 
@@ -79,8 +101,11 @@ function getLoginUser($connection, $m_code)
 function createUser($connection, $data)
 {
     extract($data);
-    $stmt = $connection->prepare("INSERT INTO `user` (fname, lname, email, tell, m_code, address, serial_number, birthday, jender, father_name, birthday_place, mazhab, university, type_id)
-                                        VALUES (:fname, :lname, :email, :tell, :m_code, :address, :serial_number, :birthday, :jender, :father_name, :birthday_place, :mazhab, :university, :type_id)");
+    $stmt = $connection->prepare("INSERT INTO `user` (fname, lname, email, tell, m_code, address, serial_number, 
+birthday, jender, father_name, birthday_place, mazhab, university, type_id, created_at)
+                                        VALUES (:fname, :lname, :email, :tell, :m_code, :address, :serial_number, 
+                                        :birthday, :jender, :father_name, :birthday_place, :mazhab, :university, :type_id, 
+                                        :created_at)");
     $stmt->bindparam(':fname', $fname);
     $stmt->bindparam(':lname', $lname);
     $stmt->bindparam(':email', $email);
@@ -95,5 +120,9 @@ function createUser($connection, $data)
     $stmt->bindparam(':mazhab', $mazhab);
     $stmt->bindparam(':university', $university);
     $stmt->bindparam(':type_id', $type, PDO::PARAM_INT);
+    date_default_timezone_set('Asia/Tehran');
+    $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
     return $stmt->execute() ? true : false;
+
 }
+
