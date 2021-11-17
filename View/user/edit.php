@@ -120,7 +120,7 @@ $user= user_Get_id($id,$connect);
     <!-- /.card-body -->
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-primary">ارسال</button>
+        <button type="submit" class="btn btn-primary">ویرایش</button>
     </div>
 </form>
 

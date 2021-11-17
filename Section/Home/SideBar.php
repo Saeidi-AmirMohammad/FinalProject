@@ -74,30 +74,30 @@
                       </li>
                   </ul>
               </li>
-              <li class="nav-item has-treeview  <?php if ($url=='/view/user/create.php' | $url=='/view/user/all.php'){ echo 'menu-open';}else {echo '';} ?>">
-                  <a href="#" class="nav-link  <?php if ($url=='/view/user/create.php' | $url=='/view/user/all.php'){ echo 'active';}else {echo '';} ?>">
+
+              <li class="nav-item has-treeview  <?php if ($url=='/view/reshtetahsili/create.php' | $url=='/view/reshtetahsili/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/reshtetahsili/create.php' | $url=='/view/reshtetahsili/all.php'){ echo 'active';}else {echo '';} ?>">
                       <i class="nav-icon fa fa-user"></i>
                       <p>
-                          کاربران
+                          رشته تحصیلی
                           <i class="right fa fa-angle-left"></i>
                       </p>
                   </a>
                   <ul class="nav nav-treeview">
                       <li class="nav-item">
-                          <a href="/view/user/create.php" class="nav-link <?php if ($url=='/view/user/create.php'){ echo 'active';}else {echo '';} ?>">
+                          <a href="/view/reshtetahsili/create.php" class="nav-link <?php if ($url=='/view/reshtetahsili/create.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>
-                              <p>ایجاد کاربر</p>
+                              <p>ایجاد رشته تحصیلی</p>
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="/view/user/all.php" class="nav-link <?php if ($url=='/view/user/all.php'){ echo 'active';}else {echo '';} ?>">
+                          <a href="/view/reshtetahsili/all.php" class="nav-link <?php if ($url=='/view/reshtetahsili/all.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>
-                              <p>همه کابران</p>
+                              <p>رشته های تحصیلی</p>
                           </a>
                       </li>
                   </ul>
               </li>
-
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

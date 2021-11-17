@@ -41,7 +41,7 @@ if (isPost()) {
     }else{
         $error=false;
         $_SESSION['error'] = true;
-        $_SESSION['massage'] = 'لطفا فیلد ها را پر نمایید یا مقادیر صحیح وارد نمایید.';
+        $_SESSION['massage'] = 'لطفا فیلد ها را پر نمایید یا مقادیر صحیح وارد کنید.';
         $_SESSION['type'] = 'danger';
     }
 }else{
@@ -50,16 +50,6 @@ if (isPost()) {
     $_SESSION['massage'] = 'لطفا درخواست خود را به صورت post ارسال کیند';
     $_SESSION['type'] = 'danger';
 }
-//if ($error == true) {
-//    $_SESSION['error'] = true;
-//    $_SESSION['massage'] = 'باموفقیت ثبت شد';
-//    $_SESSION['type'] = 'success';
-//} else {
-//    $_SESSION['error'] = true;
-//    $_SESSION['massage'] = 'خطایی رخ داده است لطفا برسی نمایید';
-//    $_SESSION['type'] = 'danger';
-//}
+
 reDirect("../../../View/user/all.php");
-//echo "<pre>";
-//var_dump($_POST);
-//echo "</pre>";
+

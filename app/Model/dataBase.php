@@ -15,7 +15,7 @@ function DBConnection()
         die($e->getMessage());
     }
 }
-
+// -------- Start Model Code Of User Tabel --------
 function getAllUserData($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM user");
@@ -124,5 +124,75 @@ birthday, jender, father_name, birthday_place, mazhab, university, type_id, crea
     $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
     return $stmt->execute() ? true : false;
 
+}
+// -------- End Model Code Of User Tabel --------
+
+// -------- Start Model Code Of Reshte Tahsili Tabel --------
+function getAllReshteTahsili($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM reshte_tahsili");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function createReshteTahsili($connection, $data)
+{
+   try{
+       extract($data);
+       $stmt = $connection->prepare("INSERT INTO `reshte_tahsili`
+ (name, code, status, created_at)
+   VALUES (:name, :code , :status ,:created_at)");
+       $stmt->bindparam(':name', $name);
+       $stmt->bindparam(':code', $code , PDO::PARAM_INT);
+       $stmt->bindparam(':status', $status , PDO::PARAM_INT);
+       date_default_timezone_set('Asia/Tehran');
+       $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+       return $stmt->execute() ? true : false;
+
+   }catch (Exception $e){
+       $e->getMessage();
+   }
+}
+
+
+function reshteTahsili_update($id, $data , $conn){
+    extract($data);
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement=$conn->prepare("UPDATE `reshte_tahsili` SET 
+,  `name`=:name  
+,  `code`=:code  
+,   `status`=:status   
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+        $statement->bindparam("id",$id,PDO::PARAM_INT);
+        $statement->bindparam("name",$name);
+        $statement->bindparam("code", $code , PDO::PARAM_INT);
+        $statement->bindparam("status", $status , PDO::PARAM_INT);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return  $statement->execute()? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch(PDOException $e) {
+        echo   "<br>" . $e->getMessage();
+    }
+}
+
+function reshteTahsili_Get_id($id , $conn){
+    $statement=$conn->prepare("SELECT * FROM reshte_tahsili where `id`= :id");
+    $statement->bindparam("id",$id);
+    $statement->execute();
+    $reshteTahsili_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $reshteTahsili_id ? $reshteTahsili_id:false;
+}
+
+function reshteTahsili_delete_id($id , $conn){
+    $statement=$conn->prepare("DELETE FROM `finalproject`.`reshte_tahsili` WHERE  `id`=:id;");
+    $statement->bindparam("id",$id);
+    $statement->execute();
+    return $statement ? $statement:false;
 }
 
