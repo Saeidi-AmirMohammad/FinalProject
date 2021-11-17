@@ -54,5 +54,5 @@ $reshteTahsili= reshteTahsili_Get_id($id,$connect);
 
 
 <?php
-require __DIR__.'/../../View/layout/footer.php';
+require __DIR__.'/../../view/layout/footer.php';
 ?>

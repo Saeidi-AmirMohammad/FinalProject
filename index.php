@@ -33,7 +33,7 @@ require  __DIR__."/bootstrap/autoload.php";
                         </div>
                         <div class="form-group d-flex">
                             <div class="w-50 text-md-left">
-                                <a href="./View/ResetLoginPassword.php" style="color: #fff">فراموشی رمز عبور</a>
+                                <a href="./view/ResetLoginPassword.php" style="color: #fff">فراموشی رمز عبور</a>
                             </div>
                             <div class="w-50">
                                 <label class="checkbox-wrap checkbox-primary">مرا به خاطر بسپار

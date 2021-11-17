@@ -108,12 +108,12 @@ require '../layout/haeder.php';
     <!-- /.card-body -->
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-primary">ارسال</button>
+        <button type="submit" class="btn btn-primary">ثبت</button>
     </div>
 </form>
 
 
 
 <?php
-require __DIR__.'/../../View/layout/footer.php';
+require __DIR__.'/../../view/layout/footer.php';
 ?>

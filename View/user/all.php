@@ -56,7 +56,7 @@ $data = getAllUserData($conn);
                         ?>
                         <td><?= $key->id ?>
                             <div class="d-flex mt-3">
-                                <form action="/View/user/edit.php" id="edit-form-<?= $key->id ?>">
+                                <form action="/view/user/edit.php" id="edit-form-<?= $key->id ?>">
                                     <input type="hidden" name="edit" value="<?= $key->id ?>">
                                 </form>
                                 <a onclick="document.getElementById('edit-form-<?= $key->id ?>').submit()"
@@ -127,5 +127,5 @@ $data = getAllUserData($conn);
 
 
 <?php
-require __DIR__ . '/../../View/layout/footer.php';
+require __DIR__ . '/../../view/layout/footer.php';
 ?>

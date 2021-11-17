@@ -98,6 +98,30 @@
                       </li>
                   </ul>
               </li>
+
+              <li class="nav-item has-treeview  <?php if ($url=='/view/lessoncourse/create.php' | $url=='/view/lessoncourse/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/lessoncourse/create.php' | $url=='/view/lessoncourse/all.php'){ echo 'active';}else {echo '';} ?>">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                          دروس رشته
+                          <i class="right fa fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/lessoncourse/create.php" class="nav-link <?php if ($url=='/view/lessoncourse/create.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>ایجاد درس</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/view/lessoncourse/all.php" class="nav-link <?php if ($url=='/view/lessoncourse/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>درس های رشته</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

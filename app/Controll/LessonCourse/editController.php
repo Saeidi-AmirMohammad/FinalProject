@@ -5,23 +5,39 @@ login_before("../../../index.php");
 $connect = DBConnection();
 
 $_POST['id'] = intval($_POST['id']);
-$_POST['code'] = intval($_POST['code']);
-$_POST['status'] = intval($_POST['status']);
+$_POST['saat_amali'] = intval($_POST['saat_amali']);
+$_POST['saat_teori'] = intval($_POST['saat_teori']);
+$_POST['vahed_amali'] = intval($_POST['vahed_amali']);
+$_POST['vahed_teori'] = intval($_POST['vahed_teori']);
+$_POST['code_pishniaz'] = intval($_POST['code_pishniaz']);
+
 $connect = DBConnection();
 if (isPost()) {
     extract($_POST);
     if (validation_requre([
         htmlspecialchars($name),
         is_numeric(htmlspecialchars($code)),
-        is_numeric(htmlspecialchars($status))
+        htmlspecialchars($type),
+        is_numeric(htmlspecialchars($saat_amali)),
+        is_numeric(htmlspecialchars($saat_teori)),
+        is_numeric(htmlspecialchars($vahed_amali)),
+        is_numeric(htmlspecialchars($vahed_teori))
     ])) {
+        htmlspecialchars($pishniaz);
+        is_numeric(htmlspecialchars($code_pishniaz));
         $data = [
             'name' => $name,
             'code' => $code,
-            'status' => $status
+            'type' => $type,
+            'saat_amali' => $saat_amali,
+            'saat_teori' => $saat_teori,
+            'vahed_amali' => $vahed_amali,
+            'vahed_teori' => $vahed_teori,
+            'pishniaz' => $pishniaz,
+            'code_pishniaz' => $code_pishniaz,
         ];
-        $reshteTahsili = reshteTahsili_update($id, $data, $connect);
-        if ($reshteTahsili) {
+        $lessonCourse = lessonCourse_update($id, $data, $connect);
+        if ($lessonCourse) {
             $error = true;
             $_SESSION['error'] = true;
             $_SESSION['massage'] = 'باموفقیت ویرایش شد';
@@ -45,4 +61,4 @@ if (isPost()) {
     $_SESSION['type'] = 'danger';
 }
 
-reDirect("../../../view/reshtetahsili/all.php");
+reDirect("../../../view/lessoncourse/all.php");

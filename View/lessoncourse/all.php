@@ -3,7 +3,7 @@
 
 require '../layout/haeder.php';
 $conn = DBConnection();
-$data = getAllReshteTahsili($conn);
+$data = getAllLessonCourse($conn);
 
 ?>
 
@@ -12,7 +12,7 @@ $data = getAllReshteTahsili($conn);
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">جدول رشته تحصیلی</h3>
+                <h3 class="card-title">جدول دروس</h3>
                 <div class="card-tools">
                     <div class="d-flex">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -21,7 +21,7 @@ $data = getAllReshteTahsili($conn);
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
-                        <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد رشته تحصیلی</a>
+                        <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد درس</a>
                     </div>
                 </div>
             </div>
@@ -30,26 +30,31 @@ $data = getAllReshteTahsili($conn);
                 <table class="table table-hover">
                     <tbody>
                     <tr>
-                        <th>شناسه رشته تحصیلی</th>
-                        <th>نام رشته تحصیلی</th>
-                        <th>کد رشته تحصیلی</th>
-                        <th>وضعیت رشته تحصیلی</th>
+                        <th>شناسه درس</th>
+                        <th>نام درس</th>
+                        <th>کد درس</th>
+                        <th>نوع درس</th>
+                        <th>ساعت عملی</th>
+                        <th>ساعت تئوری</th>
+                        <th>پیشنیاز</th>
+                        <th>کد پیشنیاز</th>
+                        <th>واحد عملی</th>
+                        <th>واحد تئوری</th>
 
                     </tr>
                     <tr>
                         <?php
                         foreach ($data
-
                         as $key):
                         ?>
                         <td><?= $key->id ?>
                             <div class="d-flex mt-3">
-                                <form action="/view/reshtetahsili/edit.php" id="edit-form-<?= $key->id ?>">
+                                <form action="/view/lessoncourse/edit.php" id="edit-form-<?= $key->id ?>">
                                     <input type="hidden" name="edit" value="<?= $key->id ?>">
                                 </form>
                                 <a onclick="document.getElementById('edit-form-<?= $key->id ?>').submit()"
                                    class="btn btn-warning  mx-1 ">ویرایش</a>
-                                <form action="/app/Controll/ReshteTahsili/deleteController.php" method="post">
+                                <form action="/app/Controll/LessonCourse/deleteController.php" method="post">
                                     <input type="hidden" name="delete[<?= $key->id ?>]" value="<?= $key->id ?>">
                                     <button type="submit" class="btn btn-danger text-white">حذف</button>
                                 </form>
@@ -57,17 +62,14 @@ $data = getAllReshteTahsili($conn);
                         </td>
                         <td><?= $key->name ?></td>
                         <td><?= $key->code ?></td>
-                        <?php
-                        switch (true) {
-                            case $key->status === '1':
-                                echo " <td>فعال</td>";
-                                break;
-                            case $key->status === '0':
-                                echo " <td>غير فعال</td>";
-                                break;
-                        }
+                        <td><?= $key->type ?></td>
+                        <td><?= $key->saat_amali ?></td>
+                        <td><?= $key->saat_teori ?></td>
+                        <td><?= $key->pishniaz ?></td>
+                        <td><?= $key->code_pishniaz ?></td>
+                        <td><?= $key->vahed_amali ?></td>
+                        <td><?= $key->vahed_teori ?></td>
 
-                        ?>
                     </tr>
                     <?php
                     endforeach;

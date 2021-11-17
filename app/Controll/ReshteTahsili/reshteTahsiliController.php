@@ -35,4 +35,4 @@ if (isPost()) {
     $_SESSION['massage'] = 'لطفا درخواست خود را به صورت post ارسال کیند';
     $_SESSION['type'] = 'danger';
 }
-reDirect("../../../View/reshtetahsili/all.php");
+reDirect("../../../view/reshtetahsili/all.php");

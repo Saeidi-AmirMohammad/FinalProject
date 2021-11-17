@@ -6,7 +6,6 @@ login_before("../../../index.php");
 
 $connect = DBConnection();
 
-
 $_POST['id'] = intval($_POST['id']);
 $_POST['jender'] = intval($_POST['jender']);
 $_POST['type'] = intval($_POST['type']);
@@ -72,4 +71,4 @@ if (isPost()) {
     $_SESSION['type'] = 'danger';
 }
 
-reDirect("../../../View/user/all.php");
+reDirect("../../../view/user/all.php");

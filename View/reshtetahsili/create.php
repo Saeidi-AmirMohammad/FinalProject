@@ -20,7 +20,7 @@ require '../layout/haeder.php';
                 <div class="form-group">
                     <label for="exampleInputEmail1">کد رشته تحصیلی</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="کد رشته تحصیلی را وارد کنید"
-                           name="code" value="">
+                           name="code" maxlength="5">
                 </div>
                 <div class="form-group">
                     <label for="status">وضعیت رشته تحصیلی</label>
@@ -35,12 +35,12 @@ require '../layout/haeder.php';
     <!-- /.card-body -->
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-primary">ارسال</button>
+        <button type="submit" class="btn btn-primary">ثبت</button>
     </div>
 </form>
 
 
 
 <?php
-require __DIR__.'/../../View/layout/footer.php';
+require __DIR__.'/../../view/layout/footer.php';
 ?>
