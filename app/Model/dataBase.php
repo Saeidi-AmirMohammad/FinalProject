@@ -294,3 +294,82 @@ function lessonCourse_delete_id($id, $conn)
     $statement->execute();
     return $statement ? $statement : false;
 }
+
+// -------- End Model Code Of Lesson Course Tabel --------
+
+// -------- Start Model Code Of News Tabel --------
+function getAllNews($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM news");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function createNews($connection, $data)
+{
+    try {
+        extract($data);
+        $stmt = $connection->prepare("INSERT INTO `news`
+ (author, title, description, date, created_at)
+   VALUES (:author, :title , :description , :date ,:created_at)");
+        $stmt->bindparam(':author', $author);
+        $stmt->bindparam(':title', $title);
+        $stmt->bindparam(':description', $description);
+        $stmt->bindparam(':date', $date);
+        date_default_timezone_set('Asia/Tehran');
+        $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+        return $stmt->execute() ? true : false;
+
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+}
+
+
+function news_update($id, $data, $conn)
+{
+    extract($data);
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $conn->prepare("UPDATE `news` SET 
+  `author`=:author  
+,  `title`=:title  
+,   `description`=:description
+,   `date`=:date     
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+        $statement->bindparam("id", $id, PDO::PARAM_INT);
+        $statement->bindparam("author", $author);
+        $statement->bindparam("title", $title);
+        $statement->bindparam("description", $description);
+        $statement->bindparam("date", $date);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return $statement->execute() ? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch (PDOException $e) {
+        echo "<br>" . $e->getMessage();
+    }
+}
+
+function news_Get_id($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM news where `id`= :id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $news_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $news_id ? $news_id : false;
+}
+
+function news_delete_id($id, $conn)
+{
+    $statement = $conn->prepare("DELETE FROM `finalproject`.`news` WHERE  `id`=:id;");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    return $statement ? $statement : false;
+}
+
+// -------- End Model Code Of News Tabel --------

@@ -122,6 +122,30 @@
                       </li>
                   </ul>
               </li>
+
+              <li class="nav-item has-treeview  <?php if ($url=='/view/news/create.php' | $url=='/view/news/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/news/create.php' | $url=='/view/news/all.php'){ echo 'active';}else {echo '';} ?>">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                         خبر و اطلاعیه
+                          <i class="right fa fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/news/create.php" class="nav-link <?php if ($url=='/view/news/create.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>ایجاد خبر</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/view/news/all.php" class="nav-link <?php if ($url=='/view/news/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>اخبار</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

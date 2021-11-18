@@ -102,7 +102,7 @@ function convert($in_post_date){
 }
 
 function convert_to_Jalali($in_post_date){
-    //شمسی به میلادی
+    //میلادی به شمسی
   // return var_dump(toEnNumber($in_post_date));
     if (str_contains($in_post_date,'-')){
         $re =str_replace( '-', '', $in_post_date);

@@ -3,7 +3,6 @@ require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
 //$n=\Carbon\Carbon::now();
 //$date = jdate();
-
 $connect = DBConnection();
 
 $_POST['id'] = intval($_POST['id']);
@@ -46,6 +45,7 @@ if (isPost()) {
             'mazhab' => $mazhab,
             'university' => $university
         ];
+
         $user = user_update($id, $data, $connect);
         if ($user) {
             $error = true;
