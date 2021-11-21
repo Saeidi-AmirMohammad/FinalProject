@@ -5,24 +5,20 @@ login_before("../../../index.php");
 $connect = DBConnection();
 
 $_POST['id'] = intval($_POST['id']);
-$_POST['status'] = intval($_POST['status']);
 
 $connect = DBConnection();
+
 if (isPost()) {
     extract($_POST);
     if (validation_requre([
-        htmlspecialchars($name),
-        is_numeric(htmlspecialchars($code)),
-        is_numeric(htmlspecialchars($status))
+        is_numeric(htmlspecialchars($class_code))
     ])) {
         $data = [
-            'name' => $name,
-            'code' => $code,
-            'status' => $status
+            'class_code' => $class_code
         ];
-        $_POST['code'] = intval($_POST['code']);
-        $reshteTahsili = reshteTahsili_update($id, $data, $connect);
-        if ($reshteTahsili) {
+        $_POST['class_code'] = intval($_POST['class_code']);
+        $classroom = classroom_update($id, $data, $connect);
+        if ($classroom) {
             $error = true;
             $_SESSION['error'] = true;
             $_SESSION['massage'] = 'باموفقیت ویرایش شد';
@@ -30,7 +26,7 @@ if (isPost()) {
         } else {
             $error = false;
             $_SESSION['error'] = true;
-            $_SESSION['massage'] = 'کد رشته تحصیلی نمی تواند تکراری باشند';
+            $_SESSION['massage'] = 'شماره کلاس نمی تواند تکراری باشد';
             $_SESSION['type'] = 'danger';
         }
     } else {
@@ -46,4 +42,4 @@ if (isPost()) {
     $_SESSION['type'] = 'danger';
 }
 
-reDirect("../../../view/reshtetahsili/all.php");
+reDirect("../../../view/classroom/all.php");

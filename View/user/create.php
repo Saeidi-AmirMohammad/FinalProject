@@ -3,6 +3,8 @@
 
 require '../layout/haeder.php';
 
+$conn = DBConnection();
+$data = getAllType($conn);
 
 ?>
 
@@ -93,13 +95,13 @@ require '../layout/haeder.php';
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="دانشگاه را وارد کنید"
                            name="university" value="">
                 </div>
+
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
                     <select class="form-control" id="type" name="type">
-                        <option value="1">استاد</option>
-                        <option value="2">کارمند</option>
-                        <option value="3">دانشجو</option>
-                        <option value="4">ادمین</option>
+                        <?php foreach ($data as $key): ?>
+                            <option value='<?= $key->id?>'><?= $key->name?></option>
+                        <?php endforeach;?>
                     </select>
                 </div>
             </div>

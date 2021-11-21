@@ -146,6 +146,78 @@
                       </li>
                   </ul>
               </li>
+
+              <li class="nav-item has-treeview  <?php if ($url=='/view/type/create.php' | $url=='/view/type/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/type/create.php' | $url=='/view/type/all.php'){ echo 'active';}else {echo '';} ?>">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                          نوع کاربر
+                          <i class="right fa fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/type/create.php" class="nav-link <?php if ($url=='/view/type/create.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>ایجاد نوع کاربر</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/view/type/all.php" class="nav-link <?php if ($url=='/view/type/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>مشاهده نوع کاربران</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+
+              <li class="nav-item has-treeview  <?php if ($url=='/view/classroom/create.php' | $url=='/view/classroom/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/classroom/create.php' | $url=='/view/classroom/all.php'){ echo 'active';}else {echo '';} ?>">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                        کلاس ها
+                          <i class="right fa fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/classroom/create.php" class="nav-link <?php if ($url=='/view/classroom/create.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>ایجاد کلاس</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/view/classroom/all.php" class="nav-link <?php if ($url=='/view/classroom/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>مشاهده کلاس ها</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+
+              <li class="nav-item has-treeview  <?php if ($url=='/view/educationalgroup/create.php' | $url=='/view/educationalgroup/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/educationalgroup/create.php' | $url=='/view/educationalgroup/all.php'){ echo 'active';}else {echo '';} ?>">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                          گروه آموزشی
+                          <i class="right fa fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/educationalgroup/create.php" class="nav-link <?php if ($url=='/view/educationalgroup/create.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>ایجاد گروه آموزشی</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/view/educationalgroup/all.php" class="nav-link <?php if ($url=='/view/educationalgroup/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>گروهای آموزشی</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

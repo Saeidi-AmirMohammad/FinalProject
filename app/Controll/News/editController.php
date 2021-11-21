@@ -20,7 +20,8 @@ if (isPost()) {
         $data = [
             'author' => $author,
             'title' => $title,
-            'description' => $description
+            'description' => $description,
+            'date' => $date
         ];
         $news = news_update($id, $data, $connect);
         if ($news) {

@@ -373,3 +373,211 @@ function news_delete_id($id, $conn)
 }
 
 // -------- End Model Code Of News Tabel --------
+
+// -------- Start Model Code Of Type Tabel --------
+
+function getAllType($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM type");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function createType($connection, $data)
+{
+    try {
+        extract($data);
+        $stmt = $connection->prepare("INSERT INTO `type`
+ (name, created_at)
+   VALUES (:name,:created_at)");
+        $stmt->bindparam(':name', $name);
+        date_default_timezone_set('Asia/Tehran');
+        $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+        return $stmt->execute() ? true : false;
+
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+}
+
+
+function type_update($id, $data, $conn)
+{
+    extract($data);
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $conn->prepare("UPDATE `type` SET 
+  `name`=:name 
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+        $statement->bindparam("id", $id, PDO::PARAM_INT);
+        $statement->bindparam("name", $name);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return $statement->execute() ? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch (PDOException $e) {
+        echo "<br>" . $e->getMessage();
+    }
+}
+
+function type_Get_id($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM type where `id`= :id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $type_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $type_id ? $type_id : false;
+}
+
+function type_delete_id($id, $conn)
+{
+    $statement = $conn->prepare("DELETE FROM `finalproject`.`type` WHERE  `id`=:id;");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    return $statement ? $statement : false;
+}
+
+// -------- End Model Code Of Type Tabel --------
+
+// -------- Start Model Code Of ClassRoom Tabel --------
+
+function getAllClassRoom($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM classroom");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function createClassRoom($connection, $data)
+{
+    try {
+        extract($data);
+        $stmt = $connection->prepare("INSERT INTO `classroom`
+ (class_code, created_at)
+   VALUES (:class_code,:created_at)");
+        $stmt->bindparam(':class_code', $class_code);
+        date_default_timezone_set('Asia/Tehran');
+        $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+        return $stmt->execute() ? true : false;
+
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+}
+
+
+function classroom_update($id, $data, $conn)
+{
+    extract($data);
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $conn->prepare("UPDATE `classroom` SET 
+  `class_code`=:class_code 
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+        $statement->bindparam("id", $id, PDO::PARAM_INT);
+        $statement->bindparam("class_code", $class_code);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return $statement->execute() ? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch (PDOException $e) {
+        echo "<br>" . $e->getMessage();
+    }
+}
+
+function classroom_Get_id($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM classroom where `id`= :id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $classroom_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $classroom_id ? $classroom_id : false;
+}
+
+function classroom_delete_id($id, $conn)
+{
+    $statement = $conn->prepare("DELETE FROM `finalproject`.`classroom` WHERE  `id`=:id;");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    return $statement ? $statement : false;
+}
+
+// -------- End Model Code Of ClassRoom Tabel --------
+
+// -------- Start Model Code Of EducationalGroup Tabel --------
+
+function getAllEducationalGroup($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM educational_group");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function createEducationalGroup($connection, $data)
+{
+    try {
+        extract($data);
+        $stmt = $connection->prepare("INSERT INTO `educational_group`
+ (name, created_at)
+   VALUES (:name,:created_at)");
+        $stmt->bindparam(':name', $name);
+        date_default_timezone_set('Asia/Tehran');
+        $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+        return $stmt->execute() ? true : false;
+
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+}
+
+
+function educationalgroup_update($id, $data, $conn)
+{
+    extract($data);
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $conn->prepare("UPDATE `educational_group` SET 
+  `name`=:name 
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+        $statement->bindparam("id", $id, PDO::PARAM_INT);
+        $statement->bindparam("name", $name);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return $statement->execute() ? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch (PDOException $e) {
+        echo "<br>" . $e->getMessage();
+    }
+}
+
+function educationalgroup_Get_id($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM educational_group where `id`= :id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $educationalgroup_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return  $educationalgroup_id ?  $educationalgroup_id : false;
+}
+
+function educationalgroup_delete_id($id, $conn)
+{
+    $statement = $conn->prepare("DELETE FROM `finalproject`.`educational_group` WHERE  `id`=:id;");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    return $statement ? $statement : false;
+}
+
+// -------- End Model Code Of EducationalGroup Tabel --------
+

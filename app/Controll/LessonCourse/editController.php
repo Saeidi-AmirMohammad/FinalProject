@@ -5,11 +5,6 @@ login_before("../../../index.php");
 $connect = DBConnection();
 
 $_POST['id'] = intval($_POST['id']);
-$_POST['saat_amali'] = intval($_POST['saat_amali']);
-$_POST['saat_teori'] = intval($_POST['saat_teori']);
-$_POST['vahed_amali'] = intval($_POST['vahed_amali']);
-$_POST['vahed_teori'] = intval($_POST['vahed_teori']);
-$_POST['code_pishniaz'] = intval($_POST['code_pishniaz']);
 
 $connect = DBConnection();
 if (isPost()) {
@@ -36,6 +31,11 @@ if (isPost()) {
             'pishniaz' => $pishniaz,
             'code_pishniaz' => $code_pishniaz,
         ];
+        $_POST['saat_amali'] = intval($_POST['saat_amali']);
+        $_POST['saat_teori'] = intval($_POST['saat_teori']);
+        $_POST['vahed_amali'] = intval($_POST['vahed_amali']);
+        $_POST['vahed_teori'] = intval($_POST['vahed_teori']);
+        $_POST['code_pishniaz'] = intval($_POST['code_pishniaz']);
         $lessonCourse = lessonCourse_update($id, $data, $connect);
         if ($lessonCourse) {
             $error = true;
