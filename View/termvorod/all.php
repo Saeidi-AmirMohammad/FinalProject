@@ -1,8 +1,9 @@
 <?php
 
+
 require '../layout/haeder.php';
 $conn = DBConnection();
-$data = getAllType($conn);
+$data = getAllTermVorod($conn);
 
 ?>
 
@@ -11,7 +12,7 @@ $data = getAllType($conn);
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">جدول نوع کاربر</h3>
+                <h3 class="card-title">جدول ترم ها</h3>
                 <div class="card-tools">
                     <div class="d-flex">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -20,7 +21,7 @@ $data = getAllType($conn);
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
-                        <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد نوع کاربر</a>
+                        <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد ترم</a>
                     </div>
                 </div>
             </div>
@@ -29,9 +30,8 @@ $data = getAllType($conn);
                 <table class="table table-hover">
                     <tbody>
                     <tr>
-                        <th>شناسه نوع کاربر</th>
-                        <th>نوع کاربر</th>
-                    </tr>
+                        <th>شناسه ترم</th>
+                        <th>شماره ترم</th>
                     <tr>
                         <?php
                         foreach ($data
@@ -39,18 +39,18 @@ $data = getAllType($conn);
                         ?>
                         <td><?= $key->id ?>
                             <div class="d-flex mt-3">
-                                <form action="/view/type/edit.php" id="edit-form-<?= $key->id ?>">
+                                <form action="/view/termvorod/edit.php" id="edit-form-<?= $key->id ?>">
                                     <input type="hidden" name="edit" value="<?= $key->id ?>">
                                 </form>
                                 <a onclick="document.getElementById('edit-form-<?= $key->id ?>').submit()"
                                    class="btn btn-warning  mx-1 ">ویرایش</a>
-                                <form action="/app/Controll/Type/deleteController.php" method="post">
+                                <form action="/app/Controll/TermVorod/deleteController.php" method="post">
                                     <input type="hidden" name="delete[<?= $key->id ?>]" value="<?= $key->id ?>">
                                     <button type="submit" class="btn btn-danger text-white">حذف</button>
                                 </form>
                             </div>
                         </td>
-                        <td><?= $key->name ?></td>
+                        <td><?= $key->number ?>
                     </tr>
                     <?php
                     endforeach;

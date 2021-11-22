@@ -16,7 +16,6 @@ if (isPost()) {
         $data = [
             'class_code' => $class_code
         ];
-        $_POST['class_code'] = intval($_POST['class_code']);
         $classroom = classroom_update($id, $data, $connect);
         if ($classroom) {
             $error = true;

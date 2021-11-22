@@ -6,26 +6,26 @@ require '../layout/haeder.php';
 $connect = DBConnection();
 
 $id=$_GET['edit'];
-$type= type_Get_id($id,$connect);
+$termvorod= termvorod_Get_id($id,$connect);
 ?>
 
 
 
-<form role="form" action="../../app/Controll/Type/editController.php" method="post">
+<form role="form" action="../../app/Controll/TermVorod/editController.php" method="post">
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">شناسه نوع کاربر در سیستم</label>
+                    <label for="exampleInputEmail1">شناسه ترم در سیستم</label>
                     <input type="text" class="form-control" id="exampleInputEmail1"
-                           name="id_view" value="<?= $type->id?>" disabled>
+                           name="id_view" value="<?= $termvorod->id?>" disabled>
                     <input type="hidden" class="form-control"
-                           name="id" value="<?= $type->id?>">
+                           name="id" value="<?= $termvorod->id?>">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">نوع کاربر</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="نوع کاربر را وارد کنید"
-                           name="name" value="<?= $type->name?>">
+                    <label for="exampleInputEmail1">شماره ترم</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="شماره ترم را وارد کنید"
+                           name="number" value="<?= $termvorod->number?>">
                 </div>
             </div>
         </div>

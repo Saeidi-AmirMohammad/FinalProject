@@ -1,14 +1,8 @@
 <?php
 
-
 require '../layout/haeder.php';
 
-$conn = DBConnection();
-$data = getAllType($conn);
-
 ?>
-
-
 
 <form role="form" action="../../app/Controll/User/userController.php" method="post">
     <div class="card-body">
@@ -51,9 +45,10 @@ $data = getAllType($conn);
                     <input type="text" class="form-control" id="exampleInputPassword1"
                            placeholder="شماره شناسنامه را وارد کنید" name="serial_number" value="">
                 </div>
+                <div id="form2"></div>
             </div>
-            <div class="col-md-6">
 
+            <div class="col-md-6">
                 <div class="form-group">
                     <label>انتخاب تاریخ:</label>
 
@@ -67,7 +62,7 @@ $data = getAllType($conn);
                     </div>
                     <!-- /.input group -->
                 </div>
-<!--            -->
+                <!--            -->
                 <div class="form-group">
                     <label for="jender">جنسیت</label>
                     <select class="form-control" id="jender" name="jender">
@@ -99,9 +94,10 @@ $data = getAllType($conn);
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
                     <select class="form-control" id="type" name="type">
-                        <?php foreach ($data as $key): ?>
-                            <option value='<?= $key->id?>'><?= $key->name?></option>
-                        <?php endforeach;?>
+                        <option id="teacher" onclick="teacher()" value="1">استاد</option>
+                        <option id="" value="2">کارمند</option>
+                        <option value="3">دانشجو</option>
+                        <option value="4">ادمین</option>
                     </select>
                 </div>
             </div>
@@ -113,9 +109,53 @@ $data = getAllType($conn);
         <button type="submit" class="btn btn-primary">ثبت</button>
     </div>
 </form>
+<button class="btn" id="teacher">teacher</button>
+<button class="btn" id="employee">employee</button>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // if ($('#type option').val() == '1') {
+        //   return  $('div#form2').load('../teacher/create.php form#codeTeacher');
+        //
+        // }
+        // else if($('#type option').val() == '2') {
+        //  return   $('div#form2').load('../employee/create.php form#codeStandard');
+        //
+        // }
+$('#teacher').trigger('click');
+$('select').on('change',function () {
+    var value = $(this).val();
+    if(value == '1'){
+        teacher();
+    }
+})
+
+            // if(value == '1'){
+            //     teacher();
+            // }
+            // else if(value == '2'){
+            //     $('div#form2').load('../employee/create.php form#codeStandard');
+            // }
+            function teacher() {
+                alert("d;fkjg;kldfg");
+            }
+
+            // $('#type option)(function () {
+            //         $('div#form2').load('../teacher/create.php form#codeTeacher');
+
+                // if($(this).val() == '2'){
+                //     $('div#form2').load('../employee/create.php form#codeStandard');
+                // }
+        // $('#type option#employee').on( 'click' , function () {
+        // })
 
 
+    })
+</script>
 
 <?php
-require __DIR__.'/../../view/layout/footer.php';
+require __DIR__ . '/../../view/layout/footer.php';
 ?>

@@ -2,25 +2,26 @@
 require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
 
-
 if (isPost()) {
     extract($_POST);
     if (validation_requre([
-        htmlspecialchars($name)
-        ])) {
+        htmlspecialchars($stuednt_id),
+        htmlspecialchars($presentation_id)
+    ])) {
         $connect = DBConnection();
-        $type = createType($connect, $_POST);
-        if ($type){
+        $ChooseLesson = CreateChooseLesson($connect, $_POST);
+        if ($ChooseLesson){
             $error=true;
             $_SESSION['error'] = true;
             $_SESSION['massage'] = 'باموفقیت ثبت شد';
             $_SESSION['type'] = 'success';
-        }else{
-            $error=false;
-            $_SESSION['error'] = true;
-            $_SESSION['massage'] = 'نوع کاربر نمی تواند تکراری باشند';
-            $_SESSION['type'] = 'danger';
         }
+//        else{
+//            $error=false;
+//            $_SESSION['error'] = true;
+//            $_SESSION['massage'] = 'کد ملی ، ایمیل ، شماره شناسنامه و تلفن همراه نمی توانند تکراری باشند';
+//            $_SESSION['type'] = 'danger';
+//        }
     }else{
         $error=false;
         $_SESSION['error'] = true;
@@ -34,5 +35,5 @@ if (isPost()) {
     $_SESSION['type'] = 'danger';
 }
 
-reDirect("../../../view/type/all.php");
+reDirect("../../../view/chooselesson/all.php");
 

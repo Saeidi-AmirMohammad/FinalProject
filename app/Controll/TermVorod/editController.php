@@ -5,23 +5,19 @@ login_before("../../../index.php");
 $connect = DBConnection();
 
 $_POST['id'] = intval($_POST['id']);
-$_POST['status'] = intval($_POST['status']);
 
 $connect = DBConnection();
+
 if (isPost()) {
     extract($_POST);
     if (validation_requre([
-        htmlspecialchars($name),
-        is_numeric(htmlspecialchars($code)),
-        is_numeric(htmlspecialchars($status))
+        is_numeric(htmlspecialchars($number))
     ])) {
         $data = [
-            'name' => $name,
-            'code' => $code,
-            'status' => $status
+            'number' => $number
         ];
-        $reshteTahsili = reshteTahsili_update($id, $data, $connect);
-        if ($reshteTahsili) {
+        $termvorod = termvorod_update($id, $data, $connect);
+        if ($termvorod) {
             $error = true;
             $_SESSION['error'] = true;
             $_SESSION['massage'] = 'باموفقیت ویرایش شد';
@@ -29,7 +25,7 @@ if (isPost()) {
         } else {
             $error = false;
             $_SESSION['error'] = true;
-            $_SESSION['massage'] = 'کد رشته تحصیلی نمی تواند تکراری باشند';
+            $_SESSION['massage'] = 'شماره ترم نمی تواند تکراری باشد';
             $_SESSION['type'] = 'danger';
         }
     } else {
@@ -45,4 +41,4 @@ if (isPost()) {
     $_SESSION['type'] = 'danger';
 }
 
-reDirect("../../../view/reshtetahsili/all.php");
+reDirect("../../../view/termvorod/all.php");

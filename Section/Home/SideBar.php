@@ -147,25 +147,25 @@
                   </ul>
               </li>
 
-              <li class="nav-item has-treeview  <?php if ($url=='/view/type/create.php' | $url=='/view/type/all.php'){ echo 'menu-open';}else {echo '';} ?>">
-                  <a href="#" class="nav-link  <?php if ($url=='/view/type/create.php' | $url=='/view/type/all.php'){ echo 'active';}else {echo '';} ?>">
+              <li class="nav-item has-treeview  <?php if ($url=='/view/termvorod/create.php' | $url=='/view/termvorod/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/termvorod/create.php' | $url=='/view/termvorod/all.php'){ echo 'active';}else {echo '';} ?>">
                       <i class="nav-icon fa fa-user"></i>
                       <p>
-                          نوع کاربر
+                         ترم
                           <i class="right fa fa-angle-left"></i>
                       </p>
                   </a>
                   <ul class="nav nav-treeview">
                       <li class="nav-item">
-                          <a href="/view/type/create.php" class="nav-link <?php if ($url=='/view/type/create.php'){ echo 'active';}else {echo '';} ?>">
+                          <a href="/view/termvorod/create.php" class="nav-link <?php if ($url=='/view/termvorod/create.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>
-                              <p>ایجاد نوع کاربر</p>
+                              <p>ایجاد ترم</p>
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="/view/type/all.php" class="nav-link <?php if ($url=='/view/type/all.php'){ echo 'active';}else {echo '';} ?>">
+                          <a href="/view/termvorod/all.php" class="nav-link <?php if ($url=='/view/termvorod/all.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>
-                              <p>مشاهده نوع کاربران</p>
+                              <p>مشاهده ترم ها</p>
                           </a>
                       </li>
                   </ul>

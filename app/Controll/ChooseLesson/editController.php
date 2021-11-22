@@ -1,33 +1,37 @@
 <?php
 require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
-//$n=\Carbon\Carbon::now();
-//$date = jdate();
+
 $connect = DBConnection();
 
 $_POST['id'] = intval($_POST['id']);
+$_POST['stuednt_id'] = intval($_POST['stuednt_id']);
+$_POST['presentation_id'] = intval($_POST['presentation_id']);
 $connect = DBConnection();
 if (isPost()) {
     extract($_POST);
     if (validation_requre([
-        htmlspecialchars($name)
+        htmlspecialchars($stuednt_id),
+        htmlspecialchars($presentation_id)
     ])) {
         $data = [
-            'name' => $name
+            'stuednt_id' => $stuednt_id,
+            'presentation_id' => $presentation_id
         ];
 
-        $type = type_update($id, $data, $connect);
-        if ($type) {
+        $ChooseLesson = chooselesson_update($id, $data, $connect);
+        if ($ChooseLesson) {
             $error = true;
             $_SESSION['error'] = true;
             $_SESSION['massage'] = 'باموفقیت ویرایش شد';
             $_SESSION['type'] = 'success';
-        } else {
-            $error = false;
-            $_SESSION['error'] = true;
-            $_SESSION['massage'] = 'نوع کاربر نمی تواند تکراری باشد';
-            $_SESSION['type'] = 'danger';
         }
+//        else {
+//            $error = false;
+//            $_SESSION['error'] = true;
+//            $_SESSION['massage'] = 'کد ملی ، ایمیل ، شماره شناسنامه و تلفن همراه نمی توانند تکراری باشند';
+//            $_SESSION['type'] = 'danger';
+//        }
     } else {
         $error = false;
         $_SESSION['error'] = true;
@@ -41,4 +45,4 @@ if (isPost()) {
     $_SESSION['type'] = 'danger';
 }
 
-reDirect("../../../view/type/all.php");
+reDirect("../../../view/chooselesson/all.php");

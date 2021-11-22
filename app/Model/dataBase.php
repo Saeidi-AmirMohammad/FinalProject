@@ -374,24 +374,24 @@ function news_delete_id($id, $conn)
 
 // -------- End Model Code Of News Tabel --------
 
-// -------- Start Model Code Of Type Tabel --------
+// -------- Start Model Code Of TermVorod Tabel --------
 
-function getAllType($connection)
+function getAllTermVorod($connection)
 {
-    $stmt = $connection->prepare("SELECT * FROM type");
+    $stmt = $connection->prepare("SELECT * FROM term_vorod");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
-function createType($connection, $data)
+function createTermVorod($connection, $data)
 {
     try {
         extract($data);
-        $stmt = $connection->prepare("INSERT INTO `type`
- (name, created_at)
-   VALUES (:name,:created_at)");
-        $stmt->bindparam(':name', $name);
+        $stmt = $connection->prepare("INSERT INTO `term_vorod`
+ (number, created_at)
+   VALUES (:number,:created_at)");
+        $stmt->bindparam(':number', $number);
         date_default_timezone_set('Asia/Tehran');
         $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
         return $stmt->execute() ? true : false;
@@ -402,17 +402,17 @@ function createType($connection, $data)
 }
 
 
-function type_update($id, $data, $conn)
+function termvorod_update($id, $data, $conn)
 {
     extract($data);
     try {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $statement = $conn->prepare("UPDATE `type` SET 
-  `name`=:name 
+        $statement = $conn->prepare("UPDATE `term_vorod` SET 
+  `number`=:number 
 ,   `updated_at`=:updated_at
 WHERE  `id`=:id ");
         $statement->bindparam("id", $id, PDO::PARAM_INT);
-        $statement->bindparam("name", $name);
+        $statement->bindparam("number", $number);
         date_default_timezone_set('Asia/Tehran');
         $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
         return $statement->execute() ? true : false;
@@ -423,25 +423,25 @@ WHERE  `id`=:id ");
     }
 }
 
-function type_Get_id($id, $conn)
+function termvorod_Get_id($id, $conn)
 {
-    $statement = $conn->prepare("SELECT * FROM type where `id`= :id");
+    $statement = $conn->prepare("SELECT * FROM term_vorod where `id`= :id");
     $statement->bindparam("id", $id);
     $statement->execute();
-    $type_id = $statement->fetch(PDO::FETCH_OBJ);
+    $termvorod_id = $statement->fetch(PDO::FETCH_OBJ);
 
-    return $type_id ? $type_id : false;
+    return $termvorod_id ? $termvorod_id : false;
 }
 
-function type_delete_id($id, $conn)
+function termvorod_delete_id($id, $conn)
 {
-    $statement = $conn->prepare("DELETE FROM `finalproject`.`type` WHERE  `id`=:id;");
+    $statement = $conn->prepare("DELETE FROM `finalproject`.`term_vorod` WHERE  `id`=:id;");
     $statement->bindparam("id", $id);
     $statement->execute();
     return $statement ? $statement : false;
 }
 
-// -------- End Model Code Of Type Tabel --------
+// -------- End Model Code Of TermVorod Tabel --------
 
 // -------- Start Model Code Of ClassRoom Tabel --------
 
@@ -580,4 +580,78 @@ function educationalgroup_delete_id($id, $conn)
 }
 
 // -------- End Model Code Of EducationalGroup Tabel --------
+
+// -------- Start Model Code Of ChooseLesson Tabel --------
+
+function getAllChooseLesson($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM choose_lesson");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function createChooseLesson($connection, $data)
+{
+    try {
+        extract($data);
+        $stmt = $connection->prepare("INSERT INTO `choose_lesson`
+ (stuednt_id, presentation_id, created_at)
+   VALUES (:stuednt_id, :presentation_id, :created_at)");
+        $stmt->bindparam(':stuednt_id', $stuednt_id);
+        $stmt->bindparam(':presentation_id', $presentation_id);
+        date_default_timezone_set('Asia/Tehran');
+        $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+        return $stmt->execute() ? true : false;
+
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+}
+
+
+function chooselesson_update($id, $data, $conn)
+{
+    extract($data);
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $conn->prepare("UPDATE `choose_lesson` SET 
+  `stuednt_id`=:stuednt_id
+  , `presentation_id`=:presentation_id
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+        $statement->bindparam("id", $id, PDO::PARAM_INT);
+        $statement->bindparam("stuednt_id", $stuednt_id);
+        $statement->bindparam("presentation_id", $presentation_id);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return $statement->execute() ? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch (PDOException $e) {
+        echo "<br>" . $e->getMessage();
+    }
+}
+
+function chooselesson_Get_id($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM choose_lesson where `id`= :id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $chooselesson_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return  $chooselesson_id ?  $chooselesson_id : false;
+}
+
+function chooselesson_delete_id($id, $conn)
+{
+    $statement = $conn->prepare("DELETE FROM `finalproject`.`choose_lesson` WHERE  `id`=:id;");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    return $statement ? $statement : false;
+}
+
+// -------- End Model Code Of ChooseLesson Tabel --------
+
+
 
