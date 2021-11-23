@@ -653,5 +653,96 @@ function chooselesson_delete_id($id, $conn)
 
 // -------- End Model Code Of ChooseLesson Tabel --------
 
+// -------- Start Model Code Of Presentation Tabel --------
+
+function getAllPresentaion($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM presentation");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function createPresentaion($connection, $data)
+{
+    try {
+        extract($data);
+        $stmt = $connection->prepare("INSERT INTO `presentation`
+ (lessonCourse_id, educationalGroup_id, teacher_id, classRoom_id, capacity,
+  day, class_time, presentation_code,  created_at)
+   VALUES (:lessonCourse_id, :educationalGroup_id, :teacher_id, :classRoom_id, :day, :capacity,
+  :class_time, :presentation_code, :created_at)");
+        $stmt->bindparam(':lessonCourse_id', $lessonCourse_id, PDO::PARAM_INT);
+        $stmt->bindparam(':educationalGroup_id', $educationalGroup_id, PDO::PARAM_INT);
+        $stmt->bindparam(':teacher_id', $teacher_id, PDO::PARAM_INT);
+        $stmt->bindparam(':classRoom_id', $classRoom_id, PDO::PARAM_INT);
+        $stmt->bindparam(':capacity', $capacity, PDO::PARAM_INT);
+        $stmt->bindparam(':day', $day);
+        $stmt->bindparam(':class_time', $class_time);
+        $stmt->bindparam(':presentation_code', $presentation_code, PDO::PARAM_INT);
+        date_default_timezone_set('Asia/Tehran');
+        $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+        return $stmt->execute() ? true : false;
+
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+}
+
+
+function presentation_update($id, $data, $conn)
+{
+    extract($data);
+    try {
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement = $conn->prepare("UPDATE `presentation` SET 
+  `lessonCourse_id`=:lessonCourse_id
+  ,`educationalGroup_id`=:educationalGroup_id
+  ,`teacher_id`=:teacher_id
+  ,`classRoom_id`=:classRoom_id
+  ,`capacity`=:capacity
+  ,`day`=:day
+  ,`class_time`=:class_time
+  ,`presentation_code`=:presentation_code
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+        $statement->bindparam("id", $id, PDO::PARAM_INT);
+        $statement->bindparam("lessonCourse_id", $lessonCourse_id, PDO::PARAM_INT);
+        $statement->bindparam("educationalGroup_id", $educationalGroup_id, PDO::PARAM_INT);
+        $statement->bindparam("teacher_id", $teacher_id, PDO::PARAM_INT);
+        $statement->bindparam("classRoom_id", $classRoom_id, PDO::PARAM_INT);
+        $statement->bindparam("capacity", $capacity, PDO::PARAM_INT);
+        $statement->bindparam("day", $day);
+        $statement->bindparam("class_time", $class_time);
+        $statement->bindparam("presentation_code", $presentation_code, PDO::PARAM_INT);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return $statement->execute() ? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch (PDOException $e) {
+        echo "<br>" . $e->getMessage();
+    }
+}
+
+function presentation_Get_id($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM presentation where `id`= :id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $presentation_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return  $presentation_id ?  $presentation_id : false;
+}
+
+function presentation_delete_id($id, $conn)
+{
+    $statement = $conn->prepare("DELETE FROM `finalproject`.`presentation` WHERE  `id`=:id;");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    return $statement ? $statement : false;
+}
+
+// -------- End Model Code Of Presentation Tabel --------
 
 

@@ -45,12 +45,11 @@ require '../layout/haeder.php';
                     <input type="text" class="form-control" id="exampleInputPassword1"
                            placeholder="شماره شناسنامه را وارد کنید" name="serial_number" value="">
                 </div>
-                <div id="form2"></div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>انتخاب تاریخ:</label>
+                    <label>تاریخ تولد</label>
 
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -94,14 +93,16 @@ require '../layout/haeder.php';
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
                     <select class="form-control" id="type" name="type">
-                        <option id="teacher" onclick="teacher()" value="1">استاد</option>
-                        <option id="" value="2">کارمند</option>
-                        <option value="3">دانشجو</option>
-                        <option value="4">ادمین</option>
+                        <option id="teacher" value="1">استاد</option>
+                        <option id="employee" value="2">کارمند</option>
+                        <option id="student" value="3">دانشجو</option>
+                        <option id="admin" value="4">ادمین</option>
                     </select>
                 </div>
             </div>
         </div>
+
+        <div id="form2"></div>
     </div>
     <!-- /.card-body -->
 
@@ -109,50 +110,26 @@ require '../layout/haeder.php';
         <button type="submit" class="btn btn-primary">ثبت</button>
     </div>
 </form>
-<button class="btn" id="teacher">teacher</button>
-<button class="btn" id="employee">employee</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script type="text/javascript">
     $(document).ready(function () {
 
-        // if ($('#type option').val() == '1') {
-        //   return  $('div#form2').load('../teacher/create.php form#codeTeacher');
-        //
-        // }
-        // else if($('#type option').val() == '2') {
-        //  return   $('div#form2').load('../employee/create.php form#codeStandard');
-        //
-        // }
-$('#teacher').trigger('click');
-$('select').on('change',function () {
-    var value = $(this).val();
-    if(value == '1'){
-        teacher();
-    }
-})
-
-            // if(value == '1'){
-            //     teacher();
-            // }
-            // else if(value == '2'){
-            //     $('div#form2').load('../employee/create.php form#codeStandard');
-            // }
-            function teacher() {
-                alert("d;fkjg;kldfg");
-            }
-
-            // $('#type option)(function () {
-            //         $('div#form2').load('../teacher/create.php form#codeTeacher');
-
-                // if($(this).val() == '2'){
-                //     $('div#form2').load('../employee/create.php form#codeStandard');
-                // }
-        // $('#type option#employee').on( 'click' , function () {
-        // })
-
-
+        $( "select#type" ).change(function () {
+                $( "select#type option#teacher:selected" ).each(function() {
+                    return  $('div#form2').load('../teacher/create.php form#codeTeacher');
+                });
+            $( "select#type option#employee:selected" ).each(function() {
+                return  $('div#form2').load('../employee/create.php form#codeStandard');
+            });
+            $( "select#type option#student:selected" ).each(function() {
+                return  $('div#form2').load('../student/create.php form#codeStudent');
+            });
+            $( "select#type option#admin:selected" ).each(function() {
+                return  $('div#form2').load('../admin/create.php form#codeAdmin');
+            });
+            })
+            .change();
     })
 </script>
 
