@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2021 at 10:41 PM
+-- Generation Time: Nov 24, 2021 at 12:37 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -354,6 +354,7 @@ CREATE TABLE `presentation` (
   `teacher_id` int(10) UNSIGNED NOT NULL,
   `classRoom_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `capacity` smallint(5) UNSIGNED NOT NULL,
+  `day` char(20) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `class_time` char(50) COLLATE utf8_persian_ci NOT NULL,
   `presentation_code` char(50) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -364,8 +365,8 @@ CREATE TABLE `presentation` (
 -- Dumping data for table `presentation`
 --
 
-INSERT INTO `presentation` (`id`, `lessonCourse_id`, `educationalGroup_id`, `teacher_id`, `classRoom_id`, `capacity`, `class_time`, `presentation_code`, `created_at`, `updated_at`) VALUES
-(6, 13, 2, 3, 6, 20, '14', '2', NULL, NULL);
+INSERT INTO `presentation` (`id`, `lessonCourse_id`, `educationalGroup_id`, `teacher_id`, `classRoom_id`, `capacity`, `day`, `class_time`, `presentation_code`, `created_at`, `updated_at`) VALUES
+(6, 13, 2, 3, 6, 20, 'یکشنبه', '14', '2', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -578,9 +579,7 @@ INSERT INTO `vazeiate_nezam_vazife` (`id`, `name`, `created_at`, `updated_at`) V
 (2, 'پایان خدمت', NULL, NULL),
 (3, 'معاف پزشکی', NULL, NULL),
 (4, 'معاف تکفل', NULL, NULL),
-(5, 'درحین خدمت', NULL, NULL),
-(9, 'معلولیت', '2021-11-14 18:55:50', NULL),
-(12, 'معلولیت جسمی', '2021-11-14 18:57:17', NULL);
+(5, 'درحین خدمت', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -677,6 +676,7 @@ ALTER TABLE `nobate_paziresh`
 --
 ALTER TABLE `presentation`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `presentation_code` (`presentation_code`),
   ADD KEY `classCode_id` (`classRoom_id`),
   ADD KEY `lessonCourse_id` (`lessonCourse_id`),
   ADD KEY `educationalGroup_id` (`educationalGroup_id`),
