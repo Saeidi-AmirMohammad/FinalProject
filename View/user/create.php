@@ -89,7 +89,6 @@ require '../layout/haeder.php';
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="دانشگاه را وارد کنید"
                            name="university" value="">
                 </div>
-
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
                     <select class="form-control" id="type" name="type">
@@ -101,13 +100,11 @@ require '../layout/haeder.php';
                 </div>
             </div>
         </div>
-
         <div id="form2"></div>
     </div>
     <!-- /.card-body -->
-
     <div class="mb-3">
-        <button type="submit" class="btn btn-primary">ثبت</button>
+        <button type="submit" class="btn btn-primary" >ثبت</button>
     </div>
 </form>
 
@@ -117,16 +114,16 @@ require '../layout/haeder.php';
 
         $( "select#type" ).change(function () {
                 $( "select#type option#teacher:selected" ).each(function() {
-                    return  $('div#form2').load('../teacher/create.php form#codeTeacher');
+                    return  $('div#form2').load('../teacher/create.php div.row');
                 });
             $( "select#type option#employee:selected" ).each(function() {
-                return  $('div#form2').load('../employee/create.php form#codeStandard');
+                return  $('div#form2').load('../employee/create.php div.row');
             });
             $( "select#type option#student:selected" ).each(function() {
-                return  $('div#form2').load('../student/create.php form#codeStudent');
+                return  $('div#form2').load('../student/create.php div.row');
             });
             $( "select#type option#admin:selected" ).each(function() {
-                return  $('div#form2').load('../admin/create.php form#codeAdmin');
+                return  $('div#form2').load('../admin/create.php div.row');
             });
             })
             .change();

@@ -43,6 +43,9 @@ $classRoomData = getAllClassRoom($conn);
                 <div class="form-group">
                     <label for="classRoom_id">شماره کلاس</label>
                     <select class="form-control" id="classRoom_id" name="classRoom_id">
+                        <?php
+                        var_dump($classRoomData);die;
+                        ?>
                         <?php foreach ($classRoomData as $key):?>
                             <option value="<?= $presentation->classRoom_id?>" <?= $presentation->classRoom_id===$presentation->classRoom_id ? 'selected' :'' ?> >استاد</option>
                         <?php endforeach;?>

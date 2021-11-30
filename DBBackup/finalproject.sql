@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2021 at 12:37 PM
+-- Generation Time: Nov 30, 2021 at 09:14 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -34,13 +34,6 @@ CREATE TABLE `choose_lesson` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
-
---
--- Dumping data for table `choose_lesson`
---
-
-INSERT INTO `choose_lesson` (`id`, `stuednt_id`, `presentation_id`, `created_at`, `updated_at`) VALUES
-(2, 1, 6, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -164,13 +157,6 @@ CREATE TABLE `garde` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
-
---
--- Dumping data for table `garde`
---
-
-INSERT INTO `garde` (`id`, `grade_value`, `student_id`, `chooseLesson_id`, `created_at`, `updated_at`) VALUES
-(3, 18, 1, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -366,7 +352,8 @@ CREATE TABLE `presentation` (
 --
 
 INSERT INTO `presentation` (`id`, `lessonCourse_id`, `educationalGroup_id`, `teacher_id`, `classRoom_id`, `capacity`, `day`, `class_time`, `presentation_code`, `created_at`, `updated_at`) VALUES
-(6, 13, 2, 3, 6, 20, 'یکشنبه', '14', '2', NULL, NULL);
+(9, 4, 2, 59, 1, 345, 'شنبه', '۸تا۱۰', '345345', NULL, NULL),
+(10, 14, 10, 62, 8, 33, 'چهار شنبه', '۱۴تا۱۸', '1212', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -428,6 +415,7 @@ INSERT INTO `student` (`id`, `codeDaneshjo`, `maghtae_id`, `reshteTahsili_id`, `
 
 CREATE TABLE `teacher` (
   `id` int(10) UNSIGNED NOT NULL,
+  `teacher_user_id` int(10) UNSIGNED NOT NULL,
   `codeModares` char(50) COLLATE utf8_persian_ci NOT NULL,
   `martabeElmi_id` int(11) UNSIGNED NOT NULL,
   `employmentType_id` int(10) UNSIGNED NOT NULL,
@@ -438,13 +426,6 @@ CREATE TABLE `teacher` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
-
---
--- Dumping data for table `teacher`
---
-
-INSERT INTO `teacher` (`id`, `codeModares`, `martabeElmi_id`, `employmentType_id`, `teachingType_id`, `madrak_id`, `educationalGroup_id`, `hozeDoroos_id`, `created_at`, `updated_at`) VALUES
-(3, '123123132', 2, 2, 4, 4, 5, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -555,7 +536,12 @@ INSERT INTO `user` (`id`, `type_id`, `fname`, `lname`, `email`, `tell`, `m_code`
 (55, 3, 'امیر محمد', 'سعیدی', 'saeidi@gmail.com', '09356788899', '1212121212', 'قاسم آباد شریعتی 10', '11111', '2021-11-13 20:30:00', b'1', 'مهدی', 'مشهد', 'شیعه', 'منتظری', '2021-11-14 17:28:25', NULL),
 (56, 3, 'fsdg', 'kjh', 'kjhk@info.com', '98798798798', '7987987987', 'jhghjgjh', '79878', '2014-05-25 19:30:00', b'0', 'kjh', 'jkhkh', 'jkhjkhk', 'kjhjkh', '2021-11-17 19:53:18', '2021-11-20 15:51:23'),
 (59, 1, 'رضا', 'علوی', 'alavi@gmail.com', '234324234', '26262626', 'jhkjh', '22222', '2021-07-26 19:30:00', b'1', 'jkhkh', 'khkjhk', 'kjhkh', 'hkjhk', NULL, '2021-11-22 08:17:30'),
-(60, 2, 'شششش', 'شششش', 'rahimi@info.com', '4353453', '345345', 'زطزرطزر', '3333', '2021-11-21 20:30:00', b'0', 'صثقثصق', 'صثقصثق', 'صثقصثق', 'صثقصقث', '2021-11-22 09:27:53', NULL);
+(60, 2, 'شششش', 'شششش', 'rahimi@info.com', '4353453', '345345', 'زطزرطزر', '3333', '2021-11-21 20:30:00', b'0', 'صثقثصق', 'صثقصثق', 'صثقصثق', 'صثقصقث', '2021-11-22 09:27:53', NULL),
+(61, 3, 'احمد', 'احمدی', 'sdfsdf@gmail.com', '29387499234', '92834738', 'sdkjhjkshkfsdf', '33333', '2021-11-29 06:19:59', b'0', '', '', '', '', NULL, NULL),
+(62, 1, 'سبحان', 'رضایی', 'lsdjfls@gmail.com', '290834234', '02938402', 'slkdjflsldfj', '44444', '2021-11-29 06:20:44', b'0', '', '', '', '', NULL, NULL),
+(63, 1, 'غلام', 'رحیمی پور', 'mkmmuwboffgvgtoyjj@adfskj.com', '09357675589', '0912345381', 'قاسم آباد شریعتی 2', '565656', '1993-06-27 19:30:00', b'1', 'اصغر', 'مشهد', 'شیعه', 'منتظری', '2021-11-29 10:04:03', NULL),
+(64, 2, 'احمد', 'رحیمی', 'mkmmuwrtboffgvgtoyjj@adfskj.com', '0956675533', '34435', 'قاسم آباد شریعتی 10', '67876777', '1989-03-25 20:30:00', b'0', 'اصغر', 'مشهد', 'rtyrtyrty', 'منتظری', '2021-11-29 10:35:39', '2021-11-29 10:36:36'),
+(67, 1, 'علی رضا', 'غلامی پور', 'rafdghisdfsdfmi@info.com', '09356675533', '0925866678', 'قاسم آباد استاد یوسفی 3 ', '124589', '2021-11-28 20:30:00', b'1', 'رضا', 'مشهد', 'شیعه', 'منتظری', '2021-11-29 11:26:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -712,7 +698,8 @@ ALTER TABLE `teacher`
   ADD KEY `teachingType_id` (`teachingType_id`),
   ADD KEY `madrak_id` (`madrak_id`),
   ADD KEY `educationalGroup_id` (`educationalGroup_id`),
-  ADD KEY `hozeDoroos_id` (`hozeDoroos_id`);
+  ADD KEY `hozeDoroos_id` (`hozeDoroos_id`),
+  ADD KEY `teacher_user_id` (`teacher_user_id`);
 
 --
 -- Indexes for table `teaching_type`
@@ -838,7 +825,7 @@ ALTER TABLE `nobate_paziresh`
 -- AUTO_INCREMENT for table `presentation`
 --
 ALTER TABLE `presentation`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `reshte_tahsili`
@@ -856,7 +843,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `teaching_type`
@@ -880,7 +867,7 @@ ALTER TABLE `type`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `vazeiate_nezam_vazife`
@@ -913,7 +900,7 @@ ALTER TABLE `presentation`
   ADD CONSTRAINT `FK_presentation_classroom` FOREIGN KEY (`classRoom_id`) REFERENCES `classroom` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_presentation_educational_group` FOREIGN KEY (`educationalGroup_id`) REFERENCES `educational_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_presentation_lesson_course` FOREIGN KEY (`lessonCourse_id`) REFERENCES `lesson_course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_presentation_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_presentation_user` FOREIGN KEY (`teacher_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student`
@@ -934,7 +921,8 @@ ALTER TABLE `teacher`
   ADD CONSTRAINT `FK_teacher_hoze_doroos` FOREIGN KEY (`hozeDoroos_id`) REFERENCES `hoze_doroos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_teacher_madrak` FOREIGN KEY (`madrak_id`) REFERENCES `madrak` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_teacher_martabe_elmi` FOREIGN KEY (`martabeElmi_id`) REFERENCES `martabe_elmi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_teacher_teaching_type` FOREIGN KEY (`teachingType_id`) REFERENCES `teaching_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_teacher_teaching_type` FOREIGN KEY (`teachingType_id`) REFERENCES `teaching_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_teacher_user` FOREIGN KEY (`teacher_user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`

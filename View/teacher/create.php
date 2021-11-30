@@ -1,10 +1,10 @@
 <?php
-require '../layout/haeder.php';
+require __DIR__."/../../bootstrap/autoload.php";
 $conn = DBConnection();
 $EducationalGroupData = getAllEducationalGroup($conn);
 ?>
 
-<form id="codeTeacher" action="../../app/Controll/Teacher/teacherController.php" method="post">
+
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -76,8 +76,3 @@ $EducationalGroupData = getAllEducationalGroup($conn);
             </div>
         </div>
     </div>
-</form>
-
-<?php
-require __DIR__ . '/../../view/layout/footer.php';
-?>

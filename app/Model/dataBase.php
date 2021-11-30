@@ -25,6 +25,32 @@ function getAllUserData($connection)
 
 }
 
+function getAllusersType( $type,$connection )
+{
+
+    switch (true){
+        case $type=='teacher':
+            $type=1;
+            break;
+        case $type=='student':
+            $type=3;
+            break;
+        case $type=='employee':
+            $type=2;
+            break;
+        case $type=='admin':
+            $type=4;
+            break;
+
+    }
+    // var_dump($type);
+    $stmt = $connection->prepare("SELECT * FROM user where type_id = :type ");
+    $stmt->bindparam("type", $type ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
 
 function user_Get_id($id, $conn)
 {
@@ -453,6 +479,8 @@ function getAllClassRoom($connection)
 
 }
 
+
+
 function createClassRoom($connection, $data)
 {
     try {
@@ -521,6 +549,10 @@ function getAllEducationalGroup($connection)
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
+
+
+
+
 
 function createEducationalGroup($connection, $data)
 {
@@ -668,10 +700,25 @@ function createPresentaion($connection, $data)
     try {
         extract($data);
         $stmt = $connection->prepare("INSERT INTO `presentation`
- (lessonCourse_id, educationalGroup_id, teacher_id, classRoom_id, capacity,
-  day, class_time, presentation_code,  created_at)
-   VALUES (:lessonCourse_id, :educationalGroup_id, :teacher_id, :classRoom_id, :day, :capacity,
-  :class_time, :presentation_code, :created_at)");
+         (
+          lessonCourse_id,
+          educationalGroup_id,
+          teacher_id,
+          classRoom_id,
+          capacity,
+          day,
+          class_time,
+          presentation_code)
+           VALUES (
+           :lessonCourse_id, 
+           :educationalGroup_id,
+           :teacher_id,
+           :classRoom_id, 
+           :capacity,
+           :day,
+           :class_time,
+           :presentation_code)
+           ");
         $stmt->bindparam(':lessonCourse_id', $lessonCourse_id, PDO::PARAM_INT);
         $stmt->bindparam(':educationalGroup_id', $educationalGroup_id, PDO::PARAM_INT);
         $stmt->bindparam(':teacher_id', $teacher_id, PDO::PARAM_INT);
@@ -679,13 +726,13 @@ function createPresentaion($connection, $data)
         $stmt->bindparam(':capacity', $capacity, PDO::PARAM_INT);
         $stmt->bindparam(':day', $day);
         $stmt->bindparam(':class_time', $class_time);
-        $stmt->bindparam(':presentation_code', $presentation_code, PDO::PARAM_INT);
+        $stmt->bindparam(':presentation_code', $presentation_code);
         date_default_timezone_set('Asia/Tehran');
         $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
         return $stmt->execute() ? true : false;
 
     } catch (Exception $e) {
-        $e->getMessage();
+         echo $e;
     }
 }
 
@@ -745,4 +792,26 @@ function presentation_delete_id($id, $conn)
 
 // -------- End Model Code Of Presentation Tabel --------
 
+// -------- Start Model Code Of Teacher Tabel --------
 
+function createTeacher_un_commonality($connection, $data)
+{
+    extract($data);
+    $stmt = $connection->prepare("INSERT INTO `teacher` (codeModares, martabeElmi_id, employmentType_id, 
+teachingType_id, madrak_id, educationalGroup_id, hozeDoroos_id, created_at)
+                                        VALUES (:codeModares, :martabeElmi_id, :employmentType_id, :teachingType_id,
+                                         :madrak_id, :educationalGroup_id, :hozeDoroos_id, :created_at)");
+    $stmt->bindparam(':codeModares', $codeModares);
+    $stmt->bindparam(':martabeElmi_id', $martabeElmi_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':employmentType_id', $employmentType_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':teachingType_id', $teachingType_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':madrak_id', $madrak_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':educationalGroup_id', $educationalGroup_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':hozeDoroos_id', $hozeDoroos_id ,PDO::PARAM_INT);
+    date_default_timezone_set('Asia/Tehran');
+    $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+    return $stmt->execute() ? true : false;
+
+}
+
+// -------- End Model Code Of Teacher Tabel --------

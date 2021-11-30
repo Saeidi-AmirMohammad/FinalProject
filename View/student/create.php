@@ -1,11 +1,10 @@
 <?php
-require '../layout/haeder.php';
+require __DIR__."/../../bootstrap/autoload.php";
 $conn = DBConnection();
 $ReshteTahsiliData = getAllReshteTahsili($conn);
 $TermVorodData = getAllTermVorod($conn);
 ?>
 
-    <form id="codeStudent" action="../../app/Controll/Student/studentController.php" method="post">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -64,8 +63,3 @@ $TermVorodData = getAllTermVorod($conn);
                 </div>
             </div>
         </div>
-    </form>
-
-<?php
-require __DIR__ . '/../../view/layout/footer.php';
-?>

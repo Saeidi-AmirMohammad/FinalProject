@@ -11971,7 +11971,7 @@ wysihtml5.commands.formatCode = {
  * TODO: the following methods still need unit test coverage
  */
 wysihtml5.views.View = Base.extend(
-  /** @scope wysihtml5.views.View.prototype */ {
+  /** @scope wysihtml5.views.view.prototype */ {
   constructor: function(parent, textareaElement, config) {
     this.parent   = parent;
     this.element  = textareaElement;

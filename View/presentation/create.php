@@ -4,6 +4,9 @@ require '../layout/haeder.php';
 
 $conn = DBConnection();
 $classRoomData = getAllClassRoom($conn);
+$lessonCourseData = getAllLessonCourse($conn);
+$EducationalGroupData = getAllEducationalGroup($conn);
+$getAllusersTypeData = getAllusersType('teacher',$conn);
 ?>
 
 <form role="form" action="../../app/Controll/Presentation/presentationController.php" method="post">
@@ -13,18 +16,39 @@ $classRoomData = getAllClassRoom($conn);
                 <div class="form-group">
                     <label for="lessonCourse_id">نام درس</label>
                     <select class="form-control" id="lessonCourse_id" name="lessonCourse_id">
+                        <?php
+                        foreach ($lessonCourseData as $key):
+                        ?>
+                            <option value="<?= $key->id?>"><?= $key->name .' - '. $key->code?></option>
+                        <?php
+                        endforeach;
+                        ?>
 
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="educationalGroup_id">نام گروه درسی</label>
                     <select class="form-control" id="educationalGroup_id" name="educationalGroup_id">
+                        <?php
+                        foreach ($EducationalGroupData as $key):
+                            ?>
+                            <option value="<?= $key->id?>"><?= $key->name?></option>
+                        <?php
+                        endforeach;
+                        ?>
 
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="teacher_id">نام استاد</label>
                     <select class="form-control" id="teacher_id" name="teacher_id">
+                        <?php
+                        foreach ($getAllusersTypeData as $key):
+                            ?>
+                            <option value="<?= $key->id?>"><?= $key->fname .' '.$key->lname .'-'. $key->m_code?></option>
+                        <?php
+                        endforeach;
+                        ?>
 
                     </select>
                 </div>

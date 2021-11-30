@@ -2480,12 +2480,12 @@ var MouseFollower = Class.extend({
 
     /* A utility class for rendering <tr> rows.
 ----------------------------------------------------------------------------------------------------------------------*/
-// It leverages methods of the subclass and the View to determine custom rendering behavior for each row "type"
+// It leverages methods of the subclass and the view to determine custom rendering behavior for each row "type"
 // (such as highlight rows, day rows, helper rows, etc).
 
 var RowRenderer = Class.extend({
 
-	view: null, // a View object
+	view: null, // a view object
 	isRTL: null, // shortcut to the view's isRTL option
 	cellHtml: '<td/>', // plain default HTML used for a cell when no other is available
 
@@ -2540,12 +2540,12 @@ var RowRenderer = Class.extend({
 	// Returns an HTML-rendering function given a specific `rendererName` (like cell, intro, or outro) and a specific
 	// `rowType` (like day, eventSkeleton, helperSkeleton), which is optional.
 	// If a renderer for the specific rowType doesn't exist, it will fall back to a generic renderer.
-	// We will query the View object first for any custom rendering functions, then the methods of the subclass.
+	// We will query the view object first for any custom rendering functions, then the methods of the subclass.
 	getHtmlRenderer: function(rendererName, rowType) {
 		var view = this.view;
 		var generalName; // like "cellHtml"
 		var specificName; // like "dayCellHtml". based on rowType
-		var provider; // either the View or the RowRenderer subclass, whichever provided the method
+		var provider; // either the view or the RowRenderer subclass, whichever provided the method
 		var renderer;
 
 		generalName = rendererName + 'Html';
@@ -3369,7 +3369,7 @@ Grid.mixin({
 			function(name, func) {
 				// attach the handler to the container element and only listen for real event elements via bubbling
 				_this.el.on(name, '.fc-event-container > *', function(ev) {
-					var seg = $(this).data('fc-seg'); // grab segment data. put there by View::renderEvents
+					var seg = $(this).data('fc-seg'); // grab segment data. put there by view::renderEvents
 
 					// only call the handlers if there is not a drag/resize in progress
 					if (seg && !_this.isDraggingSeg && !_this.isResizingSeg) {
@@ -4130,7 +4130,7 @@ var DayGrid = Grid.extend({
 					'<table>' +
 						(this.numbersVisible ?
 							'<thead>' +
-								this.rowHtml('number', row) + // leverages RowRenderer. View will define render method
+								this.rowHtml('number', row) + // leverages RowRenderer. view will define render method
 							'</thead>' :
 							''
 							) +
@@ -4141,7 +4141,7 @@ var DayGrid = Grid.extend({
 
 
 	// Renders the HTML for a whole-day cell. Will eventually end up in the day-row's background.
-	// We go through a 'day' row type instead of just doing a 'bg' row type so that the View can do custom rendering
+	// We go through a 'day' row type instead of just doing a 'bg' row type so that the view can do custom rendering
 	// specifically for whole-day rows, whereas a 'bg' might also be used for other purposes (TimeGrid bg for example).
 	dayCellHtml: function(cell) {
 		return this.bgCellHtml(cell);
@@ -5245,7 +5245,7 @@ var TimeGrid = Grid.extend({
 
 
 	// Renders the HTML for a vertical background cell behind the slots.
-	// This method is distinct from 'bg' because we wanted a new `rowType` so the View could customize the rendering.
+	// This method is distinct from 'bg' because we wanted a new `rowType` so the view could customize the rendering.
 	slotBgCellHtml: function(cell) {
 		return this.bgCellHtml(cell);
 	},
@@ -6312,7 +6312,7 @@ var View = fc.View = Class.extend({
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// Wraps the basic render() method with more View-specific logic. Called by the owner Calendar.
+	// Wraps the basic render() method with more view-specific logic. Called by the owner Calendar.
 	renderView: function() {
 		this.render();
 		this.updateSize();
@@ -6330,7 +6330,7 @@ var View = fc.View = Class.extend({
 	},
 
 
-	// Wraps the basic destroy() method with more View-specific logic. Called by the owner Calendar.
+	// Wraps the basic destroy() method with more view-specific logic. Called by the owner Calendar.
 	destroyView: function() {
 		this.unselect();
 		this.destroyViewEvents();
@@ -6450,7 +6450,7 @@ var View = fc.View = Class.extend({
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// Wraps the basic renderEvents() method with more View-specific logic
+	// Wraps the basic renderEvents() method with more view-specific logic
 	renderViewEvents: function(events) {
 		this.renderEvents(events);
 
@@ -6467,7 +6467,7 @@ var View = fc.View = Class.extend({
 	},
 
 
-	// Wraps the basic destroyEvents() method with more View-specific logic
+	// Wraps the basic destroyEvents() method with more view-specific logic
 	destroyViewEvents: function() {
 		this.eventSegEach(function(seg) {
 			this.trigger('eventDestroy', seg.event, seg.event, seg.el);
@@ -7142,7 +7142,7 @@ var View = fc.View = Class.extend({
 	
 	
 
-	// View Rendering
+	// view Rendering
 	// -----------------------------------------------------------------------------------
 
 
@@ -7199,7 +7199,7 @@ var View = fc.View = Class.extend({
 					currentView.renderView();
 					unfreezeContentHeight();
 
-					// need to do this after View::render, so dates are calculated
+					// need to do this after view::render, so dates are calculated
 					updateTitle();
 					updateTodayButton();
 
@@ -7214,11 +7214,11 @@ var View = fc.View = Class.extend({
 
 
 
-	// View Instantiation
+	// view Instantiation
 	// -----------------------------------------------------------------------------------
 
 
-	// Given a view name for a custom view or a standard view, creates a ready-to-go View object
+	// Given a view name for a custom view or a standard view, creates a ready-to-go view object
 	function instantiateView(viewType) {
 		var spec = getViewSpec(viewType);
 
@@ -8795,7 +8795,7 @@ function EventManager(options) { // assumed to be a calendar
 		var eventInput;
 		var event;
 
-		// note: very similar logic is in View's reportExternalDrop
+		// note: very similar logic is in view's reportExternalDrop
 		if (eventProps) {
 			eventInput = $.extend({}, eventProps, range);
 			event = expandEvent(buildEventFromInput(eventInput))[0];
@@ -9611,7 +9611,7 @@ fcViews.agenda = View.extend({ // AgendaView
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// Renders events onto the view and populates the View's segment array
+	// Renders events onto the view and populates the view's segment array
 	renderEvents: function(events) {
 		var dayEvents = [];
 		var timedEvents = [];
