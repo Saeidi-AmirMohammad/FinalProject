@@ -3,7 +3,7 @@ function DBConnection()
 {
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "@Am41145481311.";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=finalproject", $username, $password);
@@ -24,7 +24,13 @@ function getAllUserData($connection)
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
+function getlastestUserData($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM user ORDER BY id DESC LIMIT 1");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
+}
 function getAllusersType( $type,$connection )
 {
 
@@ -794,13 +800,17 @@ function presentation_delete_id($id, $conn)
 
 // -------- Start Model Code Of Teacher Tabel --------
 
-function createTeacher_un_commonality($connection, $data)
+function createTeacher_un_commonality($connection, $teacher_user_id, $codeModares,
+                                                   $martabeElmi_id, $employmentType_id,
+                                                   $teachingType_id, $madrak_id,
+                                                   $educationalGroup_id, $hozeDoroos_id)
 {
-    extract($data);
-    $stmt = $connection->prepare("INSERT INTO `teacher` (codeModares, martabeElmi_id, employmentType_id, 
+
+    $stmt = $connection->prepare("INSERT INTO `teacher` ( teacher_user_id ,codeModares, martabeElmi_id, employmentType_id, 
 teachingType_id, madrak_id, educationalGroup_id, hozeDoroos_id, created_at)
-                                        VALUES (:codeModares, :martabeElmi_id, :employmentType_id, :teachingType_id,
+                                        VALUES ( :teacher_user_id,:codeModares, :martabeElmi_id, :employmentType_id, :teachingType_id,
                                          :madrak_id, :educationalGroup_id, :hozeDoroos_id, :created_at)");
+    $stmt->bindparam(':teacher_user_id', $teacher_user_id ,PDO::PARAM_INT);
     $stmt->bindparam(':codeModares', $codeModares);
     $stmt->bindparam(':martabeElmi_id', $martabeElmi_id ,PDO::PARAM_INT);
     $stmt->bindparam(':employmentType_id', $employmentType_id ,PDO::PARAM_INT);
@@ -813,5 +823,82 @@ teachingType_id, madrak_id, educationalGroup_id, hozeDoroos_id, created_at)
     return $stmt->execute() ? true : false;
 
 }
+
+
+function createEmploy_un_commonality($connection,
+    $employ_user_id,
+    $codeStandard
+)
+{
+
+    $stmt = $connection->prepare("INSERT INTO `employee` ( user_id_employ ,codeStandard, created_at)
+                                        VALUES ( :user_id_employ,:codeStandard,:created_at)");
+    $stmt->bindparam(':user_id_employ', $employ_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':codeStandard', $codeStandard);
+    date_default_timezone_set('Asia/Tehran');
+    $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+    return $stmt->execute() ? true : false;
+
+}
+
+
+function createStudent_un_commonality($connection,
+                                      $student_user_id,
+                                      $codeDaneshjo,
+                                      $maghtae_id, $reshteTahsili_id,
+                                      $termVorod_id, $nobatePaziresh_id,
+                                      $vazeiateNezamVazife_id
+)
+{
+//    <<<HTML
+//
+//INSERT INTO `student` (`id`, `user_id_student`,
+// `codeDaneshjo`, `maghtae_id`, `reshteTahsili_id`,
+//  `termVorod_id`, `nobatePaziresh_id`, `vazeiateNezamVazife_id`,
+//   `created_at`, `updated_at`) VALUES (NULL, '79', '4145455', '2', '10', '4', '2', '4', NULL, NULL);
+//
+//HTML;
+//
+
+    $stmt = $connection->prepare("INSERT INTO `student` ( 
+                       user_id_student ,codeDaneshjo,
+                       maghtae_id ,reshteTahsili_id , termVorod_id ,
+                       nobatePaziresh_id ,vazeiateNezamVazife_id
+                        , created_at)
+          VALUES ( :user_id_student,:codeDaneshjo,:maghtae_id,
+                  :reshteTahsili_id,:termVorod_id,:nobatePaziresh_id,
+                  :vazeiateNezamVazife_id,:created_at)");
+    $stmt->bindparam(':user_id_student', $student_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':codeDaneshjo', $codeDaneshjo);
+    $stmt->bindparam(':maghtae_id', $maghtae_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':reshteTahsili_id', $reshteTahsili_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':termVorod_id', $termVorod_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':nobatePaziresh_id', $nobatePaziresh_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':vazeiateNezamVazife_id', $vazeiateNezamVazife_id ,PDO::PARAM_INT);
+    date_default_timezone_set('Asia/Tehran');
+    $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+    return $stmt->execute() ? true : false;
+
+}
+
+
+
+
+function create_un_commonality($connection,
+                                     $employ_user_id,
+                                     $codeStandard
+)
+{
+
+    $stmt = $connection->prepare("INSERT INTO `employee` ( user_id_employ ,codeStandard, created_at)
+                                        VALUES ( :user_id_employ,:codeStandard,:created_at)");
+    $stmt->bindparam(':user_id_employ', $employ_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':codeStandard', $codeStandard);
+    date_default_timezone_set('Asia/Tehran');
+    $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+    return $stmt->execute() ? true : false;
+
+}
+
 
 // -------- End Model Code Of Teacher Tabel --------

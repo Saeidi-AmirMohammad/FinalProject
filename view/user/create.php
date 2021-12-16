@@ -1,7 +1,5 @@
 <?php
-
 require '../layout/haeder.php';
-
 ?>
 
 <form role="form" action="../../app/Controll/User/userController.php" method="post">
