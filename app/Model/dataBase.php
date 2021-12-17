@@ -53,6 +53,111 @@ function getAllUserDataemploee($connection)
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
+
+function getmartabe_elmi($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM martabe_elmi WHERE id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function getemployment_type($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `employment_type` WHERE id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+
+function getteaching_type($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `teaching_type` WHERE id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+function getmadrak_type($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `madrak` WHERE id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function geteducational_group($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `educational_group` WHERE  id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function gethoze_doroos($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `hoze_doroos` WHERE  id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+
+function getmaghtae($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `maghtae` WHERE  id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+
+function getreshte_tahsili($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `reshte_tahsili` WHERE   id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function getterm_vorod($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `term_vorod` WHERE  id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+
+function getnobate_paziresh($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `nobate_paziresh` WHERE   id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+
+function getvazeiate_nezam_vazife($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `vazeiate_nezam_vazife` WHERE   id=:id  ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+}
+
+
+
 function getlastestUserData($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM user ORDER BY id DESC LIMIT 1");

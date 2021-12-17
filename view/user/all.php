@@ -7,6 +7,7 @@ $data = getAllUserData($conn);
 $datateacher= getAllUserDataTeacher($conn);
 $datastudent=getAllUserDataStudent($conn);
 $dataemploy=getAllUserDataemploee($conn);
+
 //echo  "<pre>";
 //print_r($datateacher);die;
 //echo  "</pre>";
@@ -53,7 +54,10 @@ $dataemploy=getAllUserDataemploee($conn);
                         <th>دانشگاه</th>
                         <th>کدمدرس</th>
                         <th>مرتبه علمی</th>
+
+
                         <th>کد پرسنلی</th>
+                        <th>نوع استاد</th>
                         <th>مدرک</th>
                         <th>گروه</th>
                         <th>حوزه دروس</th>
@@ -129,14 +133,75 @@ $dataemploy=getAllUserDataemploee($conn);
 
 
                         <td><?= $key->codeModares ?></td>
-                        <td><?= $key->martabeElmi_id ?></td>
-                        <td><?= $key->employmentType_id ?></td>
-                        <td><?= $key->madrak_id ?></td>
-                        <td><?= $key->educationalGroup_id ?></td>
-                        <td><?= $key->hozeDoroos_id ?></td>
+
+                        <?php
+                        $id = $key->martabeElmi_id;
+                        $martabeh_elmi=getmartabe_elmi($id,$conn);
+                        foreach ($martabeh_elmi as $keyy):
+                        ?>
+                        <td><?= $keyy->name ?></td>
+
+                        <?php
+                        endforeach;
+                        ?>
+                        <?php
+                        $id= $key->employmentType_id;
+                        $employmentType_id=getemployment_type($id,$conn);
+                        foreach ($employmentType_id as $keyy):
+                        ?>
+                        <td><?= $keyy->name ?></td>
+
+                        <?php
+                        endforeach;
+                        ?>
+                        <?php
+                        $id= $key->teachingType_id;
+                        $getteaching_type=getteaching_type($id,$conn);
+                        foreach ($getteaching_type as $keyy):
+                            ?>
+                            <td><?= $keyy->name ?></td>
+                        <?php
+                        endforeach;
+                        ?>
+
+                        <?php
+                        $id= $key->madrak_id;
+                        $getgetmadrak_type=getmadrak_type($id,$conn);
+                        foreach ($getgetmadrak_type as $keyy):
+                            ?>
+                            <td><?= $keyy->name ?></td>
+                        <?php
+                        endforeach;
+                        ?>
+
+
+
+                        <?php
+                        $id= $key->educationalGroup_id;
+                        $geteducational_group=geteducational_group($id,$conn);
+                        foreach ($geteducational_group as $keyy):
+                            ?>
+                            <td><?= $keyy->name ?></td>
+                        <?php
+                        endforeach;
+                        ?>
+
+
+                        <?php
+                        $id= $key->hozeDoroos_id;
+                        $gethoze_doroos=gethoze_doroos($id,$conn);
+                        foreach ($gethoze_doroos as $keyy):
+                            ?>
+                            <td><?= $keyy->name ?></td>
+                        <?php
+                        endforeach;
+                        ?>
+
+
 
                     </tr>
                     <?php
+
                     endforeach;
                     ?>
                     </tbody>
@@ -263,12 +328,63 @@ $dataemploy=getAllUserDataemploee($conn);
 
 
 
+
                             <td><?= $key->codeDaneshjo ?></td>
-                            <td><?= $key->maghtae_id ?></td>
-                            <td><?= $key->reshteTahsili_id ?></td>
-                            <td><?= $key->termVorod_id ?></td>
-                            <td><?= $key->nobatePaziresh_id ?></td>
-                            <td><?= $key->vazeiateNezamVazife_id ?></td>
+
+
+
+
+                            <?php
+                            $id= $key->maghtae_id;
+                            $getmaghtae=getmaghtae($id,$conn);
+                            foreach ($getmaghtae as $keyy):
+                                ?>
+                                <td><?= $keyy->name ?></td>
+                            <?php
+                            endforeach;
+                            ?>
+
+                            <?php
+                            $id= $key->reshteTahsili_id;
+                            $getreshte_tahsili=getreshte_tahsili($id,$conn);
+                            foreach ($getreshte_tahsili as $keyy):
+                                ?>
+                                <td><?= $keyy->name ?></td>
+                            <?php
+                            endforeach;
+                            ?>
+
+                             <?php
+                            $id= $key->termVorod_id;
+                            $getterm_vorod=getterm_vorod($id,$conn);
+                            foreach ($getterm_vorod as $keyy):
+                                ?>
+                                <td><?= $keyy->number ?></td>
+                            <?php
+                            endforeach;
+                            ?>
+
+                            <?php
+                            $id= $key->nobatePaziresh_id;
+                            $getnobate_paziresh=getnobate_paziresh($id,$conn);
+                            foreach ($getnobate_paziresh as $keyy):
+                                ?>
+                                <td><?= $keyy->name ?></td>
+                            <?php
+                            endforeach;
+                            ?>
+
+                            <?php
+                            $id= $key->vazeiateNezamVazife_id;
+                            $getvazeiate_nezam_vazifeh=getvazeiate_nezam_vazife($id,$conn);
+                            foreach ($getvazeiate_nezam_vazifeh as $keyy):
+                                ?>
+                                <td><?= $keyy->name ?></td>
+                            <?php
+                            endforeach;
+                            ?>
+
+
 
                         </tr>
                         <?php
