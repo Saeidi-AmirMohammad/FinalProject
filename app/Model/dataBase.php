@@ -24,6 +24,35 @@ function getAllUserData($connection)
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
+function getAllUserDataTeacher($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM user 
+    INNER JOIN teacher
+    ON user.id = teacher.teacher_user_id  ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function getAllUserDataStudent($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM user 
+    INNER JOIN student
+    ON user.id = student.user_id_student  ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function getAllUserDataemploee($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM user 
+    INNER JOIN employee
+    ON user.id = employee.user_id_employ  ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
 function getlastestUserData($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM user ORDER BY id DESC LIMIT 1");
