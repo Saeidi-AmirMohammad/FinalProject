@@ -8,6 +8,7 @@ $connect = DBConnection();
 //$user=getAllUserData($connect);
 //var_dump($_GET['edit']);die;
 $id=$_GET['edit'];
+$_SESSION['edit_teacer']=$_GET['edit'];
 $user= user_Get_id($id,$connect);
 ?>
 
@@ -108,15 +109,17 @@ $user= user_Get_id($id,$connect);
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
                     <select class="form-control" id="type" name="type">
-                        <option value="1" <?= $user->type_id==='1' ? 'selected' :'' ?> >استاد</option>
-                        <option value="2" <?= $user->type_id==='2' ? 'selected' :'' ?> >کارمند</option>
-                        <option value="3" <?= $user->type_id==='3' ? 'selected' :'' ?> >دانشجو</option>
-                        <option value="4" <?= $user->type_id==='4' ? 'selected' :'' ?> >ادمین</option>
+                        <option id="teacher"  value="1" <?= $user->type_id==='1' ? 'selected' :'' ?> >استاد</option>
+                        <option id="employee"  value="2" <?= $user->type_id==='2' ? 'selected' :'' ?> >کارمند</option>
+                        <option id="student"  value="3" <?= $user->type_id==='3' ? 'selected' :'' ?> >دانشجو</option>
+                        <option id="admin"   value="4" <?= $user->type_id==='4' ? 'selected' :'' ?> >ادمین</option>
                     </select>
                 </div>
             </div>
         </div>
+        <div id="form2"></div>
     </div>
+
     <!-- /.card-body -->
 
     <div class="mb-3">
@@ -124,6 +127,28 @@ $user= user_Get_id($id,$connect);
     </div>
 </form>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $( "select#type" ).change(function () {
+            $( "select#type option#teacher:selected" ).each(function() {
+                return  $('div#form2').load('../teacher/edit.php div.row');
+            });
+            $( "select#type option#employee:selected" ).each(function() {
+                return  $('div#form2').load('../employee/edit.php div.row');
+            });
+            $( "select#type option#student:selected" ).each(function() {
+                return  $('div#form2').load('../student/edit.php div.row');
+            });
+            $( "select#type option#admin:selected" ).each(function() {
+                return  $('div#form2').load('../admin/create.php div.row');
+            });
+        })
+            .change();
+    })
+</script>
 
 
 <?php

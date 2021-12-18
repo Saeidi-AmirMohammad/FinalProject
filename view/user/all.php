@@ -71,10 +71,10 @@ $dataemploy=getAllUserDataemploee($conn);
 
                         as $key):
                         ?>
-                        <td><?= $key->id ?>
+                        <td><?= $key->teacher_user_id ?>
                             <div class="d-flex mt-3">
                                 <form action="/view/user/edit.php" id="edit-form-<?= $key->teacher_user_id ?>">
-                                    <input type="hidden" name="edit" value="<?= $key->id ?>">
+                                    <input type="hidden" name="edit" value="<?= $key->teacher_user_id ?>">
                                 </form>
                                 <a onclick="document.getElementById('edit-form-<?= $key->teacher_user_id ?>').submit()"
                                    class="btn btn-warning  mx-1 ">ویرایش</a>
@@ -267,7 +267,7 @@ $dataemploy=getAllUserDataemploee($conn);
 
                             as $key):
                             ?>
-                            <td><?= $key->id ?>
+                            <td><?= $key->user_id_student ?>
                                 <div class="d-flex mt-3">
                                     <form action="/view/user/edit.php" id="edit-form-<?= $key->user_id_student?>">
                                         <input type="hidden" name="edit" value="<?= $key->user_id_student ?>">
@@ -447,7 +447,7 @@ $dataemploy=getAllUserDataemploee($conn);
 
                         as $key):
                         ?>
-                        <td><?= $key->id ?>
+                        <td><?= $key->user_id_employ ?>
                             <div class="d-flex mt-3">
                                 <form action="/view/user/edit.php" id="edit-form-<?= $key->user_id_employ?>">
                                     <input type="hidden" name="edit" value="<?= $key->user_id_employ ?>">

@@ -694,6 +694,17 @@ function getAllEducationalGroup($connection)
 
 
 
+function getAllteacher($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `teacher` WHERE teacher_user_id=:id ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+
+
 function createEducationalGroup($connection, $data)
 {
     try {
