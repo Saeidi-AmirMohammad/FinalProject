@@ -8,7 +8,7 @@ $connect = DBConnection();
 //$user=getAllUserData($connect);
 //var_dump($_GET['edit']);die;
 $id=$_GET['edit'];
-$_SESSION['edit_teacer']=$_GET['edit'];
+$_SESSION['edit']=$_GET['edit'];
 $user= user_Get_id($id,$connect);
 ?>
 

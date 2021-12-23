@@ -572,7 +572,6 @@ function termvorod_update($id, $data, $conn)
 {
     extract($data);
     try {
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = $conn->prepare("UPDATE `term_vorod` SET 
   `number`=:number 
 ,   `updated_at`=:updated_at
@@ -687,12 +686,7 @@ function getAllEducationalGroup($connection)
     $stmt = $connection->prepare("SELECT * FROM educational_group");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
-
 }
-
-
-
-
 
 function getAllteacher($id,$connection)
 {
@@ -700,8 +694,30 @@ function getAllteacher($id,$connection)
     $stmt->bindparam("id", $id ,PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
-
 }
+
+
+
+function getAllstudent($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `student` WHERE user_id_student=:id ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+}
+
+
+
+function getAllemploy($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `employee`  WHERE  user_id_employ=:id ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+
+
 
 
 
@@ -965,6 +981,40 @@ teachingType_id, madrak_id, educationalGroup_id, hozeDoroos_id, created_at)
     $stmt->bindparam(':hozeDoroos_id', $hozeDoroos_id ,PDO::PARAM_INT);
     date_default_timezone_set('Asia/Tehran');
     $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+    return $stmt->execute() ? true : false;
+
+}
+
+function updateTeacher_un_commonality($connection, $teacher_user_id, $codeModares,
+                                                   $martabeElmi_id, $employmentType_id,
+                                                   $teachingType_id, $madrak_id,
+                                                   $educationalGroup_id, $hozeDoroos_id)
+{
+
+
+    $stmt = $connection->prepare("
+UPDATE `teacher` SET 
+                  `teacher_user_id`=:teacher_user_id,
+                   `codeModares`=:codeModares,
+                   `martabeElmi_id`=:martabeElmi_id,
+                   `employmentType_id`=:employmentType_id,
+                   `teachingType_id`=:teachingType_id,
+                   `madrak_id`= :madrak_id,
+                   `educationalGroup_id`=:educationalGroup_id,
+                   `hozeDoroos_id`=:hozeDoroos_id,
+                   `updated_at`=:updated_at WHERE  `teacher_user_id`=:teacher_user_id   
+                                         
+    ");
+    $stmt->bindparam(':teacher_user_id', $teacher_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':codeModares', $codeModares);
+    $stmt->bindparam(':martabeElmi_id', $martabeElmi_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':employmentType_id', $employmentType_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':teachingType_id', $teachingType_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':madrak_id', $madrak_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':educationalGroup_id', $educationalGroup_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':hozeDoroos_id', $hozeDoroos_id ,PDO::PARAM_INT);
+    date_default_timezone_set('Asia/Tehran');
+    $stmt->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
     return $stmt->execute() ? true : false;
 
 }

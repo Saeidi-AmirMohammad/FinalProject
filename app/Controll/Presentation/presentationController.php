@@ -2,7 +2,7 @@
 require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
 echo "<pre>";
-//var_dump($_POST);
+var_dump($_POST);die;
 echo "</pre>";
 if (isPost()) {
     extract($_POST);
@@ -26,7 +26,7 @@ if (isPost()) {
             'capacity'=> intval( $_POST['capacity']),
             'day'=>  $_POST['day'],
             'class_time'=>  $_POST['class_time'],
-            'presentation_code'=>  $_POST['presentation_code'],
+            'presentation_code'=>$_POST['presentation_code'],
         ];
 var_dump($data);
         echo "</pre>";

@@ -7,7 +7,7 @@ $EducationalGroupData = getAllEducationalGroup($conn);
 ?>
 
 <?php
-$id = $_SESSION['edit_teacer'];
+$id = $_SESSION['edit'];
 $user = user_Get_id($id, $conn);
 $id = $user->id;
 $teacher = getAllteacher($id, $conn);
