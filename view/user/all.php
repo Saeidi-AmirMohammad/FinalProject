@@ -23,10 +23,10 @@ $dataemploy=getAllUserDataemploee($conn);
                 <div class="card-tools">
                     <div class="d-flex">
                         <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
+<!--                            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
+<!--                            </div>-->
                         </div>
                         <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد کاربر</a>
                     </div>
@@ -221,15 +221,7 @@ $dataemploy=getAllUserDataemploee($conn);
                 <div class="card-header">
                     <h3 class="card-title">جدول دانشجویان</h3>
                     <div class="card-tools">
-                        <div class="d-flex">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                            <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد کاربر</a>
-                        </div>
+
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -407,14 +399,7 @@ $dataemploy=getAllUserDataemploee($conn);
                 <h3 class="card-title">جدول کارمندان</h3>
                 <div class="card-tools">
                     <div class="d-flex">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                        <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد کاربر</a>
-                    </div>
+
                 </div>
             </div>
             <!-- /.card-header -->
