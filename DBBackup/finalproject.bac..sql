@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 26, 2021 at 06:32 PM
--- Server version: 8.0.27-0ubuntu0.20.04.1
--- PHP Version: 8.0.12
+-- Host: 127.0.0.1
+-- Generation Time: Nov 30, 2021 at 09:14 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `choose_lesson` (
-  `id` int UNSIGNED NOT NULL,
-  `stuednt_id` int UNSIGNED NOT NULL,
-  `presentation_id` int UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `stuednt_id` int(10) UNSIGNED NOT NULL,
+  `presentation_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- --------------------------------------------------------
 
@@ -43,11 +42,11 @@ CREATE TABLE `choose_lesson` (
 --
 
 CREATE TABLE `classroom` (
-  `id` int UNSIGNED NOT NULL,
-  `class_code` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `id` int(10) UNSIGNED NOT NULL,
+  `class_code` char(50) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `classroom`
@@ -82,11 +81,11 @@ INSERT INTO `classroom` (`id`, `class_code`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `educational_group` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `educational_group`
@@ -110,19 +109,18 @@ INSERT INTO `educational_group` (`id`, `name`, `created_at`, `updated_at`) VALUE
 --
 
 CREATE TABLE `employee` (
-  `id` int UNSIGNED NOT NULL,
-  `user_id_employ` int UNSIGNED NOT NULL,
-  `codeStandard` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `codeStandard` char(50) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `user_id_employ`, `codeStandard`, `created_at`, `updated_at`) VALUES
-(3, 122, '777733345666', '2021-12-11 15:14:33', NULL);
+INSERT INTO `employee` (`id`, `codeStandard`, `created_at`, `updated_at`) VALUES
+(1, '123', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,11 +129,11 @@ INSERT INTO `employee` (`id`, `user_id_employ`, `codeStandard`, `created_at`, `u
 --
 
 CREATE TABLE `employment_type` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `employment_type`
@@ -152,13 +150,13 @@ INSERT INTO `employment_type` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `garde` (
-  `id` int UNSIGNED NOT NULL,
-  `grade_value` smallint UNSIGNED NOT NULL,
-  `student_id` int UNSIGNED NOT NULL,
-  `chooseLesson_id` int UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `grade_value` smallint(5) UNSIGNED NOT NULL,
+  `student_id` int(10) UNSIGNED NOT NULL,
+  `chooseLesson_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- --------------------------------------------------------
 
@@ -167,11 +165,11 @@ CREATE TABLE `garde` (
 --
 
 CREATE TABLE `hoze_doroos` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `hoze_doroos`
@@ -190,19 +188,19 @@ INSERT INTO `hoze_doroos` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `lesson_course` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `code` char(5) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '0',
-  `type` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
-  `saat_amali` smallint UNSIGNED NOT NULL DEFAULT '0',
-  `saat_teori` smallint UNSIGNED NOT NULL DEFAULT '0',
-  `pishniaz` varchar(100) CHARACTER SET utf8 COLLATE utf8_persian_ci DEFAULT '',
-  `code_pishniaz` char(5) CHARACTER SET utf8 COLLATE utf8_persian_ci DEFAULT NULL,
-  `vahed_amali` smallint NOT NULL,
-  `vahed_teori` smallint NOT NULL DEFAULT '0',
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) COLLATE utf8_persian_ci NOT NULL,
+  `code` char(5) COLLATE utf8_persian_ci NOT NULL DEFAULT '0',
+  `type` char(50) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `saat_amali` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
+  `saat_teori` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
+  `pishniaz` varchar(100) COLLATE utf8_persian_ci DEFAULT '',
+  `code_pishniaz` char(5) COLLATE utf8_persian_ci DEFAULT NULL,
+  `vahed_amali` smallint(5) NOT NULL,
+  `vahed_teori` smallint(5) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `lesson_course`
@@ -220,11 +218,11 @@ INSERT INTO `lesson_course` (`id`, `name`, `code`, `type`, `saat_amali`, `saat_t
 --
 
 CREATE TABLE `madrak` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `madrak`
@@ -244,11 +242,11 @@ INSERT INTO `madrak` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `maghtae` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `maghtae`
@@ -267,11 +265,11 @@ INSERT INTO `maghtae` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `martabe_elmi` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `martabe_elmi`
@@ -291,22 +289,22 @@ INSERT INTO `martabe_elmi` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `news` (
-  `id` int UNSIGNED NOT NULL,
-  `author` varchar(100) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `title` char(70) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
-  `description` varchar(250) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id` int(10) UNSIGNED NOT NULL,
+  `author` varchar(100) COLLATE utf8_persian_ci NOT NULL,
+  `title` char(70) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `description` varchar(250) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `author`, `title`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'سید محمد عرفانیhhhhhhh', 'تعطیلی دانشکده 2 پزشکیhhhhhhh', 'سیتنمباتنسیابنمتاسیتنباتنسیباتنسایبنتسیابنتاسیتنباسنتیابنتسیبا\r\nسمینتبمسیابنمتسیابنمتسایبنمتاسیبنتاستنمیباتنمسیابنمتسایبhhhhhhhhhhhنتسا', '2021-11-18 17:55:19', '2021-11-20 16:22:27'),
-(3, 'سید احمد حسینیثقفثقفfffffff', 'کلاس های مجازی 2ثقفثقفffffffffff', 'نمتادسمیتبمسنتیبمتسیب\r\nقثفثقفثقفfffffffffffffff', '2021-11-20 15:47:57', '2021-11-20 16:22:11');
+INSERT INTO `news` (`id`, `author`, `title`, `description`, `date`, `created_at`, `updated_at`) VALUES
+(1, 'سید محمد عرفانیhhhhhhh', 'تعطیلی دانشکده 2 پزشکیhhhhhhh', 'سیتنمباتنسیابنمتاسیتنباتنسیباتنسایبنتسیابنتاسیتنباسنتیابنتسیبا\r\nسمینتبمسیابنمتسیابنمتسایبنمتاسیبنتاستنمیباتنمسیابنمتسایبhhhhhhhhhhhنتسا', '2021-11-18 20:30:00', '2021-11-18 17:55:19', '2021-11-20 16:22:27'),
+(3, 'سید احمد حسینیثقفثقفfffffff', 'کلاس های مجازی 2ثقفثقفffffffffff', 'نمتادسمیتبمسنتیبمتسیب\r\nقثفثقفثقفfffffffffffffff', '2021-08-02 19:30:00', '2021-11-20 15:47:57', '2021-11-20 16:22:11');
 
 -- --------------------------------------------------------
 
@@ -315,11 +313,11 @@ INSERT INTO `news` (`id`, `author`, `title`, `description`, `created_at`, `updat
 --
 
 CREATE TABLE `nobate_paziresh` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `nobate_paziresh`
@@ -336,18 +334,18 @@ INSERT INTO `nobate_paziresh` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `presentation` (
-  `id` int UNSIGNED NOT NULL,
-  `lessonCourse_id` int UNSIGNED NOT NULL,
-  `educationalGroup_id` int UNSIGNED NOT NULL,
-  `teacher_id` int UNSIGNED NOT NULL,
-  `classRoom_id` int UNSIGNED NOT NULL DEFAULT '0',
-  `capacity` smallint UNSIGNED NOT NULL,
-  `day` char(20) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
-  `class_time` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `presentation_code` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `id` int(10) UNSIGNED NOT NULL,
+  `lessonCourse_id` int(10) UNSIGNED NOT NULL,
+  `educationalGroup_id` int(10) UNSIGNED NOT NULL,
+  `teacher_id` int(10) UNSIGNED NOT NULL,
+  `classRoom_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `capacity` smallint(5) UNSIGNED NOT NULL,
+  `day` char(20) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `class_time` char(50) COLLATE utf8_persian_ci NOT NULL,
+  `presentation_code` char(50) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `presentation`
@@ -364,20 +362,20 @@ INSERT INTO `presentation` (`id`, `lessonCourse_id`, `educationalGroup_id`, `tea
 --
 
 CREATE TABLE `reshte_tahsili` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '0',
-  `code` char(5) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(150) COLLATE utf8_persian_ci NOT NULL DEFAULT '0',
+  `code` char(5) COLLATE utf8_persian_ci NOT NULL,
   `status` bit(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `reshte_tahsili`
 --
 
 INSERT INTO `reshte_tahsili` (`id`, `name`, `code`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'مهندسی تکنولوژی نرم افزار', '4444', b'1', '2021-11-16 08:43:30', '2021-12-23 14:23:08'),
+(1, 'مهندسی تکنولوژی نرم افزار', '4444', b'1', '2021-11-16 08:43:30', '2021-11-21 09:42:44'),
 (2, 'مهندسی تکنولوژی برق', '45645', b'0', '2021-11-16 08:43:52', '2021-11-17 18:23:50'),
 (5, 'مهندسی تکنولوژی نرم افزار', '117', b'1', '2021-11-16 08:45:35', NULL),
 (9, 'مهندسی تکنولوژی نرم افزار', '764', b'1', '2021-11-16 08:49:36', NULL),
@@ -391,24 +389,23 @@ INSERT INTO `reshte_tahsili` (`id`, `name`, `code`, `status`, `created_at`, `upd
 --
 
 CREATE TABLE `student` (
-  `id` int UNSIGNED NOT NULL,
-  `user_id_student` int UNSIGNED NOT NULL,
-  `codeDaneshjo` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `maghtae_id` int UNSIGNED NOT NULL,
-  `reshteTahsili_id` int UNSIGNED NOT NULL,
-  `termVorod_id` int UNSIGNED NOT NULL,
-  `nobatePaziresh_id` int UNSIGNED NOT NULL,
-  `vazeiateNezamVazife_id` int UNSIGNED DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `codeDaneshjo` char(50) COLLATE utf8_persian_ci NOT NULL,
+  `maghtae_id` int(10) UNSIGNED NOT NULL,
+  `reshteTahsili_id` int(10) UNSIGNED NOT NULL,
+  `termVorod_id` int(10) UNSIGNED NOT NULL,
+  `nobatePaziresh_id` int(10) UNSIGNED NOT NULL,
+  `vazeiateNezamVazife_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `user_id_student`, `codeDaneshjo`, `maghtae_id`, `reshteTahsili_id`, `termVorod_id`, `nobatePaziresh_id`, `vazeiateNezamVazife_id`, `created_at`, `updated_at`) VALUES
-(6, 123, '855422', 3, 10, 3, 1, 1, '2021-12-11 15:16:30', '2021-12-26 17:51:35');
+INSERT INTO `student` (`id`, `codeDaneshjo`, `maghtae_id`, `reshteTahsili_id`, `termVorod_id`, `nobatePaziresh_id`, `vazeiateNezamVazife_id`, `created_at`, `updated_at`) VALUES
+(1, '98220055112234', 2, 12, 1, 1, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -417,26 +414,18 @@ INSERT INTO `student` (`id`, `user_id_student`, `codeDaneshjo`, `maghtae_id`, `r
 --
 
 CREATE TABLE `teacher` (
-  `id` int UNSIGNED NOT NULL,
-  `teacher_user_id` int UNSIGNED NOT NULL,
-  `codeModares` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `martabeElmi_id` int UNSIGNED NOT NULL,
-  `employmentType_id` int UNSIGNED NOT NULL,
-  `teachingType_id` int UNSIGNED NOT NULL,
-  `madrak_id` int UNSIGNED NOT NULL,
-  `educationalGroup_id` int UNSIGNED NOT NULL,
-  `hozeDoroos_id` int UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `teacher_user_id` int(10) UNSIGNED NOT NULL,
+  `codeModares` char(50) COLLATE utf8_persian_ci NOT NULL,
+  `martabeElmi_id` int(11) UNSIGNED NOT NULL,
+  `employmentType_id` int(10) UNSIGNED NOT NULL,
+  `teachingType_id` int(11) UNSIGNED NOT NULL,
+  `madrak_id` int(10) UNSIGNED NOT NULL,
+  `educationalGroup_id` int(10) UNSIGNED NOT NULL,
+  `hozeDoroos_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
-
---
--- Dumping data for table `teacher`
---
-
-INSERT INTO `teacher` (`id`, `teacher_user_id`, `codeModares`, `martabeElmi_id`, `employmentType_id`, `teachingType_id`, `madrak_id`, `educationalGroup_id`, `hozeDoroos_id`, `created_at`, `updated_at`) VALUES
-(12, 121, '333331211', 4, 2, 1, 1, 7, 3, '2021-12-11 15:13:08', '2021-12-25 16:40:38'),
-(13, 124, '234234234', 3, 2, 4, 4, 6, 3, '2021-12-19 16:46:15', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- --------------------------------------------------------
 
@@ -445,11 +434,11 @@ INSERT INTO `teacher` (`id`, `teacher_user_id`, `codeModares`, `martabeElmi_id`,
 --
 
 CREATE TABLE `teaching_type` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `teaching_type`
@@ -468,18 +457,18 @@ INSERT INTO `teaching_type` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `term_vorod` (
-  `id` int UNSIGNED NOT NULL,
-  `number` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `id` int(10) UNSIGNED NOT NULL,
+  `number` char(50) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `term_vorod`
 --
 
 INSERT INTO `term_vorod` (`id`, `number`, `created_at`, `updated_at`) VALUES
-(1, '961', NULL, '2021-12-23 14:26:34'),
+(1, '961', NULL, NULL),
 (2, '962', NULL, NULL),
 (3, '971', NULL, NULL),
 (4, '972', NULL, NULL),
@@ -497,11 +486,11 @@ INSERT INTO `term_vorod` (`id`, `number`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `type` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `type`
@@ -520,49 +509,39 @@ INSERT INTO `type` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` int UNSIGNED NOT NULL,
-  `type_id` int UNSIGNED NOT NULL,
-  `fname` varchar(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `lname` varchar(100) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `email` varchar(120) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `tell` char(20) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `m_code` char(30) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `address` varchar(250) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `serial_number` char(20) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `birthday` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id` int(10) UNSIGNED NOT NULL,
+  `type_id` int(10) UNSIGNED NOT NULL,
+  `fname` varchar(50) COLLATE utf8_persian_ci NOT NULL,
+  `lname` varchar(100) COLLATE utf8_persian_ci NOT NULL,
+  `email` varchar(120) COLLATE utf8_persian_ci NOT NULL,
+  `tell` char(20) COLLATE utf8_persian_ci NOT NULL,
+  `m_code` char(30) COLLATE utf8_persian_ci NOT NULL,
+  `address` varchar(250) COLLATE utf8_persian_ci NOT NULL,
+  `serial_number` char(20) COLLATE utf8_persian_ci NOT NULL,
+  `birthday` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `jender` bit(1) NOT NULL,
-  `father_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `birthday_place` varchar(70) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `mazhab` varchar(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `university` varchar(70) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
+  `father_name` varchar(50) COLLATE utf8_persian_ci NOT NULL,
+  `birthday_place` varchar(70) COLLATE utf8_persian_ci NOT NULL,
+  `mazhab` varchar(50) COLLATE utf8_persian_ci NOT NULL,
+  `university` varchar(70) COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `type_id`, `fname`, `lname`, `email`, `tell`, `m_code`, `address`, `serial_number`, `jender`, `father_name`, `birthday_place`, `mazhab`, `university`, `created_at`, `updated_at`) VALUES
-(55, 3, 'امیر محمد', 'سعیدی', 'saeidi@gmail.com', '09356788899', '123456', 'قاسم آباد شریعتی 10', '123456', b'1', 'مهدی', 'مشهد', 'شیعه', 'منتظری', '2021-11-14 17:28:25', NULL),
-(56, 3, 'fsdg', 'kjh', 'kjhk@info.com', '98798798798', '7987987987', 'jhghjgjh', '79878', b'0', 'kjh', 'jkhkh', 'jkhjkhk', 'kjhjkh', '2021-11-17 19:53:18', '2021-11-20 15:51:23'),
-(59, 1, 'رضا', 'علوی', 'alavi@gmail.com', '234324234', '26262626', 'jhkjh', '22222', b'1', 'jkhkh', 'khkjhk', 'kjhkh', 'hkjhk', NULL, '2021-11-22 08:17:30'),
-(60, 2, 'شششش', 'شششش', 'rahimi@info.com', '4353453', '345345', 'زطزرطزر', '3333', b'0', 'صثقثصق', 'صثقصثق', 'صثقصثق', 'صثقصقث', '2021-11-22 09:27:53', NULL),
-(61, 3, 'احمد', 'احمدی', 'sdfsdf@gmail.com', '29387499234', '92834738', 'sdkjhjkshkfsdf', '33333', b'0', '', '', '', '', NULL, NULL),
-(62, 1, 'سبحان', 'رضایی', 'lsdjfls@gmail.com', '290834234', '02938402', 'slkdjflsldfj', '44444', b'0', '', '', '', '', NULL, NULL),
-(63, 1, 'غلام', 'رحیمی پور', 'mkmmuwboffgvgtoyjj@adfskj.com', '09357675589', '0912345381', 'قاسم آباد شریعتی 2', '565656', b'1', 'اصغر', 'مشهد', 'شیعه', 'منتظری', '2021-11-29 10:04:03', NULL),
-(64, 2, 'احمد', 'رحیمی', 'mkmmuwrtboffgvgtoyjj@adfskj.com', '0956675533', '34435', 'قاسم آباد شریعتی 10', '67876777', b'0', 'اصغر', 'مشهد', 'rtyrtyrty', 'منتظری', '2021-11-29 10:35:39', '2021-11-29 10:36:36'),
-(67, 1, 'علی رضا', 'غلامی پور', 'rafdghisdfsdfmi@info.com', '09356675533', '0925866678', 'قاسم آباد استاد یوسفی 3 ', '124589', b'1', 'رضا', 'مشهد', 'شیعه', 'منتظری', '2021-11-29 11:26:51', NULL),
-(68, 1, 'gjjhgj', 'ghjghjg', 'amirr8578ampoor@gmail.com', '45454545', '45454545', 'dfsfsdfsdfsdsdf', '345345345', b'1', 'fdgdf', 'dfgdg', 'dfgdfg', 'dfgdfg', '2021-12-10 15:49:46', NULL),
-(75, 1, 'gjjhgj', 'ghjghjg', 'amir7898ampoor@gmail.com', '455213', '9875421', 'dfsfsdfsdfsdsdf', '675465867', b'1', 'fdgdf', 'dfgdg', 'dfgdfg', 'dfgdfg', '2021-12-10 16:08:57', NULL),
-(79, 1, 'gjjhgj', 'ghjghjg', 'am8518ampoor@gmail.com', '54678', '9785', 'dfsfsdfsdfsdsdf', '654788', b'1', 'fdgdf', 'dfgdg', 'dfgdfg', 'dfgdfg', '2021-12-10 16:17:32', NULL),
-(81, 1, 'gjjhgj', 'ghjghjg', 'a487545mpoor@gmail.com', '78954', '456778', 'dfsfsdfsdfsdsdf', '457841', b'1', 'fdgdf', 'dfgdg', 'dfgdfg', 'dfgdfg', '2021-12-10 16:22:25', NULL),
-(93, 1, 'hgf', 'ddf', 'a85232oor@gmail.com', '34', '34535', 'sgf', '544', b'1', 'rfs', 'sfsd', 'sf', 'sdfs', '2021-12-10 18:27:57', NULL),
-(101, 1, 'cdvxvc', 'vcvv', 'xdvxdor@gmail.com', '5445354', '875787852', 'dxzfzfzf', '456456477', b'1', 'gvghgf', 'fghfgh', 'fghfgh', 'fghfgh', '2021-12-11 07:34:29', NULL),
-(121, 1, 'test1', 'test1', 'am34rtfgfdfg55oor@gmail.com', '55343211234', '566742342', 'ooooooooooooooooooooooovbcvbdfgdfg', '4534545345', b'1', 'dfgdgdg', 'fddfgg', 'dfgdfgdfg', 'dfgdfgdfg', '2021-12-11 15:13:08', '2021-12-25 16:40:38'),
-(122, 2, 'test2', 'test2', 'amgdg5345foor@gmail.com', '77552323444', '3333566745', 'fdgfdfgdfg', '676678833', b'1', 'gfhgg', 'fghff', 'gfffghfg', 'fghfgh', '2021-12-11 15:14:33', '2021-12-26 18:18:13'),
-(123, 3, 'test3', 'test3', 'amfg555555r@gmail.com', '554443332', '1211123354', '454545fghfghfg', '666444323', b'1', 'fghgf', 'fgfgff', 'fgfhfhf', 'fgfhfh', '2021-12-11 15:16:30', '2021-12-26 17:51:35'),
-(124, 1, 'امیر ', 'سعیدی', 'a8tjufvvhhor@gmail.com', '234234234', '2345678645', 'adgfgf', '234324', b'1', 'fdgdfg', 'dfgdgdgf', 'fdddddgg', 'dfgdfgfd', '2021-12-19 16:46:15', NULL);
+INSERT INTO `user` (`id`, `type_id`, `fname`, `lname`, `email`, `tell`, `m_code`, `address`, `serial_number`, `birthday`, `jender`, `father_name`, `birthday_place`, `mazhab`, `university`, `created_at`, `updated_at`) VALUES
+(55, 3, 'امیر محمد', 'سعیدی', 'saeidi@gmail.com', '09356788899', '1212121212', 'قاسم آباد شریعتی 10', '11111', '2021-11-13 20:30:00', b'1', 'مهدی', 'مشهد', 'شیعه', 'منتظری', '2021-11-14 17:28:25', NULL),
+(56, 3, 'fsdg', 'kjh', 'kjhk@info.com', '98798798798', '7987987987', 'jhghjgjh', '79878', '2014-05-25 19:30:00', b'0', 'kjh', 'jkhkh', 'jkhjkhk', 'kjhjkh', '2021-11-17 19:53:18', '2021-11-20 15:51:23'),
+(59, 1, 'رضا', 'علوی', 'alavi@gmail.com', '234324234', '26262626', 'jhkjh', '22222', '2021-07-26 19:30:00', b'1', 'jkhkh', 'khkjhk', 'kjhkh', 'hkjhk', NULL, '2021-11-22 08:17:30'),
+(60, 2, 'شششش', 'شششش', 'rahimi@info.com', '4353453', '345345', 'زطزرطزر', '3333', '2021-11-21 20:30:00', b'0', 'صثقثصق', 'صثقصثق', 'صثقصثق', 'صثقصقث', '2021-11-22 09:27:53', NULL),
+(61, 3, 'احمد', 'احمدی', 'sdfsdf@gmail.com', '29387499234', '92834738', 'sdkjhjkshkfsdf', '33333', '2021-11-29 06:19:59', b'0', '', '', '', '', NULL, NULL),
+(62, 1, 'سبحان', 'رضایی', 'lsdjfls@gmail.com', '290834234', '02938402', 'slkdjflsldfj', '44444', '2021-11-29 06:20:44', b'0', '', '', '', '', NULL, NULL),
+(63, 1, 'غلام', 'رحیمی پور', 'mkmmuwboffgvgtoyjj@adfskj.com', '09357675589', '0912345381', 'قاسم آباد شریعتی 2', '565656', '1993-06-27 19:30:00', b'1', 'اصغر', 'مشهد', 'شیعه', 'منتظری', '2021-11-29 10:04:03', NULL),
+(64, 2, 'احمد', 'رحیمی', 'mkmmuwrtboffgvgtoyjj@adfskj.com', '0956675533', '34435', 'قاسم آباد شریعتی 10', '67876777', '1989-03-25 20:30:00', b'0', 'اصغر', 'مشهد', 'rtyrtyrty', 'منتظری', '2021-11-29 10:35:39', '2021-11-29 10:36:36'),
+(67, 1, 'علی رضا', 'غلامی پور', 'rafdghisdfsdfmi@info.com', '09356675533', '0925866678', 'قاسم آباد استاد یوسفی 3 ', '124589', '2021-11-28 20:30:00', b'1', 'رضا', 'مشهد', 'شیعه', 'منتظری', '2021-11-29 11:26:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -571,11 +550,11 @@ INSERT INTO `user` (`id`, `type_id`, `fname`, `lname`, `email`, `tell`, `m_code`
 --
 
 CREATE TABLE `vazeiate_nezam_vazife` (
-  `id` int UNSIGNED NOT NULL,
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` char(50) COLLATE utf8_persian_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 --
 -- Dumping data for table `vazeiate_nezam_vazife`
@@ -619,8 +598,7 @@ ALTER TABLE `educational_group`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `codeStandard` (`codeStandard`),
-  ADD KEY `user_id_employ` (`user_id_employ`);
+  ADD UNIQUE KEY `codeStandard` (`codeStandard`);
 
 --
 -- Indexes for table `employment_type`
@@ -707,8 +685,7 @@ ALTER TABLE `student`
   ADD KEY `reshteTahsili_id` (`reshteTahsili_id`),
   ADD KEY `termVorod_id` (`termVorod_id`),
   ADD KEY `nobatePaziresh_id` (`nobatePaziresh_id`),
-  ADD KEY `vazeiateNezamVazife_id` (`vazeiateNezamVazife_id`),
-  ADD KEY `user_id_student` (`user_id_student`);
+  ADD KEY `vazeiateNezamVazife_id` (`vazeiateNezamVazife_id`);
 
 --
 -- Indexes for table `teacher`
@@ -770,133 +747,133 @@ ALTER TABLE `vazeiate_nezam_vazife`
 -- AUTO_INCREMENT for table `choose_lesson`
 --
 ALTER TABLE `choose_lesson`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `classroom`
 --
 ALTER TABLE `classroom`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `educational_group`
 --
 ALTER TABLE `educational_group`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `employment_type`
 --
 ALTER TABLE `employment_type`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `garde`
 --
 ALTER TABLE `garde`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `hoze_doroos`
 --
 ALTER TABLE `hoze_doroos`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `lesson_course`
 --
 ALTER TABLE `lesson_course`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `madrak`
 --
 ALTER TABLE `madrak`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `maghtae`
 --
 ALTER TABLE `maghtae`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `martabe_elmi`
 --
 ALTER TABLE `martabe_elmi`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nobate_paziresh`
 --
 ALTER TABLE `nobate_paziresh`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `presentation`
 --
 ALTER TABLE `presentation`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `reshte_tahsili`
 --
 ALTER TABLE `reshte_tahsili`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `teaching_type`
 --
 ALTER TABLE `teaching_type`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `term_vorod`
 --
 ALTER TABLE `term_vorod`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `type`
 --
 ALTER TABLE `type`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `vazeiate_nezam_vazife`
 --
 ALTER TABLE `vazeiate_nezam_vazife`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -908,12 +885,6 @@ ALTER TABLE `vazeiate_nezam_vazife`
 ALTER TABLE `choose_lesson`
   ADD CONSTRAINT `FK_choose_lesson_presentation` FOREIGN KEY (`presentation_id`) REFERENCES `presentation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_choose_lesson_student` FOREIGN KEY (`stuednt_id`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `employee`
---
-ALTER TABLE `employee`
-  ADD CONSTRAINT `user_id_employ` FOREIGN KEY (`user_id_employ`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `garde`
@@ -939,8 +910,7 @@ ALTER TABLE `student`
   ADD CONSTRAINT `FK_student_nobate_paziresh` FOREIGN KEY (`nobatePaziresh_id`) REFERENCES `nobate_paziresh` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_student_reshte_tahsili` FOREIGN KEY (`reshteTahsili_id`) REFERENCES `reshte_tahsili` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_student_term_vorod` FOREIGN KEY (`termVorod_id`) REFERENCES `term_vorod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_student_vazeiate_nezam_vazife` FOREIGN KEY (`vazeiateNezamVazife_id`) REFERENCES `vazeiate_nezam_vazife` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_id_student` FOREIGN KEY (`user_id_student`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_student_vazeiate_nezam_vazife` FOREIGN KEY (`vazeiateNezamVazife_id`) REFERENCES `vazeiate_nezam_vazife` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teacher`
