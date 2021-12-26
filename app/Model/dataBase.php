@@ -1037,6 +1037,7 @@ function createEmploy_un_commonality($connection,
 }
 
 
+
 function createStudent_un_commonality($connection,
                                       $student_user_id,
                                       $codeDaneshjo,
@@ -1108,6 +1109,26 @@ function updateStudent_un_commonality($connection,
 }
 
 
+
+
+function updateEmploy_un_commonality($connection,
+                                     $employ_user_id,
+                                     $codeStandard
+)
+{
+
+    $stmt = $connection->prepare("UPDATE `employee` SET 
+                   `user_id_employ`=:user_id_employ,
+                    `codeStandard`=:codeStandard,
+                    `updated_at`=updated_at WHERE `user_id_employ`=:user_id_employ
+");
+    $stmt->bindparam(':user_id_employ', $employ_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':codeStandard', $codeStandard);
+    date_default_timezone_set('Asia/Tehran');
+    $stmt->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+    return $stmt->execute() ? true : false;
+
+}
 
 
 function create_un_commonality($connection,

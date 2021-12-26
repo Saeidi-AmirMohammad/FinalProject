@@ -41,9 +41,7 @@ echo "</pre>";
 function teacher_func()
 {
 
-
     extract($_POST);
-
 
     commonality($type, $fname,
         $lname, $email,
@@ -57,7 +55,6 @@ function teacher_func()
         $teachingType_id, $madrak_id,
         $educationalGroup_id, $hozeDoroos_id
     );
-
 
     reDirect("../../../view/user/all.php");
 }
@@ -389,49 +386,43 @@ function create_user_employ(
     )) {
 
         $connect = DBConnection();
-        $_POST['birthday'] = $out_date;
-        $user = createUser($connect, $_POST);
-        $lastest_user = getlastestUserData($connect);
-        $id_userNew = $lastest_user[0]->id;
+        $birthday= $_POST['birthday'] = $out_date;
+        $i=$_POST['id'] = intval($_POST['id']);
+        $_POST['type'] = intval($_POST['type']);
+
+        $data = [
+            'type_id' => $type,
+            'fname' => $fname,
+            'lname' => $lname,
+            'email' => $email,
+            'tell' => $tell,
+            'm_code' => $m_code,
+            'birthday' => $birthday,
+            'address' => $address,
+            'serial_number' => $serial_number,
+            'father_name' => $father_name,
+            'jender' => $jender,
+            'birthday_place' => $birthday_place,
+            'mazhab' => $mazhab,
+            'university' => $university
+        ];
+        user_update($i, $data, $connect);
+        $id_userNew = $i;
         $employ_user_id = $id_userNew;
-        echo "<pre>";
-        var_dump(  $type, $fname,
-            $lname, $email,
-            $tell, $m_code,
-            $address, $serial_number,
-            $jender, $father_name,
-            $birthday_place, $mazhab,
-            $university,$out_date,
-            $codeStandard, $employ_user_id
 
-        );
-        echo "</pre>";
-        un_commonality_employ(
-            $employ_user_id,
-            $codeStandard
-        );
-    }
-}
 
-function create_employ_(
-    $employ_user_id,
-    $codeStandard
-)
-{
-    if (validate_employ_(
-        $employ_user_id,
-        $codeStandard
-    )) {
         $connect = DBConnection();
         // return $_POST;
-        $user = createEmploy_un_commonality(
+        updateEmploy_un_commonality(
             $connect,
             $employ_user_id,
             $codeStandard
         );
-
+        reDirect("../../../view/user/all.php");
     }
 }
+
+
 
 /**
  * @param $type
@@ -545,8 +536,6 @@ function commonality_student(
             $maghtae_id, $reshteTahsili_id,
             $termVorod_id, $nobatePaziresh_id,
             $vazeiateNezamVazife_id
-
-
         );
 
     }
