@@ -1045,15 +1045,7 @@ function createStudent_un_commonality($connection,
                                       $vazeiateNezamVazife_id
 )
 {
-//    <<<HTML
-//
-//INSERT INTO `student` (`id`, `user_id_student`,
-// `codeDaneshjo`, `maghtae_id`, `reshteTahsili_id`,
-//  `termVorod_id`, `nobatePaziresh_id`, `vazeiateNezamVazife_id`,
-//   `created_at`, `updated_at`) VALUES (NULL, '79', '4145455', '2', '10', '4', '2', '4', NULL, NULL);
-//
-//HTML;
-//
+
 
     $stmt = $connection->prepare("INSERT INTO `student` ( 
                        user_id_student ,codeDaneshjo,
@@ -1073,6 +1065,45 @@ function createStudent_un_commonality($connection,
     date_default_timezone_set('Asia/Tehran');
     $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
     return $stmt->execute() ? true : false;
+
+}
+
+
+
+function updateStudent_un_commonality($connection,
+                                      $user_id_student,
+                                      $codeDaneshjo,
+                                      $maghtae_id, $reshteTahsili_id,
+                                      $termVorod_id, $nobatePaziresh_id,
+                                      $vazeiateNezamVazife_id
+)
+{
+    try {
+        //check for "example" in mail address
+    $stmt = $connection->prepare("UPDATE `student` SET 
+                   `user_id_student`=:user_id_student,
+                   `codeDaneshjo`=:codeDaneshjo,
+                   `maghtae_id`=:maghtae_id,
+                   `reshteTahsili_id`=:reshteTahsili_id,
+                   `termVorod_id`=:termVorod_id,
+                   `nobatePaziresh_id`=:nobatePaziresh_id,
+                   `vazeiateNezamVazife_id`=:vazeiateNezamVazife_id,
+                   `updated_at`= :updated_at  WHERE  `user_id_student`=:user_id_student ");
+
+    $stmt->bindparam(':user_id_student',$user_id_student,PDO::PARAM_INT);
+    $stmt->bindparam(':codeDaneshjo',$codeDaneshjo);
+    $stmt->bindparam(':maghtae_id',$maghtae_id,PDO::PARAM_INT);
+    $stmt->bindparam(':reshteTahsili_id',$reshteTahsili_id,PDO::PARAM_INT);
+    $stmt->bindparam(':termVorod_id',$termVorod_id,PDO::PARAM_INT);
+    $stmt->bindparam(':nobatePaziresh_id',$nobatePaziresh_id,PDO::PARAM_INT);
+    $stmt->bindparam(':vazeiateNezamVazife_id',$vazeiateNezamVazife_id,PDO::PARAM_INT);
+    date_default_timezone_set('Asia/Tehran');
+    $stmt->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+    return $stmt->execute() ? true : false;
+    }
+    catch(Exception $e) {
+        echo $e;
+    }
 
 }
 

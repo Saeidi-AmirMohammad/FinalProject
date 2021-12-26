@@ -213,7 +213,8 @@ function create_Teacher_(
         $connect = DBConnection();
         // return $_POST;
 
-        updateTeacher_un_commonality($connect, $teacher_user_id, $codeModares,
+        updateTeacher_un_commonality(
+            $connect, $teacher_user_id, $codeModares,
             $martabeElmi_id, $employmentType_id,
             $teachingType_id, $madrak_id,
             $educationalGroup_id, $hozeDoroos_id);
@@ -514,7 +515,7 @@ function student_func()
         $termVorod_id, $nobatePaziresh_id,
         $vazeiateNezamVazife_id
     );
-
+    reDirect("../../../view/user/all.php");
 }
 
 function commonality_student(
@@ -558,11 +559,8 @@ function un_commonality_student(
     $maghtae_id, $reshteTahsili_id,
     $termVorod_id, $nobatePaziresh_id,
     $vazeiateNezamVazife_id
-
-
 )
 {
-
     if (isPost()) {
         create_student_(
             $student_user_id,
@@ -570,7 +568,6 @@ function un_commonality_student(
             $maghtae_id, $reshteTahsili_id,
             $termVorod_id, $nobatePaziresh_id,
             $vazeiateNezamVazife_id
-
         );
     }
 }
@@ -620,61 +617,50 @@ function create_user_student(
     )) {
 
         $connect = DBConnection();
-        $birthday= $_POST['birthday'] = $out_date;
-        $i=$_POST['id'] = intval($_POST['id']);
-        $_POST['type'] = intval($_POST['type']);
+        $_POST['birthday'] = $out_date;
+        createUser($connect, $_POST);
+        $lastest_user = getlastestUserData($connect);
+        $id_userNew = $lastest_user[0]->id;
+        $student_user_id = $id_userNew;
 
-        $data = [
-            'type_id' => $type,
-            'fname' => $fname,
-            'lname' => $lname,
-            'email' => $email,
-            'tell' => $tell,
-            'm_code' => $m_code,
-            'birthday' => $birthday,
-            'address' => $address,
-            'serial_number' => $serial_number,
-            'father_name' => $father_name,
-            'jender' => $jender,
-            'birthday_place' => $birthday_place,
-            'mazhab' => $mazhab,
-            'university' => $university
-        ];
-        user_update($i, $data, $connect);
-        $id_userNew = $i;
-        $user_id_student = $id_userNew;
-
-
-        $maghtae_id=intval($maghtae_id);
-        $termVorod_id=intval($termVorod_id);
-        $reshteTahsili_id=intval($reshteTahsili_id);
-        $nobatePaziresh_id=intval($nobatePaziresh_id);
-        $vazeiateNezamVazife_id=intval($vazeiateNezamVazife_id);
-
-//        echo "<pre>";
-//        var_dump($user_id_student);
-//        var_dump($codeDaneshjo);
-//        var_dump($maghtae_id);
-//        var_dump($termVorod_id);
-//        var_dump($reshteTahsili_id);
-//        var_dump($nobatePaziresh_id);
-//        var_dump($vazeiateNezamVazife_id);
-//       // var_dump($_POST);
-//        echo "</pre>";
-
-        $connect = DBConnection();
-
-        updateStudent_un_commonality(
-            $connect,$user_id_student,
-            $codeDaneshjo,$maghtae_id, $reshteTahsili_id,
-            $termVorod_id,$nobatePaziresh_id,
+        un_commonality_student(
+            $student_user_id,
+            $codeDaneshjo,
+            $maghtae_id, $reshteTahsili_id,
+            $termVorod_id, $nobatePaziresh_id,
             $vazeiateNezamVazife_id
         );
-      reDirect("../../../view/user/all.php");
     }
 }
 
+function create_student_(
+    $student_user_id,
+    $codeDaneshjo,
+    $maghtae_id, $reshteTahsili_id,
+    $termVorod_id, $nobatePaziresh_id,
+    $vazeiateNezamVazife_id
+)
+{
+    if (validate_student_(
+        $student_user_id,
+        $codeDaneshjo,
+        $maghtae_id, $reshteTahsili_id,
+        $termVorod_id, $nobatePaziresh_id,
+        $vazeiateNezamVazife_id
+    )) {
+        $connect = DBConnection();
+        // return $_POST;
+        createStudent_un_commonality(
+            $connect,
+            $student_user_id,
+            $codeDaneshjo,
+            $maghtae_id, $reshteTahsili_id,
+            $termVorod_id, $nobatePaziresh_id,
+            $vazeiateNezamVazife_id
+        );
 
+    }
+}
 
 /**
  * @param $type

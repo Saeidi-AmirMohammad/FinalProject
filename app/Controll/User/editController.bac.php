@@ -71,4 +71,5 @@ if (isPost()) {
     $_SESSION['type'] = 'danger';
 }
 
+
 reDirect("../../../view/user/all.php");
