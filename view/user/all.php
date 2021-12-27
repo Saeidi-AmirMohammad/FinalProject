@@ -8,9 +8,6 @@ $datateacher= getAllUserDataTeacher($conn);
 $datastudent=getAllUserDataStudent($conn);
 $dataemploy=getAllUserDataemploee($conn);
 
-//echo  "<pre>";
-//print_r($datateacher);die;
-//echo  "</pre>";
 
 ?>
 

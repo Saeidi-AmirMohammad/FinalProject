@@ -17,19 +17,20 @@ if (isPost()) {
         is_numeric(htmlspecialchars($presentation_code))
     ])) {
         $connect = DBConnection();
-//        echo "<pre>";
+
         $data=[
             'lessonCourse_id'=> intval( $_POST['lessonCourse_id']),
             'educationalGroup_id'=> intval( $_POST['educationalGroup_id']),
             'teacher_id'=> intval( $_POST['teacher_id']),
             'classRoom_id'=> intval( $_POST['classRoom_id']),
-            'capacity'=> $_POST['capacity'],
+            'capacity'=>intval($_POST['capacity']),
             'day'=>  $_POST['day'],
             'class_time'=>  $_POST['class_time'],
             'presentation_code'=>$_POST['presentation_code'],
         ];
+//   echo "<pre>";
 //var_dump($data);die;
-//        echo "</pre>";
+//   echo "</pre>";
         $presentaion = createPresentaion($connect, $data);
         if ($presentaion){
             $error=true;

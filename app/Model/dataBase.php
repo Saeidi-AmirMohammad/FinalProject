@@ -3,7 +3,7 @@ function DBConnection()
 {
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "@Am41145481311.";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=finalproject", $username, $password);
@@ -24,6 +24,7 @@ function getAllUserData($connection)
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
+
 function getAllUserDataTeacher($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM user 
@@ -54,108 +55,108 @@ function getAllUserDataemploee($connection)
 
 }
 
-function getmartabe_elmi($id,$connection)
+function getmartabe_elmi($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM martabe_elmi WHERE id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
-function getemployment_type($id,$connection)
+function getemployment_type($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `employment_type` WHERE id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
 
-function getteaching_type($id,$connection)
+function getteaching_type($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `teaching_type` WHERE id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
-function getmadrak_type($id,$connection)
+
+function getmadrak_type($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `madrak` WHERE id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
-function geteducational_group($id,$connection)
+function geteducational_group($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `educational_group` WHERE  id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
-function gethoze_doroos($id,$connection)
+function gethoze_doroos($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `hoze_doroos` WHERE  id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
 
-function getmaghtae($id,$connection)
+function getmaghtae($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `maghtae` WHERE  id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
 
-function getreshte_tahsili($id,$connection)
+function getreshte_tahsili($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `reshte_tahsili` WHERE   id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
-function getterm_vorod($id,$connection)
+function getterm_vorod($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `term_vorod` WHERE  id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
 
-function getnobate_paziresh($id,$connection)
+function getnobate_paziresh($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `nobate_paziresh` WHERE   id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
 
 
-function getvazeiate_nezam_vazife($id,$connection)
+function getvazeiate_nezam_vazife($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `vazeiate_nezam_vazife` WHERE   id=:id  ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 }
-
 
 
 function getlastestUserData($connection)
@@ -165,27 +166,28 @@ function getlastestUserData($connection)
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
-function getAllusersType( $type,$connection )
+
+function getAllusersType($type, $connection)
 {
 
-    switch (true){
-        case $type=='teacher':
-            $type=1;
+    switch (true) {
+        case $type == 'teacher':
+            $type = 1;
             break;
-        case $type=='student':
-            $type=3;
+        case $type == 'student':
+            $type = 3;
             break;
-        case $type=='employee':
-            $type=2;
+        case $type == 'employee':
+            $type = 2;
             break;
-        case $type=='admin':
-            $type=4;
+        case $type == 'admin':
+            $type = 4;
             break;
 
     }
     // var_dump($type);
     $stmt = $connection->prepare("SELECT * FROM user where type_id = :type ");
-    $stmt->bindparam("type", $type ,PDO::PARAM_INT);
+    $stmt->bindparam("type", $type, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
@@ -619,7 +621,6 @@ function getAllClassRoom($connection)
 }
 
 
-
 function createClassRoom($connection, $data)
 {
     try {
@@ -734,7 +735,7 @@ function educationalgroup_Get_id($id, $conn)
     $statement->execute();
     $educationalgroup_id = $statement->fetch(PDO::FETCH_OBJ);
 
-    return  $educationalgroup_id ?  $educationalgroup_id : false;
+    return $educationalgroup_id ? $educationalgroup_id : false;
 }
 
 function educationalgroup_delete_id($id, $conn)
@@ -806,7 +807,7 @@ function chooselesson_Get_id($id, $conn)
     $statement->execute();
     $chooselesson_id = $statement->fetch(PDO::FETCH_OBJ);
 
-    return  $chooselesson_id ?  $chooselesson_id : false;
+    return $chooselesson_id ? $chooselesson_id : false;
 }
 
 function chooselesson_delete_id($id, $conn)
@@ -828,6 +829,51 @@ function getAllPresentaion($connection)
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
 }
+function getidlesson_course($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `lesson_course` WHERE `id`=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+     $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+
+function getideducational_group($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `educational_group` WHERE  `id`=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+     $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+
+function getid_classroom_group($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `classroom`  WHERE  `id`=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+     $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+
+function getid_user_end($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `user` WHERE  `id`=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+    $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+
+function getid_teacher_user_group($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `user` WHERE `type_id`=1 ");
+    $stmt->execute();
+     $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+
+
 
 function createPresentaion($connection, $data)
 {
@@ -842,7 +888,9 @@ function createPresentaion($connection, $data)
           capacity,
           day,
           class_time,
-          presentation_code)
+          presentation_code,
+          created_at
+          )
            VALUES (
            :lessonCourse_id, 
            :educationalGroup_id,
@@ -851,13 +899,15 @@ function createPresentaion($connection, $data)
            :capacity,
            :day,
            :class_time,
-           :presentation_code)
+           :presentation_code,
+           :created_at
+           )
            ");
         $stmt->bindparam(':lessonCourse_id', $lessonCourse_id, PDO::PARAM_INT);
         $stmt->bindparam(':educationalGroup_id', $educationalGroup_id, PDO::PARAM_INT);
         $stmt->bindparam(':teacher_id', $teacher_id, PDO::PARAM_INT);
         $stmt->bindparam(':classRoom_id', $classRoom_id, PDO::PARAM_INT);
-        $stmt->bindparam(':capacity', $capacity);
+        $stmt->bindparam(':capacity', $capacity,PDO::PARAM_INT);
         $stmt->bindparam(':day', $day);
         $stmt->bindparam(':class_time', $class_time);
         $stmt->bindparam(':presentation_code', $presentation_code);
@@ -865,8 +915,8 @@ function createPresentaion($connection, $data)
         $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
         return $stmt->execute() ? true : false;
 
-    }catch (Exception $e) {
-        $e->getMessage();
+    } catch (Exception $e) {
+       echo  $e;
     }
 }
 
@@ -891,7 +941,7 @@ WHERE  `id`=:id ");
         $statement->bindparam("educationalGroup_id", $educationalGroup_id, PDO::PARAM_INT);
         $statement->bindparam("teacher_id", $teacher_id, PDO::PARAM_INT);
         $statement->bindparam("classRoom_id", $classRoom_id, PDO::PARAM_INT);
-        $statement->bindparam("capacity", $capacity);
+        $statement->bindparam("capacity", $capacity,PDO::PARAM_INT);
         $statement->bindparam("day", $day);
         $statement->bindparam("class_time", $class_time);
         $statement->bindparam("presentation_code", $presentation_code);
@@ -912,7 +962,7 @@ function presentation_Get_id($id, $conn)
     $statement->execute();
     $presentation_id = $statement->fetch(PDO::FETCH_OBJ);
 
-    return  $presentation_id ?  $presentation_id : false;
+    return $presentation_id ? $presentation_id : false;
 }
 
 function presentation_delete_id($id, $conn)
@@ -927,53 +977,51 @@ function presentation_delete_id($id, $conn)
 
 // -------- Start Model Code Of User UnCommonality Tabels --------
 
-function getAllteacher($id,$connection)
+function getAllteacher($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `teacher` WHERE teacher_user_id=:id ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 }
 
 
-
-function getAllstudent($id,$connection)
+function getAllstudent($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `student` WHERE user_id_student=:id ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 }
 
 
-
-function getAllemploy($id,$connection)
+function getAllemploy($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `employee`  WHERE  user_id_employ=:id ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
 
 function createTeacher_un_commonality($connection, $teacher_user_id, $codeModares,
-                                                   $martabeElmi_id, $employmentType_id,
-                                                   $teachingType_id, $madrak_id,
-                                                   $educationalGroup_id, $hozeDoroos_id)
+                                      $martabeElmi_id, $employmentType_id,
+                                      $teachingType_id, $madrak_id,
+                                      $educationalGroup_id, $hozeDoroos_id)
 {
 
     $stmt = $connection->prepare("INSERT INTO `teacher` ( teacher_user_id ,codeModares, martabeElmi_id, employmentType_id, 
 teachingType_id, madrak_id, educationalGroup_id, hozeDoroos_id, created_at)
                                         VALUES ( :teacher_user_id,:codeModares, :martabeElmi_id, :employmentType_id, :teachingType_id,
                                          :madrak_id, :educationalGroup_id, :hozeDoroos_id, :created_at)");
-    $stmt->bindparam(':teacher_user_id', $teacher_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':teacher_user_id', $teacher_user_id, PDO::PARAM_INT);
     $stmt->bindparam(':codeModares', $codeModares);
-    $stmt->bindparam(':martabeElmi_id', $martabeElmi_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':employmentType_id', $employmentType_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':teachingType_id', $teachingType_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':madrak_id', $madrak_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':educationalGroup_id', $educationalGroup_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':hozeDoroos_id', $hozeDoroos_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':martabeElmi_id', $martabeElmi_id, PDO::PARAM_INT);
+    $stmt->bindparam(':employmentType_id', $employmentType_id, PDO::PARAM_INT);
+    $stmt->bindparam(':teachingType_id', $teachingType_id, PDO::PARAM_INT);
+    $stmt->bindparam(':madrak_id', $madrak_id, PDO::PARAM_INT);
+    $stmt->bindparam(':educationalGroup_id', $educationalGroup_id, PDO::PARAM_INT);
+    $stmt->bindparam(':hozeDoroos_id', $hozeDoroos_id, PDO::PARAM_INT);
     date_default_timezone_set('Asia/Tehran');
     $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
     return $stmt->execute() ? true : false;
@@ -981,9 +1029,9 @@ teachingType_id, madrak_id, educationalGroup_id, hozeDoroos_id, created_at)
 }
 
 function updateTeacher_un_commonality($connection, $teacher_user_id, $codeModares,
-                                                   $martabeElmi_id, $employmentType_id,
-                                                   $teachingType_id, $madrak_id,
-                                                   $educationalGroup_id, $hozeDoroos_id)
+                                      $martabeElmi_id, $employmentType_id,
+                                      $teachingType_id, $madrak_id,
+                                      $educationalGroup_id, $hozeDoroos_id)
 {
 
 
@@ -1000,14 +1048,14 @@ UPDATE `teacher` SET
                    `updated_at`=:updated_at WHERE  `teacher_user_id`=:teacher_user_id   
                                          
     ");
-    $stmt->bindparam(':teacher_user_id', $teacher_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':teacher_user_id', $teacher_user_id, PDO::PARAM_INT);
     $stmt->bindparam(':codeModares', $codeModares);
-    $stmt->bindparam(':martabeElmi_id', $martabeElmi_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':employmentType_id', $employmentType_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':teachingType_id', $teachingType_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':madrak_id', $madrak_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':educationalGroup_id', $educationalGroup_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':hozeDoroos_id', $hozeDoroos_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':martabeElmi_id', $martabeElmi_id, PDO::PARAM_INT);
+    $stmt->bindparam(':employmentType_id', $employmentType_id, PDO::PARAM_INT);
+    $stmt->bindparam(':teachingType_id', $teachingType_id, PDO::PARAM_INT);
+    $stmt->bindparam(':madrak_id', $madrak_id, PDO::PARAM_INT);
+    $stmt->bindparam(':educationalGroup_id', $educationalGroup_id, PDO::PARAM_INT);
+    $stmt->bindparam(':hozeDoroos_id', $hozeDoroos_id, PDO::PARAM_INT);
     date_default_timezone_set('Asia/Tehran');
     $stmt->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
     return $stmt->execute() ? true : false;
@@ -1016,21 +1064,20 @@ UPDATE `teacher` SET
 
 
 function createEmploy_un_commonality($connection,
-    $employ_user_id,
-    $codeStandard
+                                     $employ_user_id,
+                                     $codeStandard
 )
 {
 
     $stmt = $connection->prepare("INSERT INTO `employee` ( user_id_employ ,codeStandard, created_at)
                                         VALUES ( :user_id_employ,:codeStandard,:created_at)");
-    $stmt->bindparam(':user_id_employ', $employ_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':user_id_employ', $employ_user_id, PDO::PARAM_INT);
     $stmt->bindparam(':codeStandard', $codeStandard);
     date_default_timezone_set('Asia/Tehran');
     $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
     return $stmt->execute() ? true : false;
 
 }
-
 
 
 function createStudent_un_commonality($connection,
@@ -1051,19 +1098,18 @@ function createStudent_un_commonality($connection,
           VALUES ( :user_id_student,:codeDaneshjo,:maghtae_id,
                   :reshteTahsili_id,:termVorod_id,:nobatePaziresh_id,
                   :vazeiateNezamVazife_id,:created_at)");
-    $stmt->bindparam(':user_id_student', $student_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':user_id_student', $student_user_id, PDO::PARAM_INT);
     $stmt->bindparam(':codeDaneshjo', $codeDaneshjo);
-    $stmt->bindparam(':maghtae_id', $maghtae_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':reshteTahsili_id', $reshteTahsili_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':termVorod_id', $termVorod_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':nobatePaziresh_id', $nobatePaziresh_id ,PDO::PARAM_INT);
-    $stmt->bindparam(':vazeiateNezamVazife_id', $vazeiateNezamVazife_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':maghtae_id', $maghtae_id, PDO::PARAM_INT);
+    $stmt->bindparam(':reshteTahsili_id', $reshteTahsili_id, PDO::PARAM_INT);
+    $stmt->bindparam(':termVorod_id', $termVorod_id, PDO::PARAM_INT);
+    $stmt->bindparam(':nobatePaziresh_id', $nobatePaziresh_id, PDO::PARAM_INT);
+    $stmt->bindparam(':vazeiateNezamVazife_id', $vazeiateNezamVazife_id, PDO::PARAM_INT);
     date_default_timezone_set('Asia/Tehran');
     $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
     return $stmt->execute() ? true : false;
 
 }
-
 
 
 function updateStudent_un_commonality($connection,
@@ -1076,7 +1122,7 @@ function updateStudent_un_commonality($connection,
 {
     try {
         //check for "example" in mail address
-    $stmt = $connection->prepare("UPDATE `student` SET 
+        $stmt = $connection->prepare("UPDATE `student` SET 
                    `user_id_student`=:user_id_student,
                    `codeDaneshjo`=:codeDaneshjo,
                    `maghtae_id`=:maghtae_id,
@@ -1086,18 +1132,17 @@ function updateStudent_un_commonality($connection,
                    `vazeiateNezamVazife_id`=:vazeiateNezamVazife_id,
                    `updated_at`= :updated_at  WHERE  `user_id_student`=:user_id_student ");
 
-    $stmt->bindparam(':user_id_student',$user_id_student,PDO::PARAM_INT);
-    $stmt->bindparam(':codeDaneshjo',$codeDaneshjo);
-    $stmt->bindparam(':maghtae_id',$maghtae_id,PDO::PARAM_INT);
-    $stmt->bindparam(':reshteTahsili_id',$reshteTahsili_id,PDO::PARAM_INT);
-    $stmt->bindparam(':termVorod_id',$termVorod_id,PDO::PARAM_INT);
-    $stmt->bindparam(':nobatePaziresh_id',$nobatePaziresh_id,PDO::PARAM_INT);
-    $stmt->bindparam(':vazeiateNezamVazife_id',$vazeiateNezamVazife_id,PDO::PARAM_INT);
-    date_default_timezone_set('Asia/Tehran');
-    $stmt->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
-    return $stmt->execute() ? true : false;
-    }
-    catch(Exception $e) {
+        $stmt->bindparam(':user_id_student', $user_id_student, PDO::PARAM_INT);
+        $stmt->bindparam(':codeDaneshjo', $codeDaneshjo);
+        $stmt->bindparam(':maghtae_id', $maghtae_id, PDO::PARAM_INT);
+        $stmt->bindparam(':reshteTahsili_id', $reshteTahsili_id, PDO::PARAM_INT);
+        $stmt->bindparam(':termVorod_id', $termVorod_id, PDO::PARAM_INT);
+        $stmt->bindparam(':nobatePaziresh_id', $nobatePaziresh_id, PDO::PARAM_INT);
+        $stmt->bindparam(':vazeiateNezamVazife_id', $vazeiateNezamVazife_id, PDO::PARAM_INT);
+        date_default_timezone_set('Asia/Tehran');
+        $stmt->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return $stmt->execute() ? true : false;
+    } catch (Exception $e) {
         echo $e;
     }
 
@@ -1114,7 +1159,7 @@ function updateEmploy_un_commonality($connection,
                     `codeStandard`=:codeStandard,
                     `updated_at`=updated_at WHERE `user_id_employ`=:user_id_employ
 ");
-    $stmt->bindparam(':user_id_employ', $employ_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':user_id_employ', $employ_user_id, PDO::PARAM_INT);
     $stmt->bindparam(':codeStandard', $codeStandard);
     date_default_timezone_set('Asia/Tehran');
     $stmt->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
@@ -1124,14 +1169,14 @@ function updateEmploy_un_commonality($connection,
 
 
 function create_un_commonality($connection,
-                                     $employ_user_id,
-                                     $codeStandard
+                               $employ_user_id,
+                               $codeStandard
 )
 {
 
     $stmt = $connection->prepare("INSERT INTO `employee` ( user_id_employ ,codeStandard, created_at)
                                         VALUES ( :user_id_employ,:codeStandard,:created_at)");
-    $stmt->bindparam(':user_id_employ', $employ_user_id ,PDO::PARAM_INT);
+    $stmt->bindparam(':user_id_employ', $employ_user_id, PDO::PARAM_INT);
     $stmt->bindparam(':codeStandard', $codeStandard);
     date_default_timezone_set('Asia/Tehran');
     $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));

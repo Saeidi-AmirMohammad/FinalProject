@@ -7,7 +7,11 @@ $lesson_course = getAllLessonCourse($conn);
 $educationalgroup = getAllEducationalGroup($conn);
 $datateacher= getAllUserDataTeacher($conn);
 $classroom = getAllClassRoom($conn);
+$dataPresentaio=getAllPresentaion($conn);
 
+//echo  "<pre>";
+//var_dump($dataPresentaio);die;
+//echo  "</pre>";
 ?>
 
 
@@ -61,33 +65,53 @@ $classroom = getAllClassRoom($conn);
                                 </form>
                             </div>
                         </td>
+
+
                         <?php
-                        foreach ($lesson_course
-                        as $key):
+                      $data_=  getidlesson_course($conn,$key->lessonCourse_id);
+                        foreach ($data_
+                        as $keyo):
                         ?>
-                        <td><?= $key->name ?></td>
-                        <?php endforeach;?>
+                        <td><?= $keyo->name ?></td>
+                        <?php
+                        endforeach;
+                        ?>
+
 
                         <?php
-                        foreach ($educationalgroup
-                                 as $key):
+                        $data_=  getideducational_group($conn,$key->educationalGroup_id);
+                        foreach ($data_
+                                 as $keyo):
                             ?>
-                            <td><?= $key->name ?></td>
-                        <?php endforeach;?>
+                            <td><?= $keyo->name ?></td>
+                        <?php
+                        endforeach;
+                        ?>
 
                         <?php
-                        foreach ($datateacher
-                                 as $key):
+                     $data_=  getid_teacher_user_group($conn);
+                     $user= getid_user_end($conn,$key->teacher_id );
+                        foreach ($user as $o):
                             ?>
-                            <td><?= $key->teacher_user_id ?></td>
-                        <?php endforeach;?>
+                            <td><?= $o->fname.' '.$o->lname ?></td>
+                        <?php
+                        endforeach;
+                        ?>
 
                         <?php
-                        foreach ($classroom
-                                 as $key):
+                        $data_=  getid_classroom_group($conn,$key->classRoom_id);
+                        foreach ($data_
+                                 as $keyo):
                             ?>
-                            <td><?= $key->name?></td>
-                        <?php endforeach;?>
+                            <td><?= $keyo->class_code ?></td>
+                        <?php
+                        endforeach;
+                        ?>
+                        <td><?= $key->capacity?></td>
+                        <td><?= $key->day?></td>
+                        <td><?= $key->class_time?></td>
+                        <td><?= $key->presentation_code?></td>
+
                     </tr>
                     <?php
                     endforeach;
