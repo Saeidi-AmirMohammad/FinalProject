@@ -129,9 +129,6 @@ $dataemploy=getAllUserDataemploee($conn);
                         <td><?= $key->birthday_place ?></td>
                         <td><?= $key->mazhab ?></td>
                         <td><?= $key->university ?></td>
-
-
-
                         <td><?= $key->codeModares ?></td>
 
                         <?php
@@ -196,9 +193,6 @@ $dataemploy=getAllUserDataemploee($conn);
                         <?php
                         endforeach;
                         ?>
-
-
-
                     </tr>
                     <?php
 

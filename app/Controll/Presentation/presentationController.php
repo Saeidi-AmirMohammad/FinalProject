@@ -1,9 +1,9 @@
 <?php
 require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
-echo "<pre>";
-var_dump($_POST);die;
-echo "</pre>";
+//echo "<pre>";
+//var_dump($_POST);die;
+//echo "</pre>";
 if (isPost()) {
     extract($_POST);
     if (validation_requre([
@@ -14,22 +14,22 @@ if (isPost()) {
         is_numeric(htmlspecialchars($capacity)),
         htmlspecialchars($day),
         htmlspecialchars($class_time),
-        is_numeric( htmlspecialchars($presentation_code))
+        is_numeric(htmlspecialchars($presentation_code))
     ])) {
         $connect = DBConnection();
-        echo "<pre>";
+//        echo "<pre>";
         $data=[
             'lessonCourse_id'=> intval( $_POST['lessonCourse_id']),
             'educationalGroup_id'=> intval( $_POST['educationalGroup_id']),
             'teacher_id'=> intval( $_POST['teacher_id']),
             'classRoom_id'=> intval( $_POST['classRoom_id']),
-            'capacity'=> intval( $_POST['capacity']),
+            'capacity'=> $_POST['capacity'],
             'day'=>  $_POST['day'],
             'class_time'=>  $_POST['class_time'],
             'presentation_code'=>$_POST['presentation_code'],
         ];
-var_dump($data);
-        echo "</pre>";
+//var_dump($data);die;
+//        echo "</pre>";
         $presentaion = createPresentaion($connect, $data);
         if ($presentaion){
             $error=true;

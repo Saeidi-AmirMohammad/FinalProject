@@ -3,7 +3,7 @@ function DBConnection()
 {
     $servername = "localhost";
     $username = "root";
-    $password = "@Am41145481311.";
+    $password = "";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=finalproject", $username, $password);
@@ -688,39 +688,6 @@ function getAllEducationalGroup($connection)
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 }
 
-function getAllteacher($id,$connection)
-{
-    $stmt = $connection->prepare("SELECT * FROM `teacher` WHERE teacher_user_id=:id ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
-}
-
-
-
-function getAllstudent($id,$connection)
-{
-    $stmt = $connection->prepare("SELECT * FROM `student` WHERE user_id_student=:id ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
-}
-
-
-
-function getAllemploy($id,$connection)
-{
-    $stmt = $connection->prepare("SELECT * FROM `employee`  WHERE  user_id_employ=:id ");
-    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
-}
-
-
-
-
-
-
 function createEducationalGroup($connection, $data)
 {
     try {
@@ -890,7 +857,7 @@ function createPresentaion($connection, $data)
         $stmt->bindparam(':educationalGroup_id', $educationalGroup_id, PDO::PARAM_INT);
         $stmt->bindparam(':teacher_id', $teacher_id, PDO::PARAM_INT);
         $stmt->bindparam(':classRoom_id', $classRoom_id, PDO::PARAM_INT);
-        $stmt->bindparam(':capacity', $capacity, PDO::PARAM_INT);
+        $stmt->bindparam(':capacity', $capacity);
         $stmt->bindparam(':day', $day);
         $stmt->bindparam(':class_time', $class_time);
         $stmt->bindparam(':presentation_code', $presentation_code);
@@ -898,11 +865,10 @@ function createPresentaion($connection, $data)
         $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
         return $stmt->execute() ? true : false;
 
-    } catch (Exception $e) {
-         echo $e;
+    }catch (Exception $e) {
+        $e->getMessage();
     }
 }
-
 
 function presentation_update($id, $data, $conn)
 {
@@ -925,10 +891,10 @@ WHERE  `id`=:id ");
         $statement->bindparam("educationalGroup_id", $educationalGroup_id, PDO::PARAM_INT);
         $statement->bindparam("teacher_id", $teacher_id, PDO::PARAM_INT);
         $statement->bindparam("classRoom_id", $classRoom_id, PDO::PARAM_INT);
-        $statement->bindparam("capacity", $capacity, PDO::PARAM_INT);
+        $statement->bindparam("capacity", $capacity);
         $statement->bindparam("day", $day);
         $statement->bindparam("class_time", $class_time);
-        $statement->bindparam("presentation_code", $presentation_code, PDO::PARAM_INT);
+        $statement->bindparam("presentation_code", $presentation_code);
         date_default_timezone_set('Asia/Tehran');
         $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
         return $statement->execute() ? true : false;
@@ -959,7 +925,36 @@ function presentation_delete_id($id, $conn)
 
 // -------- End Model Code Of Presentation Tabel --------
 
-// -------- Start Model Code Of Teacher Tabel --------
+// -------- Start Model Code Of User UnCommonality Tabels --------
+
+function getAllteacher($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `teacher` WHERE teacher_user_id=:id ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+}
+
+
+
+function getAllstudent($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `student` WHERE user_id_student=:id ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+}
+
+
+
+function getAllemploy($id,$connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `employee`  WHERE  user_id_employ=:id ");
+    $stmt->bindparam("id", $id ,PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
 
 function createTeacher_un_commonality($connection, $teacher_user_id, $codeModares,
                                                    $martabeElmi_id, $employmentType_id,
@@ -1108,9 +1103,6 @@ function updateStudent_un_commonality($connection,
 
 }
 
-
-
-
 function updateEmploy_un_commonality($connection,
                                      $employ_user_id,
                                      $codeStandard
@@ -1147,5 +1139,4 @@ function create_un_commonality($connection,
 
 }
 
-
-// -------- End Model Code Of Teacher Tabel --------
+// -------- End Model Code Of User UnCommonality Tabels --------

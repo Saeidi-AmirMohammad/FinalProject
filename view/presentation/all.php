@@ -1,9 +1,12 @@
 <?php
 
-
 require '../layout/haeder.php';
 $conn = DBConnection();
-$data = getAllPresentaion($conn);
+$presentaion = getAllPresentaion($conn);
+$lesson_course = getAllLessonCourse($conn);
+$educationalgroup = getAllEducationalGroup($conn);
+$datateacher= getAllUserDataTeacher($conn);
+$classroom = getAllClassRoom($conn);
 
 ?>
 
@@ -42,7 +45,7 @@ $data = getAllPresentaion($conn);
                     </tr>
                     <tr>
                         <?php
-                        foreach ($data
+                        foreach ($presentaion
                         as $key):
                         ?>
                         <td><?= $key->id ?>
@@ -59,10 +62,31 @@ $data = getAllPresentaion($conn);
                             </div>
                         </td>
                         <?php
-                        foreach ($data
+                        foreach ($lesson_course
                         as $key):
                         ?>
-                        <td><?= $key->lessonCourse_id ?></td>
+                        <td><?= $key->name ?></td>
+                        <?php endforeach;?>
+
+                        <?php
+                        foreach ($educationalgroup
+                                 as $key):
+                            ?>
+                            <td><?= $key->name ?></td>
+                        <?php endforeach;?>
+
+                        <?php
+                        foreach ($datateacher
+                                 as $key):
+                            ?>
+                            <td><?= $key->teacher_user_id ?></td>
+                        <?php endforeach;?>
+
+                        <?php
+                        foreach ($classroom
+                                 as $key):
+                            ?>
+                            <td><?= $key->name?></td>
                         <?php endforeach;?>
                     </tr>
                     <?php

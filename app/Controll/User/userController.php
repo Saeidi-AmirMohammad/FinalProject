@@ -8,21 +8,6 @@ var_dump($_POST);
 
 echo "</pre>";
 
-/**
- * @param $type
- * @param $fname
- * @param $lname
- * @param $email
- * @param $tell
- * @param $m_code
- * @param $address
- * @param $serial_number
- * @param $jender
- * @param $father_name
- * @param $birthday_place
- * @param $mazhab
- * @param $university
- */
 //function user_func()
 //{
 //    extract($_POST);
@@ -35,16 +20,12 @@ echo "</pre>";
 
 
 
-/*---------------------------teacher------------------------------------------------------------------------------------------*/
+/*---------------------------teacher--------------------------------*/
 
 
 function teacher_func()
 {
-
-
     extract($_POST);
-
-
     commonality($type, $fname,
         $lname, $email,
         $tell, $m_code,
@@ -58,25 +39,9 @@ function teacher_func()
         $educationalGroup_id, $hozeDoroos_id
     );
 
-
     reDirect("../../../view/user/all.php");
 }
 
-/**
- * @param $type
- * @param $fname
- * @param $lname
- * @param $email
- * @param $tell
- * @param $m_code
- * @param $address
- * @param $serial_number
- * @param $jender
- * @param $father_name
- * @param $birthday_place
- * @param $mazhab
- * @param $university
- */
 function commonality($type, $fname,
                      $lname, $email,
                      $tell, $m_code,
@@ -125,22 +90,6 @@ function un_commonality_teacher(
     }
 }
 
-/**
- * @param $type
- * @param $fname
- * @param $lname
- * @param $email
- * @param $tell
- * @param $m_code
- * @param $address
- * @param $serial_number
- * @param $jender
- * @param $father_name
- * @param $birthday_place
- * @param $mazhab
- * @param $university
- * @param string $out_date
- */
 function create_user_($type, $fname, $lname, $email,
                       $tell, $m_code, $address, $serial_number,
                       $jender, $father_name, $birthday_place,
@@ -194,23 +143,6 @@ function create_Teacher_(
     }
 }
 
-/**
- * @param $type
- * @param $fname
- * @param $lname
- * @param $email
- * @param $tell
- * @param $m_code
- * @param $address
- * @param $serial_number
- * @param $jender
- * @param $father_name
- * @param $birthday_place
- * @param $mazhab
- * @param $university
- * @param string $out_date
- * @return bool
- */
 function validate_user_($type, $fname, $lname, $email,
                         $tell, $m_code, $address, $serial_number,
                         $jender, $father_name, $birthday_place, $mazhab, $university,
@@ -265,11 +197,9 @@ function validate_Teacer_(
 
 
 
-/*---------------------------teacher------------------------------------------------------------------------------------------*/
+/*---------------------------teacher--------------------------------*/
 
-
-/*---------------------------------------------employ------------------------------------------------------------------------*/
-
+/*---------------------------employee--------------------------------*/
 function employee_func()
 {
     extract($_POST);
@@ -323,22 +253,6 @@ function un_commonality_employ(
     }
 }
 
-/**
- * @param $type
- * @param $fname
- * @param $lname
- * @param $email
- * @param $tell
- * @param $m_code
- * @param $address
- * @param $serial_number
- * @param $jender
- * @param $father_name
- * @param $birthday_place
- * @param $mazhab
- * @param $university
- * @param string $out_date
- */
 function create_user_employ(
     $type, $fname,
     $lname, $email,
@@ -406,23 +320,6 @@ function create_employ_(
     }
 }
 
-/**
- * @param $type
- * @param $fname
- * @param $lname
- * @param $email
- * @param $tell
- * @param $m_code
- * @param $address
- * @param $serial_number
- * @param $jender
- * @param $father_name
- * @param $birthday_place
- * @param $mazhab
- * @param $university
- * @param string $out_date
- * @return bool
- */
 function validate_user_employ(
     $type, $fname,
     $lname, $email,
@@ -465,11 +362,9 @@ function validate_employ_(
 
 
 
-/*---------------------------------employ------------------------------------------------------------------------------------*/
+/*---------------------------employee--------------------------------*/
 
-/*---------------------------------student------------------------------------------------------------------------------------*/
-
-
+/*---------------------------student--------------------------------*/
 
 function student_func()
 {
@@ -544,22 +439,6 @@ function un_commonality_student(
     }
 }
 
-/**
- * @param $type
- * @param $fname
- * @param $lname
- * @param $email
- * @param $tell
- * @param $m_code
- * @param $address
- * @param $serial_number
- * @param $jender
- * @param $father_name
- * @param $birthday_place
- * @param $mazhab
- * @param $university
- * @param string $out_date
- */
 function create_user_student(
     $type, $fname,
     $lname, $email,
@@ -634,23 +513,6 @@ function create_student_(
     }
 }
 
-/**
- * @param $type
- * @param $fname
- * @param $lname
- * @param $email
- * @param $tell
- * @param $m_code
- * @param $address
- * @param $serial_number
- * @param $jender
- * @param $father_name
- * @param $birthday_place
- * @param $mazhab
- * @param $university
- * @param string $out_date
- * @return bool
- */
 function validate_user_student(
     $type, $fname,
     $lname, $email,
@@ -708,12 +570,7 @@ function validate_student_(
     ]);
 }
 
-
-
-
-
-
-/*----------------------------------student-----------------------------------------------------------------------------------*/
+/*---------------------------student--------------------------------*/
 
 switch (true) {
     case $_POST['type'] == '1':
