@@ -9,7 +9,6 @@ $user = user_Get_id($id, $conn);
 $id = $user->id;
 $teacher = getAllstudent($id, $conn);
 foreach ($teacher as $key):
-
 ?>
         <div class="row">
             <div class="col-md-6">

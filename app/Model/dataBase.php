@@ -924,7 +924,7 @@ function presentation_update($id, $data, $conn)
 {
     extract($data);
     try {
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+     //   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = $conn->prepare("UPDATE `presentation` SET 
   `lessonCourse_id`=:lessonCourse_id
   ,`educationalGroup_id`=:educationalGroup_id
@@ -949,7 +949,7 @@ WHERE  `id`=:id ");
         $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
         return $statement->execute() ? true : false;
         // echo a message to say the UPDATE succeeded
-        echo $statement->rowCount() . " records UPDATED successfully";
+       // echo $statement->rowCount() . " records UPDATED successfully";
     } catch (PDOException $e) {
         echo "<br>" . $e->getMessage();
     }

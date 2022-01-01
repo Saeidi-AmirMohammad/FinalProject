@@ -89,7 +89,7 @@ $dataPresentaio=getAllPresentaion($conn);
                         ?>
 
                         <?php
-                     $data_=  getid_teacher_user_group($conn);
+                    // $data_=  getid_teacher_user_group($conn);
                      $user= getid_user_end($conn,$key->teacher_id );
                         foreach ($user as $o):
                             ?>

@@ -3,7 +3,9 @@ require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
 
 $connect = DBConnection();
-
+echo "<pre>";
+var_dump($_POST);
+echo "</pre>";
 $_POST['id'] = intval($_POST['id']);
 $_POST['lessonCourse_id'] = intval($_POST['lessonCourse_id']);
 $_POST['educationalGroup_id'] = intval($_POST['educationalGroup_id']);
@@ -23,18 +25,10 @@ if (isPost()) {
         htmlspecialchars($class_time),
         is_numeric( htmlspecialchars($presentation_code))
     ])) {
-        $data = [
-            'type_id' => $lessonCourse_id,
-            'fname' => $educationalGroup_id,
-            'lname' => $teacher_id,
-            'email' => $classRoom_id,
-            'tell' => $capacity,
-            'm_code' => $day,
-            'birthday' => $class_time,
-            'address' => $presentation_code
-        ];
 
-        $user = presentation_update($id, $data, $connect);
+       // var_dump();
+        $user = presentation_update($id, $_POST, $connect);
+
         if ($user) {
             $error = true;
             $_SESSION['error'] = true;

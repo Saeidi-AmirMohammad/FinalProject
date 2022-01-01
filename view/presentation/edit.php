@@ -1,126 +1,121 @@
 <?php
 
-
 require '../layout/haeder.php';
 
-$connect = DBConnection();
-$id=$_GET['edit'];
-$presentation= presentation_Get_id($id,$connect);
+$conn = DBConnection();
 $classRoomData = getAllClassRoom($conn);
+$lessonCourseData = getAllLessonCourse($conn);
+$EducationalGroupData = getAllEducationalGroup($conn);
+$getAllusersTypeData = getAllusersType('teacher', $conn);
+$id = $_GET['edit'];
+//var_dump($id);
+$_SESSION['edit'] = $_GET['edit'];
+$presentation = presentation_Get_id($id, $conn);
+//$get=getAllPresentaion($conn);
+//var_dump($presentation);
 ?>
+<?php
+//var_dump($presentation);
 
 
-
+?>
 <form role="form" action="../../app/Controll/Presentation/editController.php" method="post">
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">شناسه درس ارائه شده در سیستم</label>
                     <input type="text" class="form-control" id="exampleInputEmail1"
-                           name="id_view" value="<?= $presentation->id?>" disabled>
+                           name="id_view" value="<?= $presentation->id ?>" disabled>
                     <input type="hidden" class="form-control"
-                           name="id" value="<?= $presentation->id?>">
-                </div>
-                <div class="form-group">
+                           name="id" value="<?= $presentation->id ?>">
                     <label for="lessonCourse_id">نام درس</label>
-                    <select class="form-control" id="lessonCourse_id" name="lessonCourse_id">
+                    <select class="form-control" id="lessonCourse_id" name="lessonCourse_id"
+                    >
+                        <?php
+                        foreach ($lessonCourseData as $keyo):
+                            ?>
+                            <option value="<?= $keyo->id ?>" <?= $presentation->lessonCourse_id === $keyo->id ? 'selected' : '' ?> ><?= $keyo->name . ' - ' . $keyo->code ?></option>
+                        <?php
+                        endforeach;
+                        ?>
 
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="educationalGroup_id">نام گروه درسی</label>
                     <select class="form-control" id="educationalGroup_id" name="educationalGroup_id">
+                        <?php
+                        foreach ($EducationalGroupData as $key):
+                            ?>
+                            <option value="<?= $key->id ?>" <?= $presentation->educationalGroup_id === $key->id ? 'selected' : '' ?> ><?= $key->name ?></option>
+                        <?php
+                        endforeach;
+                        ?>
 
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="teacher_id">نام استاد</label>
                     <select class="form-control" id="teacher_id" name="teacher_id">
+                        <?php
+                        foreach ($getAllusersTypeData as $key):
+                            ?>
+                            <option value="<?= $key->id ?>" <?= $presentation->teacher_id === $key->id ? 'selected' : '' ?> ><?= $key->fname . ' ' . $key->lname . '-' . $key->m_code ?></option>
+                        <?php
+                        endforeach;
+                        ?>
 
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="classRoom_id">شماره کلاس</label>
                     <select class="form-control" id="classRoom_id" name="classRoom_id">
-                        <?php
-                        var_dump($classRoomData);die;
-                        ?>
-                        <?php foreach ($classRoomData as $key):?>
-                            <option value="<?= $presentation->classRoom_id?>" <?= $presentation->classRoom_id===$presentation->classRoom_id ? 'selected' :'' ?> >استاد</option>
-                        <?php endforeach;?>
+                        <?php foreach ($classRoomData as $key): ?>
+                            <option value="<?= $key->id ?>" <?= $presentation->classRoom_id === $key->id ? 'selected' : '' ?> ><?= $key->class_code ?></option>
+                        <?php endforeach; ?>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">کد ملی</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="کد ملی را وارد کنید"
-                           name="m_code" maxlength="10" value="<?=$user->m_code?>">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">آدرس</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="آدرس را وارد کنید"
-                           name="address" value="<?=$user->address?>">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">شماره شناسنامه</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1"
-                           placeholder="شماره شناسنامه را وارد کنید" name="serial_number" value="<?=$user->serial_number?>">
                 </div>
             </div>
             <div class="col-md-6">
-
                 <div class="form-group">
-                    <label>انتخاب تاریخ:</label>
-
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-calendar"></i>
-                      </span>
-                        </div>
-                        <input name="birthday" value="<?=$user->birthday?>" class="normal-example form-control pwt-datepicker-input-element">
-                    </div>
-                    <!-- /.input group -->
+                    <label for="exampleInputEmail1">ظرفیت کلاس</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1"
+                           placeholder="ظرفیت کلاس را وارد کنید"
+                           name="capacity" maxlength="3"  value=" <?=  $presentation->capacity  ?>" >
                 </div>
-<!--            -->
                 <div class="form-group">
-                    <label for="jender">جنسیت</label>
-                    <select class="form-control" id="jender" name="jender"  >
-                        <option value="1" <?= $user->jender=='1' ? 'selected':'' ?>  >مرد</option>
-                        <option value="0" <?= $user->jender=='0' ? 'selected' :'' ?>>زن</option>
+                    <label for="day">روز هفته</label>
+                    <select class="form-control" id="day" name="day">
+                        <option value="شنبه" <?= $presentation->day === 'شنبه' ? 'selected' : '' ?> >شنبه</option>
+                        <option value="یک شنبه" <?= $presentation->day === 'یک شنبه' ? 'selected' : '' ?> >یک شنبه</option>
+                        <option value="دو شنبه"   <?= $presentation->day === 'دو شنبه' ? 'selected' : '' ?> >دو شنبه</option>
+                        <option value="سه شنبه"   <?= $presentation->day === 'سه شنبه' ? 'selected' : '' ?>   >سه شنبه</option>
+                        <option value="چهار شنبه"  <?= $presentation->day === 'چهار شنبه' ? 'selected' : '' ?>  >چهار شنبه</option>
+                        <option value="پنج شنبه"   <?= $presentation->day === 'پنج شنبه' ? 'selected' : '' ?>     >پنج شنبه</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">نام پدر</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="نام پدر را وارد کنید"
-                           name="father_name" value="<?=$user->father_name?>">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">مکان تولد</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="مکان تولد را وارد کنید"
-                           name="birthday_place" value="<?=$user->birthday_place?>">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">مذهب</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="مذهب را وارد کنید"
-                           name="mazhab" value="<?=$user->mazhab?>">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">دانشگاه</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="دانشگاه را وارد کنید"
-                           name="university" value="<?=$user->university?>">
-                </div>
-                <div class="form-group">
-                    <label for="type">نوع کاربر</label>
-                    <select class="form-control" id="type" name="type">
-                        <option value="1" <?= $user->type_id==='1' ? 'selected' :'' ?> >استاد</option>
-                        <option value="2" <?= $user->type_id==='2' ? 'selected' :'' ?> >کارمند</option>
-                        <option value="3" <?= $user->type_id==='3' ? 'selected' :'' ?> >دانشجو</option>
-                        <option value="4" <?= $user->type_id==='4' ? 'selected' :'' ?> >ادمین</option>
+                    <label for="class_time">ساعت برگزاری کلاس</label>
+                    <select class="form-control" id="class_time" name="class_time">
+                        <option value="۸تا۱۰"       <?= $presentation->class_time === '۸تا۱۰' ? 'selected' : '' ?>     >۸ تا ۱۰</option>
+                        <option value="۸تا۱۲"      <?= $presentation->class_time === '۸تا۱۲' ? 'selected' : '' ?>      >۸ تا ۱۲</option>
+                        <option value="۱۰تا۱۲"     <?= $presentation->class_time === '۱۰تا۱۲' ? 'selected' : '' ?>           >۱۰ تا ۱۲</option>
+                        <option value="۱۰تا۱۴"        <?= $presentation->class_time === '۱۰تا۱۴' ? 'selected' : '' ?>      >۱۰ تا ۱۴</option>
+                        <option value="۱۲تا۱۴"       <?= $presentation->class_time === '۱۲تا۱۴' ? 'selected' : '' ?>  >۱۲ تا ۱۴</option>
+                        <option value="۱۲تا۱۶"       <?= $presentation->class_time === '۱۲تا۱۶' ? 'selected' : '' ?>   >۱۲ تا ۱۶</option>
+                        <option value="۱۴تا۱۶"       <?= $presentation->class_time === '۱۴تا۱۶' ? 'selected' : '' ?>    >۱۴ تا ۱۶</option>
+                        <option value="۱۴تا۱۸"        <?= $presentation->class_time === '۱۴تا۱۸' ? 'selected' : '' ?>  >۱۴ تا ۱۸</option>
+                        <option value="۱۶تا۱۸"       <?= $presentation->class_time === '۱۶تا۱۸' ? 'selected' : '' ?>  >۱۶ تا ۱۸</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">کد ارائه</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1"
+                           placeholder="کد ارائه را وارد کنید"     name="presentation_code"   value=" <?= $presentation->presentation_code ?>  "  >
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- /.card-body -->
 
@@ -129,8 +124,10 @@ $classRoomData = getAllClassRoom($conn);
     </div>
 </form>
 
+<?php
 
+?>
 
 <?php
-require __DIR__.'/../../view/layout/footer.php';
+require __DIR__ . '/../../view/layout/footer.php';
 ?>
