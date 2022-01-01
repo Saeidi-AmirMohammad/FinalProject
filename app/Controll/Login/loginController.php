@@ -1,5 +1,16 @@
 <?php
 require __DIR__ . '/../../../bootstrap/autoload.php';
+
+//echo '<pre>';
+//
+//var_dump($output = openssl_encrypt("hello", "AES-256-CBC", 'secret'));
+//$o= $output;
+//
+//var_dump($output = openssl_decrypt($o, "AES-256-CBC", 'secret'));
+////var_dump(base64_decode("This is really secret!"));
+//echo '</pre>';
+
+$out_seryal_hash=openssl_encrypt($_POST['serial_number'], "AES-256-CBC", 'secret');
 if (ispost()) {
     extract($_POST);
     if (validation_requre([
@@ -9,7 +20,7 @@ if (ispost()) {
         $connect = DBConnection();
         $user = getLoginUser($connect, $_POST['m_code']);
         if ($user) {
-            if ($_POST['serial_number'] == $user->serial_number) {
+            if ($out_seryal_hash == $user->serial_number) {
                 $_SESSION['user'] = $user->m_code;
 
                 $_SESSION['error'] = true;

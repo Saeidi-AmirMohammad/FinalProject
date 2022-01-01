@@ -206,10 +206,10 @@ function user_Get_id($id, $conn)
 
 function user_delete_id($id, $conn)
 {
-    $statement = $conn->prepare("DELETE FROM `finalproject`.`user` WHERE  `id`=:id;");
-    $statement->bindparam("id", $id);
+    $statement = $conn->prepare("DELETE FROM `user` WHERE `user`.`id`=:id");
+    $statement->bindparam(":id", $id);
     $statement->execute();
-    return $statement ? $statement : false;
+    return $statement ?? false;
 }
 
 function user_update($id, $data, $conn)
@@ -242,7 +242,8 @@ WHERE  `id`=:id ");
         $statement->bindparam("tell", $tell);
         $statement->bindparam("m_code", $m_code);
         $statement->bindparam("address", $address);
-        $statement->bindparam("serial_number", $serial_number);
+        $hash_seryalnumber= openssl_encrypt($serial_number, "AES-256-CBC", 'secret');
+        $statement->bindparam("serial_number", $hash_seryalnumber);
         $statement->bindparam("birthday", $birthday);
         $statement->bindparam("jender", $jender, PDO::PARAM_INT);
         $statement->bindparam("father_name", $father_name);
@@ -283,7 +284,16 @@ birthday, jender, father_name, birthday_place, mazhab, university, type_id, crea
     $stmt->bindparam(':tell', $tell);
     $stmt->bindparam(':m_code', $m_code);
     $stmt->bindparam(':address', $address);
-    $stmt->bindparam(':serial_number', $serial_number);
+    //echo '<pre>';
+//
+//var_dump($output = openssl_encrypt("hello", "AES-256-CBC", 'secret'));
+//$o= $output;
+//
+//var_dump($output = openssl_decrypt($o, "AES-256-CBC", 'secret'));
+////var_dump(base64_decode("This is really secret!"));
+//echo '</pre>';
+    $hash_seryalnumber= openssl_encrypt($serial_number, "AES-256-CBC", 'secret');
+    $stmt->bindparam(':serial_number', $hash_seryalnumber);
     $stmt->bindparam(':birthday', $birthday);
     $stmt->bindparam(':jender', $jender, PDO::PARAM_INT);
     $stmt->bindparam(':father_name', $father_name);

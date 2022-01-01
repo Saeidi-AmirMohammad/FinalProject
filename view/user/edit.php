@@ -60,7 +60,7 @@ $user= user_Get_id($id,$connect);
                 <div class="form-group">
                     <label for="exampleInputPassword1">شماره شناسنامه</label>
                     <input type="text" class="form-control" id="exampleInputPassword1"
-                           placeholder="شماره شناسنامه را وارد کنید" name="serial_number" value="<?=$user->serial_number?>">
+                           placeholder="شماره شناسنامه را وارد کنید" name="serial_number" value="<?=   openssl_decrypt( $user->serial_number , "AES-256-CBC", 'secret');?>">
                 </div>
             </div>
             <div class="col-md-6">

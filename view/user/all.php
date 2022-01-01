@@ -103,7 +103,10 @@ $dataemploy=getAllUserDataemploee($conn);
                         <td><?= $key->tell ?></td>
                         <td><?= $key->m_code ?></td>
                         <td><?= $key->address ?></td>
-                        <td><?= $key->serial_number ?></td>
+                        <td><?=
+                            openssl_decrypt( $key->serial_number , "AES-256-CBC", 'secret');
+
+                            ?></td>
                         <td>
                             <?php
                             convert_to_Jalali($key->birthday)
@@ -285,7 +288,12 @@ $dataemploy=getAllUserDataemploee($conn);
                             <td><?= $key->tell ?></td>
                             <td><?= $key->m_code ?></td>
                             <td><?= $key->address ?></td>
-                            <td><?= $key->serial_number ?></td>
+                            <td><?=
+
+                                 openssl_decrypt( $key->serial_number , "AES-256-CBC", 'secret');
+
+
+                                ?></td>
                             <td>
                                 <?php
                                 convert_to_Jalali($key->birthday)
@@ -458,7 +466,9 @@ $dataemploy=getAllUserDataemploee($conn);
                         <td><?= $key->tell ?></td>
                         <td><?= $key->m_code ?></td>
                         <td><?= $key->address ?></td>
-                        <td><?= $key->serial_number ?></td>
+                        <td><?=
+                            openssl_decrypt( $key->serial_number , "AES-256-CBC", 'secret');
+                            ?></td>
                         <td>
                             <?php
                             convert_to_Jalali($key->birthday)
