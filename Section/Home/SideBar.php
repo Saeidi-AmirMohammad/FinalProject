@@ -241,6 +241,20 @@
                           </a>
                       </li>
                   </ul>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/presentation/create.php" class="nav-link <?php if ($url=='/view/presentation/create.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>ایجاد ارائه درس</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/view/presentation/all.php" class="nav-link <?php if ($url=='/view/presentation/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>دروس ارائه شده</p>
+                          </a>
+                      </li>
+                  </ul>
               </li>
           </ul>
         </nav>

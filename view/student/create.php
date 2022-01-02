@@ -16,6 +16,7 @@ $TermVorodData = getAllTermVorod($conn);
                 <div class="form-group">
                     <label for="maghtae_id">مقطع تحصیلی</label>
                     <select class="form-control" id="maghtae_id" name="maghtae_id">
+                        <option  selected >لطفا انتخاب کنید</option>
                         <option value="1">کاردانی پیوسته</option>
                         <option value="2">کاردانی ناپیوسته</option>
                         <option value="3">کارشناسی پیوسته</option>
@@ -26,6 +27,7 @@ $TermVorodData = getAllTermVorod($conn);
                 <div class="form-group">
                     <label for="reshteTahsili_id">رشته تحصیلی</label>
                     <select class="form-control" id="reshteTahsili_id" name="reshteTahsili_id">
+                        <option  selected >لطفا انتخاب کنید</option>
                         <?php foreach ($ReshteTahsiliData as $key):?>
                             <option value="<?= $key->id?>"><?php if( $key->status === '1'){echo 'فعال';} else{echo 'غیر فعال';}?> - <?= $key->name?> - <?= $key->code?></option>
                         <?php endforeach;?>
@@ -37,6 +39,7 @@ $TermVorodData = getAllTermVorod($conn);
                 <div class="form-group">
                     <label for="termVorod_id">ترم ورود</label>
                     <select class="form-control" id="termVorod_id" name="termVorod_id">
+                        <option  selected >لطفا انتخاب کنید</option>
                         <?php foreach ($TermVorodData as $key):?>
                             <option value="<?= $key->id?>"><?= $key->number?></option>
                         <?php endforeach;?>
@@ -46,6 +49,7 @@ $TermVorodData = getAllTermVorod($conn);
                 <div class="form-group">
                     <label for="nobatePaziresh_id">نوبت پذیرش</label>
                     <select class="form-control" id="nobatePaziresh_id" name="nobatePaziresh_id">
+                        <option  selected >لطفا انتخاب کنید</option>
                         <option value="1">روزانه</option>
                         <option value="2">شبانه</option>
                     </select>
@@ -54,6 +58,7 @@ $TermVorodData = getAllTermVorod($conn);
                 <div class="form-group">
                     <label for="vazeiateNezamVazife_id">وضعیت نظام وظیفه</label>
                     <select class="form-control" id="vazeiateNezamVazife_id" name="vazeiateNezamVazife_id">
+                        <option  selected >لطفا انتخاب کنید</option>
                         <option value="1">معاف دائم</option>
                         <option value="2">پایان خدمت</option>
                         <option value="3">معاف پزشکی</option>

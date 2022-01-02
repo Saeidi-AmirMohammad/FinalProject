@@ -90,10 +90,10 @@ require '../layout/haeder.php';
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
                     <select class="form-control" id="type" name="type">
+                        <option  selected >لطفا انتخاب کنید</option>
                         <option id="teacher" value="1">استاد</option>
                         <option id="employee" value="2">کارمند</option>
                         <option id="student" value="3">دانشجو</option>
-                        <option id="admin" value="4">ادمین</option>
                     </select>
                 </div>
             </div>

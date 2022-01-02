@@ -108,11 +108,10 @@ $user= user_Get_id($id,$connect);
                 </div>
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
-                    <select class="form-control" id="type" name="type">
+                    <select class="form-control" id="type" name="type" disabled >
                         <option id="teacher"  value="1" <?= $user->type_id==='1' ? 'selected' :'' ?> >استاد</option>
                         <option id="employee"  value="2" <?= $user->type_id==='2' ? 'selected' :'' ?> >کارمند</option>
                         <option id="student"  value="3" <?= $user->type_id==='3' ? 'selected' :'' ?> >دانشجو</option>
-                        <option id="admin"   value="4" <?= $user->type_id==='4' ? 'selected' :'' ?> >ادمین</option>
                     </select>
                 </div>
             </div>
@@ -129,6 +128,9 @@ $user= user_Get_id($id,$connect);
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<?php
+if ( $user->type_id==='1'):
+?>
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -137,18 +139,71 @@ $user= user_Get_id($id,$connect);
                 return  $('div#form2').load('../teacher/edit.php div.row');
             });
             $( "select#type option#employee:selected" ).each(function() {
-                return  $('div#form2').load('../employee/edit.php div.row');
+                return  $('div#form2').load('../employee/create.php div.row');
             });
             $( "select#type option#student:selected" ).each(function() {
-                return  $('div#form2').load('../student/edit.php div.row');
-            });
-            $( "select#type option#admin:selected" ).each(function() {
-                return  $('div#form2').load('../admin/create.php div.row');
+                return  $('div#form2').load('../student/create.php div.row');
             });
         })
             .change();
     })
 </script>
+<?php
+endif;
+?>
+
+<?php
+if ( $user->type_id==='2'):
+    ?>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $( "select#type" ).change(function () {
+                $( "select#type option#teacher:selected" ).each(function() {
+                    return  $('div#form2').load('../teacher/create.php div.row');
+                });
+                $( "select#type option#employee:selected" ).each(function() {
+                    return  $('div#form2').load('../employee/edit.php div.row');
+                });
+                $( "select#type option#student:selected" ).each(function() {
+                    return  $('div#form2').load('../student/create.php div.row');
+                });
+            })
+                .change();
+        })
+    </script>
+<?php
+endif;
+?>
+
+
+<?php
+if ( $user->type_id==='3'):
+    ?>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $( "select#type" ).change(function () {
+                $( "select#type option#teacher:selected" ).each(function() {
+                    return  $('div#form2').load('../teacher/create.php div.row');
+                });
+                $( "select#type option#employee:selected" ).each(function() {
+                    return  $('div#form2').load('../employee/create.php div.row');
+                });
+                $( "select#type option#student:selected" ).each(function() {
+                    return  $('div#form2').load('../student/edit.php div.row');
+                });
+            })
+                .change();
+        })
+    </script>
+<?php
+endif;
+?>
+
+
+
+
 
 
 <?php

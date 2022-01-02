@@ -4,7 +4,7 @@ login_before("../../../index.php");
 //$n=\Carbon\Carbon::now();
 //$date = jdate();
 echo "<pre>";
-//var_dump($_POST);die;
+var_dump($_POST);die;
 
 echo "</pre>";
 
