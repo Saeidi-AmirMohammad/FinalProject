@@ -139,10 +139,10 @@ if ( $user->type_id==='1'):
                 return  $('div#form2').load('../teacher/edit.php div.row');
             });
             $( "select#type option#employee:selected" ).each(function() {
-                return  $('div#form2').load('../employee/create.php div.row');
+                return  $('div#form2').load('../employee/edit.php div.row');
             });
             $( "select#type option#student:selected" ).each(function() {
-                return  $('div#form2').load('../student/create.php div.row');
+                return  $('div#form2').load('../student/edit.php div.row');
             });
         })
             .change();

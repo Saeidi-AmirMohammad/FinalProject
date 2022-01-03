@@ -241,17 +241,27 @@
                           </a>
                       </li>
                   </ul>
+              </li>
+
+              <li class="nav-item has-treeview  <?php if ($url=='/view/chooselesson/create.php' | $url=='/view/chooselesson/all.php'){ echo 'menu-open';}else {echo '';} ?>">
+                  <a href="#" class="nav-link  <?php if ($url=='/view/chooselesson/create.php' | $url=='/view/chooselesson/all.php'){ echo 'active';}else {echo '';} ?>">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                         واحد درسی
+                          <i class="right fa fa-angle-left"></i>
+                      </p>
+                  </a>
                   <ul class="nav nav-treeview">
                       <li class="nav-item">
-                          <a href="/view/presentation/create.php" class="nav-link <?php if ($url=='/view/presentation/create.php'){ echo 'active';}else {echo '';} ?>">
+                          <a href="/view/chooselesson/create.php" class="nav-link <?php if ($url=='/view/chooselesson/create.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>
-                              <p>ایجاد ارائه درس</p>
+                              <p>انتخاب واحد درسی</p>
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="/view/presentation/all.php" class="nav-link <?php if ($url=='/view/presentation/all.php'){ echo 'active';}else {echo '';} ?>">
+                          <a href="/view/chooselesson/all.php" class="nav-link <?php if ($url=='/view/chooselesson/all.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>
-                              <p>دروس ارائه شده</p>
+                              <p>واحدهای درسی انتخاب شده</p>
                           </a>
                       </li>
                   </ul>

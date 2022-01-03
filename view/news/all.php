@@ -14,12 +14,12 @@ $data = getAllNews($conn);
                 <h3 class="card-title">جدول اخبار</h3>
                 <div class="card-tools">
                     <div class="d-flex">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
+<!--                        <div class="input-group input-group-sm" style="width: 150px;">-->
+<!--                            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد خبر</a>
                     </div>
                 </div>

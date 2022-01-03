@@ -54,12 +54,12 @@ $dataPresentaio=getAllPresentaion($conn);
                         ?>
                         <td><?= $key->id ?>
                             <div class="d-flex mt-3">
-                                <form action="/view/presentation/edit.php" id="edit-form-<?= $key->id ?>">
+                                <form action="/view/chooselesson/edit.php" id="edit-form-<?= $key->id ?>">
                                     <input type="hidden" name="edit" value="<?= $key->id ?>">
                                 </form>
                                 <a onclick="document.getElementById('edit-form-<?= $key->id ?>').submit()"
                                    class="btn btn-warning  mx-1 ">ویرایش</a>
-                                <form action="/app/Controll/Presentation/deleteController.php" method="post">
+                                <form action="/app/Controll/chooselesson/deleteController.php" method="post">
                                     <input type="hidden" name="delete[<?= $key->id ?>]" value="<?= $key->id ?>">
                                     <button type="submit" class="btn btn-danger text-white">حذف</button>
                                 </form>

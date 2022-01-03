@@ -120,9 +120,6 @@ require '../layout/haeder.php';
             $( "select#type option#student:selected" ).each(function() {
                 return  $('div#form2').load('../student/create.php div.row');
             });
-            $( "select#type option#admin:selected" ).each(function() {
-                return  $('div#form2').load('../admin/create.php div.row');
-            });
             })
             .change();
     })

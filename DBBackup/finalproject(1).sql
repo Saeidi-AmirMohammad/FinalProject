@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 26, 2021 at 06:32 PM
+-- Generation Time: Jan 02, 2022 at 06:11 PM
 -- Server version: 8.0.27-0ubuntu0.20.04.1
 -- PHP Version: 8.0.12
 
@@ -35,6 +35,14 @@ CREATE TABLE `choose_lesson` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_persian_ci;
+
+--
+-- Dumping data for table `choose_lesson`
+--
+
+INSERT INTO `choose_lesson` (`id`, `stuednt_id`, `presentation_id`, `created_at`, `updated_at`) VALUES
+(3, 8, 23, NULL, NULL),
+(4, 8, 25, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -122,7 +130,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `user_id_employ`, `codeStandard`, `created_at`, `updated_at`) VALUES
-(3, 122, '777733345666', '2021-12-11 15:14:33', NULL);
+(4, 127, '8754545', '2022-01-01 18:25:29', NULL),
+(5, 129, '342342', '2022-01-01 18:31:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -343,7 +352,7 @@ CREATE TABLE `presentation` (
   `classRoom_id` int UNSIGNED NOT NULL DEFAULT '0',
   `capacity` smallint UNSIGNED NOT NULL,
   `day` char(20) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
-  `class_time` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `class_time` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci DEFAULT NULL,
   `presentation_code` char(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -354,8 +363,10 @@ CREATE TABLE `presentation` (
 --
 
 INSERT INTO `presentation` (`id`, `lessonCourse_id`, `educationalGroup_id`, `teacher_id`, `classRoom_id`, `capacity`, `day`, `class_time`, `presentation_code`, `created_at`, `updated_at`) VALUES
-(9, 4, 2, 59, 1, 345, 'شنبه', '۸تا۱۰', '345345', NULL, NULL),
-(10, 14, 10, 62, 8, 33, 'چهار شنبه', '۱۴تا۱۸', '1212', NULL, NULL);
+(23, 13, 4, 133, 2, 488, 'شنبه', '۸تا۱۰', '455', '2022-01-02 17:43:48', NULL),
+(24, 13, 3, 133, 2, 88, 'یک شنبه', '۸تا۱۲', '877', '2022-01-02 17:44:08', NULL),
+(25, 4, 5, 133, 1, 77, 'دو شنبه', '۱۰تا۱۴', '4555', '2022-01-02 17:44:29', NULL),
+(26, 4, 7, 133, 10, 87, 'چهار شنبه', '۸تا۱۰', '8877', '2022-01-02 17:44:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -408,7 +419,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `user_id_student`, `codeDaneshjo`, `maghtae_id`, `reshteTahsili_id`, `termVorod_id`, `nobatePaziresh_id`, `vazeiateNezamVazife_id`, `created_at`, `updated_at`) VALUES
-(6, 123, '855422', 3, 10, 3, 1, 1, '2021-12-11 15:16:30', '2021-12-26 17:51:35');
+(8, 131, '8797864564', 2, 12, 1, 1, 1, '2022-01-01 18:42:56', '2022-01-01 18:58:37');
 
 -- --------------------------------------------------------
 
@@ -435,8 +446,7 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`id`, `teacher_user_id`, `codeModares`, `martabeElmi_id`, `employmentType_id`, `teachingType_id`, `madrak_id`, `educationalGroup_id`, `hozeDoroos_id`, `created_at`, `updated_at`) VALUES
-(12, 121, '333331211', 4, 2, 1, 1, 7, 3, '2021-12-11 15:13:08', '2021-12-25 16:40:38'),
-(13, 124, '234234234', 3, 2, 4, 4, 6, 3, '2021-12-19 16:46:15', NULL);
+(16, 133, '1245554', 2, 2, 1, 1, 2, 1, '2022-01-01 18:53:28', '2022-01-02 17:28:43');
 
 -- --------------------------------------------------------
 
@@ -528,7 +538,7 @@ CREATE TABLE `user` (
   `tell` char(20) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
   `m_code` char(30) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
   `address` varchar(250) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
-  `serial_number` char(20) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
+  `serial_number` char(100) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
   `birthday` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `jender` bit(1) NOT NULL,
   `father_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_persian_ci NOT NULL,
@@ -544,25 +554,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `type_id`, `fname`, `lname`, `email`, `tell`, `m_code`, `address`, `serial_number`, `jender`, `father_name`, `birthday_place`, `mazhab`, `university`, `created_at`, `updated_at`) VALUES
-(55, 3, 'امیر محمد', 'سعیدی', 'saeidi@gmail.com', '09356788899', '123456', 'قاسم آباد شریعتی 10', '123456', b'1', 'مهدی', 'مشهد', 'شیعه', 'منتظری', '2021-11-14 17:28:25', NULL),
-(56, 3, 'fsdg', 'kjh', 'kjhk@info.com', '98798798798', '7987987987', 'jhghjgjh', '79878', b'0', 'kjh', 'jkhkh', 'jkhjkhk', 'kjhjkh', '2021-11-17 19:53:18', '2021-11-20 15:51:23'),
-(59, 1, 'رضا', 'علوی', 'alavi@gmail.com', '234324234', '26262626', 'jhkjh', '22222', b'1', 'jkhkh', 'khkjhk', 'kjhkh', 'hkjhk', NULL, '2021-11-22 08:17:30'),
-(60, 2, 'شششش', 'شششش', 'rahimi@info.com', '4353453', '345345', 'زطزرطزر', '3333', b'0', 'صثقثصق', 'صثقصثق', 'صثقصثق', 'صثقصقث', '2021-11-22 09:27:53', NULL),
-(61, 3, 'احمد', 'احمدی', 'sdfsdf@gmail.com', '29387499234', '92834738', 'sdkjhjkshkfsdf', '33333', b'0', '', '', '', '', NULL, NULL),
-(62, 1, 'سبحان', 'رضایی', 'lsdjfls@gmail.com', '290834234', '02938402', 'slkdjflsldfj', '44444', b'0', '', '', '', '', NULL, NULL),
-(63, 1, 'غلام', 'رحیمی پور', 'mkmmuwboffgvgtoyjj@adfskj.com', '09357675589', '0912345381', 'قاسم آباد شریعتی 2', '565656', b'1', 'اصغر', 'مشهد', 'شیعه', 'منتظری', '2021-11-29 10:04:03', NULL),
-(64, 2, 'احمد', 'رحیمی', 'mkmmuwrtboffgvgtoyjj@adfskj.com', '0956675533', '34435', 'قاسم آباد شریعتی 10', '67876777', b'0', 'اصغر', 'مشهد', 'rtyrtyrty', 'منتظری', '2021-11-29 10:35:39', '2021-11-29 10:36:36'),
-(67, 1, 'علی رضا', 'غلامی پور', 'rafdghisdfsdfmi@info.com', '09356675533', '0925866678', 'قاسم آباد استاد یوسفی 3 ', '124589', b'1', 'رضا', 'مشهد', 'شیعه', 'منتظری', '2021-11-29 11:26:51', NULL),
-(68, 1, 'gjjhgj', 'ghjghjg', 'amirr8578ampoor@gmail.com', '45454545', '45454545', 'dfsfsdfsdfsdsdf', '345345345', b'1', 'fdgdf', 'dfgdg', 'dfgdfg', 'dfgdfg', '2021-12-10 15:49:46', NULL),
-(75, 1, 'gjjhgj', 'ghjghjg', 'amir7898ampoor@gmail.com', '455213', '9875421', 'dfsfsdfsdfsdsdf', '675465867', b'1', 'fdgdf', 'dfgdg', 'dfgdfg', 'dfgdfg', '2021-12-10 16:08:57', NULL),
-(79, 1, 'gjjhgj', 'ghjghjg', 'am8518ampoor@gmail.com', '54678', '9785', 'dfsfsdfsdfsdsdf', '654788', b'1', 'fdgdf', 'dfgdg', 'dfgdfg', 'dfgdfg', '2021-12-10 16:17:32', NULL),
-(81, 1, 'gjjhgj', 'ghjghjg', 'a487545mpoor@gmail.com', '78954', '456778', 'dfsfsdfsdfsdsdf', '457841', b'1', 'fdgdf', 'dfgdg', 'dfgdfg', 'dfgdfg', '2021-12-10 16:22:25', NULL),
-(93, 1, 'hgf', 'ddf', 'a85232oor@gmail.com', '34', '34535', 'sgf', '544', b'1', 'rfs', 'sfsd', 'sf', 'sdfs', '2021-12-10 18:27:57', NULL),
-(101, 1, 'cdvxvc', 'vcvv', 'xdvxdor@gmail.com', '5445354', '875787852', 'dxzfzfzf', '456456477', b'1', 'gvghgf', 'fghfgh', 'fghfgh', 'fghfgh', '2021-12-11 07:34:29', NULL),
-(121, 1, 'test1', 'test1', 'am34rtfgfdfg55oor@gmail.com', '55343211234', '566742342', 'ooooooooooooooooooooooovbcvbdfgdfg', '4534545345', b'1', 'dfgdgdg', 'fddfgg', 'dfgdfgdfg', 'dfgdfgdfg', '2021-12-11 15:13:08', '2021-12-25 16:40:38'),
-(122, 2, 'test2', 'test2', 'amgdg5345foor@gmail.com', '77552323444', '3333566745', 'fdgfdfgdfg', '676678833', b'1', 'gfhgg', 'fghff', 'gfffghfg', 'fghfgh', '2021-12-11 15:14:33', '2021-12-26 18:18:13'),
-(123, 3, 'test3', 'test3', 'amfg555555r@gmail.com', '554443332', '1211123354', '454545fghfghfg', '666444323', b'1', 'fghgf', 'fgfgff', 'fgfhfhf', 'fgfhfh', '2021-12-11 15:16:30', '2021-12-26 17:51:35'),
-(124, 1, 'امیر ', 'سعیدی', 'a8tjufvvhhor@gmail.com', '234234234', '2345678645', 'adgfgf', '234324', b'1', 'fdgdfg', 'dfgdgdgf', 'fdddddgg', 'dfgdfgfd', '2021-12-19 16:46:15', NULL);
+(127, 2, 'amirreza', 'moghaddampoor', 'a453546546456oor@gmail.com', '09387776458', '0985545488', 'dfsfsdfsdfsdsdf', '+XCMMDm30DXb9K9JqbRxGQ==', b'1', 'ghgfhfgh', 'fghfghfgh', 'fghfghfgh', 'fghfghfgh', '2022-01-01 18:25:29', NULL),
+(129, 2, 'امیر محمد ', 'سعیدی', 'hjjh545454@gmail.com', '0935415448', '123456', 'dxzfzfzf', 'CIAM9602OjpmzSLcXpj7YQ==', b'1', 'ghgfhfgh', 'dfgdg', 'dfgdfg', 'dfgdfg', '2022-01-01 18:31:12', NULL),
+(131, 3, 'mohammad', 'azimi', 'azimi@gmail.com', '09778885555', '448855663', 'dfsfsdfsdfsdsdf', 'sMlNIxN+Fj+Z57hD9J0l+A==', b'1', 'naghi', 'tehran', 'shieh', 'uni montazeri', '2022-01-01 18:42:56', '2022-01-01 18:58:37'),
+(133, 1, 'mohammadali', 'rezaei', 'tnnoor@gmail.com', '0985222555', '545646456', 'dfsfsdfsdfsdsdf', 'ltfsTpQl+DNo0GhRTbgvSw==', b'1', 'ali', 'mashhad', 'shieh', 'uni montazeri', '2022-01-01 18:53:28', '2022-01-02 17:28:43');
 
 -- --------------------------------------------------------
 
@@ -770,7 +765,7 @@ ALTER TABLE `vazeiate_nezam_vazife`
 -- AUTO_INCREMENT for table `choose_lesson`
 --
 ALTER TABLE `choose_lesson`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `classroom`
@@ -788,7 +783,7 @@ ALTER TABLE `educational_group`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `employment_type`
@@ -848,7 +843,7 @@ ALTER TABLE `nobate_paziresh`
 -- AUTO_INCREMENT for table `presentation`
 --
 ALTER TABLE `presentation`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `reshte_tahsili`
@@ -860,13 +855,13 @@ ALTER TABLE `reshte_tahsili`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `teaching_type`
@@ -890,7 +885,7 @@ ALTER TABLE `type`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `vazeiate_nezam_vazife`
