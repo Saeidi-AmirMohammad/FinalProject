@@ -3,7 +3,7 @@ function DBConnection()
 {
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "@Am41145481311.";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=finalproject", $username, $password);
@@ -45,6 +45,14 @@ function getAllUserDataStudent($connection)
 
 }
 
+function getAllchoose_lesson_info_all($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `choose_lesson_info_all` ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
 function getAllUserDataemploee($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM user 
@@ -58,6 +66,28 @@ function getAllUserDataemploee($connection)
 function getmartabe_elmi($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM martabe_elmi WHERE id=:id  ");
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+
+
+function getpresentation_id( )
+{
+    $stmt = DBConnection()->prepare("
+SELECT user.id'student_id',  presentation.id,  lesson_course.name'lesson_course_name' , educational_group.name'educational_group_name' , user.fname'teacher_fname' , user.lname'teacher_lname' , classroom.class_code , presentation.capacity, presentation.day, presentation.class_time ,presentation.presentation_code FROM presentation INNER JOIN lesson_course ON presentation.lessonCourse_id=lesson_course.id INNER JOIN educational_group ON presentation.educationalGroup_id=educational_group.id INNER JOIN user ON user.type_id=1 AND presentation.teacher_id=user.id INNER JOIN classroom ON presentation.classRoom_id=classroom.id  
+
+");
+
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+function getlesson_id($id, $connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `lesson_course`   WHERE id=:id  ");
     $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
@@ -284,6 +314,9 @@ birthday, jender, father_name, birthday_place, mazhab, university, type_id, crea
     $stmt->bindparam(':tell', $tell);
     $stmt->bindparam(':m_code', $m_code);
     $stmt->bindparam(':address', $address);
+
+  
+
     //echo '<pre>';
 //
 //var_dump($output = openssl_encrypt("hello", "AES-256-CBC", 'secret'));
@@ -793,10 +826,10 @@ function chooselesson_update($id, $data, $conn)
     try {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = $conn->prepare("UPDATE `choose_lesson` SET 
-  `stuednt_id`=:stuednt_id
+   `stuednt_id`=:stuednt_id
   , `presentation_id`=:presentation_id
-,   `updated_at`=:updated_at
-WHERE  `id`=:id ");
+  , `updated_at`=:updated_at
+     WHERE  `id`=:id ");
         $statement->bindparam("id", $id, PDO::PARAM_INT);
         $statement->bindparam("stuednt_id", $stuednt_id);
         $statement->bindparam("presentation_id", $presentation_id);

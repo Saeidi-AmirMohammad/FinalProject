@@ -4,6 +4,8 @@ login_before("../../../index.php");
 
 $connect = DBConnection();
 
+
+
 $_POST['id'] = intval($_POST['id']);
 $_POST['stuednt_id'] = intval($_POST['stuednt_id']);
 $_POST['presentation_id'] = intval($_POST['presentation_id']);
@@ -18,7 +20,7 @@ if (isPost()) {
             'stuednt_id' => $stuednt_id,
             'presentation_id' => $presentation_id
         ];
-
+     //  var_dump($_POST);die;
         $ChooseLesson = chooselesson_update($id, $data, $connect);
         if ($ChooseLesson) {
             $error = true;

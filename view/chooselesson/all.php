@@ -8,9 +8,11 @@ $educationalgroup = getAllEducationalGroup($conn);
 $datateacher= getAllUserDataTeacher($conn);
 $classroom = getAllClassRoom($conn);
 $dataPresentaio=getAllPresentaion($conn);
+$get= getpresentation_id();
+$getAllchoose_lesson_info_all= getAllchoose_lesson_info_all($conn);
 
 //echo  "<pre>";
-//var_dump($dataPresentaio);die;
+//var_dump($getAllchoose_lesson_info_all);die;
 //echo  "</pre>";
 ?>
 
@@ -19,16 +21,10 @@ $dataPresentaio=getAllPresentaion($conn);
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">جدول دروس ارائه شده</h3>
+                <h3 class="card-title">انتخاب واحد</h3>
                 <div class="card-tools">
                     <div class="d-flex">
-<!--                        <div class="input-group input-group-sm" style="width: 150px;">-->
-<!--                            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">-->
-<!--                            <div class="input-group-append">-->
-<!--                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد ارائه</a>
+                        <a href="create.php" class="btn btn-primary text-white mx-1 ">انتخاب واحد</a>
                     </div>
                 </div>
             </div>
@@ -37,80 +33,55 @@ $dataPresentaio=getAllPresentaion($conn);
                 <table class="table table-hover">
                     <tbody>
                     <tr>
-                        <th>شناسه ارائه</th>
+                        <th>شناسه انتخاب واحد</th>
+                        <th>نام دانشجو </th>
+                        <th>نام خانوادگی دانشجو </th>
+                        <th>شماره دانشجویی </th>
+                        <th>نام استاد</th>
+                        <th>نام خانوادگی استاد</th>
+                        <th>کد مدرسی</th>
                         <th>نام درس</th>
                         <th>نام گروه درسی</th>
-                        <th>نام استاد</th>
                         <th>شماره کلاس</th>
-                        <th>ظرفیت کلاس</th>
-                        <th>روز هفته</th>
+                        <th>ظرفیت کلاس </th>
+                        <th>روز برگزاری کلاس </th>
                         <th>ساعت برگزاری کلاس</th>
                         <th>کد ارائه</th>
                     </tr>
                     <tr>
                         <?php
-                        foreach ($presentaion
+                        foreach ($getAllchoose_lesson_info_all
                         as $key):
                         ?>
-                        <td><?= $key->id ?>
+                        <td><?= $key->choose_lesson_id ?>
                             <div class="d-flex mt-3">
-                                <form action="/view/chooselesson/edit.php" id="edit-form-<?= $key->id ?>">
-                                    <input type="hidden" name="edit" value="<?= $key->id ?>">
+                                <form action="/view/chooselesson/edit.php" id="edit-form-<?= $key->choose_lesson_id ?>">
+                                    <input type="hidden" name="edit" value="<?= $key->choose_lesson_id ?>">
                                 </form>
-                                <a onclick="document.getElementById('edit-form-<?= $key->id ?>').submit()"
+                                <a onclick="document.getElementById('edit-form-<?= $key->choose_lesson_id ?>').submit()"
                                    class="btn btn-warning  mx-1 ">ویرایش</a>
-                                <form action="/app/Controll/chooselesson/deleteController.php" method="post">
-                                    <input type="hidden" name="delete[<?= $key->id ?>]" value="<?= $key->id ?>">
+                                <form action="/app/Controll/ChooseLesson/deleteController.php" method="post">
+                                    <input type="hidden" name="delete[<?= $key->choose_lesson_id ?>]" value="<?= $key->choose_lesson_id ?>">
                                     <button type="submit" class="btn btn-danger text-white">حذف</button>
                                 </form>
                             </div>
                         </td>
 
 
-                        <?php
-                      $data_=  getidlesson_course($conn,$key->lessonCourse_id);
-                        foreach ($data_
-                        as $keyo):
-                        ?>
-                        <td><?= $keyo->name ?></td>
-                        <?php
-                        endforeach;
-                        ?>
-
-
-                        <?php
-                        $data_=  getideducational_group($conn,$key->educationalGroup_id);
-                        foreach ($data_
-                                 as $keyo):
-                            ?>
-                            <td><?= $keyo->name ?></td>
-                        <?php
-                        endforeach;
-                        ?>
-
-                        <?php
-                    // $data_=  getid_teacher_user_group($conn);
-                     $user= getid_user_end($conn,$key->teacher_id );
-                        foreach ($user as $o):
-                            ?>
-                            <td><?= $o->fname.' '.$o->lname ?></td>
-                        <?php
-                        endforeach;
-                        ?>
-
-                        <?php
-                        $data_=  getid_classroom_group($conn,$key->classRoom_id);
-                        foreach ($data_
-                                 as $keyo):
-                            ?>
-                            <td><?= $keyo->class_code ?></td>
-                        <?php
-                        endforeach;
-                        ?>
+                        <td><?= $key->studen_fname?></td>
+                        <td><?= $key->student_lname?></td>
+                        <td><?= $key->codeDaneshjo?></td>
+                        <td><?= $key->teacher_lname?></td>
+                        <td><?= $key->teacher_fname?></td>
+                        <td><?= $key->codeModares?></td>
+                        <td><?= $key->lesson_course_name?></td>
+                        <td><?= $key->educational_group_name?></td>
+                        <td><?= $key->class_code?></td>
                         <td><?= $key->capacity?></td>
                         <td><?= $key->day?></td>
                         <td><?= $key->class_time?></td>
                         <td><?= $key->presentation_code?></td>
+
 
                     </tr>
                     <?php
