@@ -45,9 +45,26 @@ function getAllUserDataStudent($connection)
 
 }
 
+function getAllgrade($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM user 
+    INNER JOIN student
+    ON user.id = student.user_id_student  ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
 function getAllchoose_lesson_info_all($connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `choose_lesson_info_all` ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+function get_grade_all($connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `grade_all` ");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 
@@ -72,6 +89,14 @@ function getmartabe_elmi($id, $connection)
 
 }
 
+function getgrade_id($id, $connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `garde`  WHERE chooseLesson_id=:id  ");
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
 
 
 function getpresentation_id( )
@@ -613,6 +638,26 @@ function createTermVorod($connection, $data)
 }
 
 
+function createGrade($connection, $data)
+{
+    try {
+        extract($data);
+        $stmt = $connection->prepare("
+INSERT INTO `garde`( `grade_value`, `student_id`, `chooseLesson_id`, `created_at`) 
+   VALUES (:grade,:student_id,:choose_lesson_id,:created_at)
+   ");
+        $stmt->bindparam(':grade', $grade);
+        $stmt->bindparam(':student_id',$student_id );
+        $stmt->bindparam(':choose_lesson_id', $choose_lesson_id);
+        date_default_timezone_set('Asia/Tehran');
+        $stmt->bindparam(':created_at', date("Y-m-d H:i:s", time()));
+        return $stmt->execute() ? true : false;
+
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+}
+
 function termvorod_update($id, $data, $conn)
 {
     extract($data);
@@ -633,6 +678,31 @@ WHERE  `id`=:id ");
     }
 }
 
+function grade_update($id, $data, $conn)
+{    extract($data);
+
+  //  echo $grade;die;
+    try {
+
+
+        $statement = $conn->prepare("
+UPDATE `garde` SET 
+     `grade_value`=:grade
+,   `updated_at`=:updated_at
+WHERE  `id`=:id ");
+        $statement->bindparam(":id", $id, PDO::PARAM_INT);
+        $statement->bindparam(":grade", $grade);
+        date_default_timezone_set('Asia/Tehran');
+        $statement->bindparam(':updated_at', date("Y-m-d H:i:s", time()));
+        return $statement->execute() ? true : false;
+        // echo a message to say the UPDATE succeeded
+        echo $statement->rowCount() . " records UPDATED successfully";
+    } catch (PDOException $e) {
+        echo "<br>" . $e->getMessage();
+    }
+}
+
+
 function termvorod_Get_id($id, $conn)
 {
     $statement = $conn->prepare("SELECT * FROM term_vorod where `id`= :id");
@@ -646,6 +716,14 @@ function termvorod_Get_id($id, $conn)
 function termvorod_delete_id($id, $conn)
 {
     $statement = $conn->prepare("DELETE FROM `finalproject`.`term_vorod` WHERE  `id`=:id;");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    return $statement ? $statement : false;
+}
+
+function grade_delete_id($id, $conn)
+{
+    $statement = $conn->prepare("DELETE FROM `garde` WHERE `garde`.`id`=:id;");
     $statement->bindparam("id", $id);
     $statement->execute();
     return $statement ? $statement : false;

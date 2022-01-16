@@ -265,6 +265,14 @@
                           </a>
                       </li>
                   </ul>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/view/grade/all.php" class="nav-link <?php if ($url=='/view/grade/all.php'){ echo 'active';}else {echo '';} ?>">
+                              <i class="fa fa-circle-o nav-icon"></i>
+                              <p>نمره نهایی دروس</p>
+                          </a>
+                      </li>
+                  </ul>
               </li>
 
 
