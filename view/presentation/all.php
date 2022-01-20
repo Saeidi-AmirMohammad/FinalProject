@@ -43,6 +43,7 @@ $dataPresentaio=getAllPresentaion($conn);
                         <th>نام استاد</th>
                         <th>شماره کلاس</th>
                         <th>ظرفیت کلاس</th>
+                        <th>ظرفیت رزرو شده</th>
                         <th>روز هفته</th>
                         <th>ساعت برگزاری کلاس</th>
                         <th>کد ارائه</th>
@@ -108,6 +109,7 @@ $dataPresentaio=getAllPresentaion($conn);
                         endforeach;
                         ?>
                         <td><?= $key->capacity?></td>
+                        <td><?= $key->count_capacity?></td>
                         <td><?= $key->day?></td>
                         <td><?= $key->class_time?></td>
                         <td><?= $key->presentation_code?></td>

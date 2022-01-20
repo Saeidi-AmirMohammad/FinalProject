@@ -741,6 +741,15 @@ function getAllClassRoom($connection)
 
 }
 
+function getallowCapacity_choose($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM `Capacity_choose` where `presentation_id`= :id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $classroom_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $classroom_id ? $classroom_id : false;
+}
 
 function createClassRoom($connection, $data)
 {
@@ -945,7 +954,7 @@ function chooselesson_delete_id($id, $conn)
 
 function getAllPresentaion($connection)
 {
-    $stmt = $connection->prepare("SELECT * FROM presentation");
+    $stmt = $connection->prepare("SELECT * FROM `presentation_capacity` ");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
 

@@ -9,7 +9,16 @@ if (isPost()) {
         htmlspecialchars($presentation_id)
     ])) {
         $connect = DBConnection();
+
+
+     if (getallowCapacity_choose($presentation_id,$connect) ){
         $ChooseLesson = CreateChooseLesson($connect, $_POST);
+     }else{
+         $error=true;
+         $_SESSION['error'] = true;
+         $_SESSION['massage'] = 'ظرفیت کلاس پرشده است';
+         $_SESSION['type'] = 'danger';
+     }
         if ($ChooseLesson){
             $error=true;
             $_SESSION['error'] = true;

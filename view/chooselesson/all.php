@@ -44,6 +44,7 @@ $getAllchoose_lesson_info_all= getAllchoose_lesson_info_all($conn);
                         <th>نام گروه درسی</th>
                         <th>شماره کلاس</th>
                         <th>ظرفیت کلاس </th>
+                        <th>ظرفیت رزرو شده </th>
                         <th>روز برگزاری کلاس </th>
                         <th>ساعت برگزاری کلاس</th>
                         <th>کد ارائه</th>
@@ -78,6 +79,7 @@ $getAllchoose_lesson_info_all= getAllchoose_lesson_info_all($conn);
                         <td><?= $key->educational_group_name?></td>
                         <td><?= $key->class_code?></td>
                         <td><?= $key->capacity?></td>
+                        <td><?= $key->count_capacity?></td>
                         <td><?= $key->day?></td>
                         <td><?= $key->class_time?></td>
                         <td><?= $key->presentation_code?></td>

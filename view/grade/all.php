@@ -64,7 +64,9 @@ $getAllchoose_lesson_info_all= get_grade_all($conn);
                                     <?php
                                      endif;
                                      ?>
-
+                                   <?php
+                                     if  (! is_null( $key->created_at_grade)):
+                                   ?>
                                       <form action="/view/grade/edit.php" id="edit-form-<?= $key->choose_lesson_id ?>">
                                           <input type="hidden" name="choose_lesson_id" value="<?= $key->choose_lesson_id ?>">
                                           <input type="hidden" name="student_id" value="<?= $key->student_id ?>">
@@ -77,6 +79,9 @@ $getAllchoose_lesson_info_all= get_grade_all($conn);
                                     <input type="hidden" name="delete[<?= $key->grade_id ?>]" value="<?= $key->grade_id ?>">
                                     <button type="submit" class="btn btn-danger text-white" >حذف نمره</button>
                                 </form>
+                                     <?php
+                                     endif;
+                                   ?>
                             </div>
                         </td>
 
