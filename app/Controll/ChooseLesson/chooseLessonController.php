@@ -10,9 +10,19 @@ if (isPost()) {
     ])) {
         $connect = DBConnection();
 
-
+if (! getallper_choose_exist($presentation_id,$connect)){
+       $ChooseLesson = CreateChooseLesson($connect, $_POST);
+        }
      if (getallowCapacity_choose($presentation_id,$connect) ){
-        $ChooseLesson = CreateChooseLesson($connect, $_POST);
+       if (! getallowuniq_row_choose($stuednt_id,$presentation_id, $connect)){
+           $ChooseLesson = CreateChooseLesson($connect, $_POST);
+       }else{
+           $error=true;
+           $_SESSION['error'] = true;
+           $_SESSION['massage'] ='انتخاب انجام شده';
+           $_SESSION['type'] = 'danger';
+       }
+
      }else{
          $error=true;
          $_SESSION['error'] = true;

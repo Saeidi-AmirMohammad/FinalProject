@@ -750,6 +750,26 @@ function getallowCapacity_choose($id, $conn)
 
     return $classroom_id ? $classroom_id : false;
 }
+function getallper_choose_exist($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM `Capacity_choose_all` WHERE Capacity_choose_all.presentation_id=:id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $classroom_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $classroom_id ? $classroom_id : false;
+}
+function getallowuniq_row_choose($id1,$id2, $conn)
+{
+    $statement = $conn->prepare(" SELECT * FROM `UNIQUE_choos_row` 
+WHERE UNIQUE_choos_row.stuednt_id=:id1 AND UNIQUE_choos_row.presentation_id=:id2
+ ");
+    $statement->bindparam("id1", $id1);
+    $statement->bindparam("id2", $id2);
+    $statement->execute();
+    $classroom_id = $statement->fetch(PDO::FETCH_OBJ);
+    return $classroom_id ? $classroom_id : false;
+}
 
 function createClassRoom($connection, $data)
 {
