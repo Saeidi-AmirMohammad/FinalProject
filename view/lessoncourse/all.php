@@ -1,12 +1,78 @@
 <?php
-
-
 require '../layout/haeder.php';
 $conn = DBConnection();
 $data = getAllLessonCourse($conn);
-
+//lessonCourse_reshtehtahsili_Get_id()
 ?>
 
+<?php
+if ( $_SESSION["user_type"]==3):
+?>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">جدول دروس</h3>
+                <div class="card-tools">
+
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <th>شناسه درس</th>
+                        <th>نام درس</th>
+                        <th>کد درس</th>
+                        <th>نوع درس</th>
+                        <th>ساعت عملی</th>
+                        <th>ساعت تئوری</th>
+                        <th>پیشنیاز</th>
+                        <th>کد پیشنیاز</th>
+                        <th>واحد عملی</th>
+                        <th>واحد تئوری</th>
+
+                    </tr>
+                    <tr>
+                        <?php
+                        $user_now=getid_student_all_end($conn,$_SESSION['user_id']);
+//var_dump($user_now[0]->reshteTahsili_id);die;
+                        $i=$user_now[0]->reshteTahsili_id;
+                      $dd=lessonCourse_reshtehtahsili_Get_id($i,$conn);
+                        foreach ($dd
+                        as $key):
+                        ?>
+                        <td><?= $key->id ?>
+
+                        </td>
+                        <td><?= $key->name ?></td>
+                        <td><?= $key->code ?></td>
+                        <td><?= $key->type ?></td>
+                        <td><?= $key->saat_amali ?></td>
+                        <td><?= $key->saat_teori ?></td>
+                        <td><?= $key->pishniaz ?></td>
+                        <td><?= $key->code_pishniaz ?></td>
+                        <td><?= $key->vahed_amali ?></td>
+                        <td><?= $key->vahed_teori ?></td>
+
+                    </tr>
+                    <?php
+                    endforeach;
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<?php
+endif;
+
+if ( $_SESSION["user_type"]==2 ||  $_SESSION["user_type"]==1 ||  $_SESSION["user_type"]==4 ):
+?>
 
 <div class="row">
     <div class="col-12">
@@ -15,12 +81,12 @@ $data = getAllLessonCourse($conn);
                 <h3 class="card-title">جدول دروس</h3>
                 <div class="card-tools">
                     <div class="d-flex">
-<!--                        <div class="input-group input-group-sm" style="width: 150px;">-->
-<!--                            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">-->
-<!--                            <div class="input-group-append">-->
-<!--                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                        <div class="input-group input-group-sm" style="width: 150px;">-->
+                        <!--                            <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">-->
+                        <!--                            <div class="input-group-append">-->
+                        <!--                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                         <a href="create.php" class="btn btn-primary text-white mx-1 ">ایجاد درس</a>
                     </div>
                 </div>
@@ -82,6 +148,12 @@ $data = getAllLessonCourse($conn);
         <!-- /.card -->
     </div>
 </div>
+
+<?php
+endif;
+
+
+?>
 
 
 <?php

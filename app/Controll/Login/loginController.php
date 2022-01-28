@@ -22,6 +22,8 @@ if (ispost()) {
         if ($user) {
             if ($out_seryal_hash == $user->serial_number) {
                 $_SESSION['user'] = $user->m_code;
+                $_SESSION['user_type']=$user->type_id;
+                $_SESSION['user_id']=$user->id;
 
                 $_SESSION['error'] = true;
                 $_SESSION['massage'] = $user->fname . " " . $user->lname . " " . "خوش آمدید";

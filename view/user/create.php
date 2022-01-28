@@ -89,10 +89,18 @@ require '../layout/haeder.php';
                 </div>
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
+
                     <select class="form-control" id="type" name="type">
                         <option  selected >لطفا انتخاب کنید</option>
                         <option id="teacher" value="1">استاد</option>
+                        <?php
+                        if ( $_SESSION["user_type"]!=2):
+
+                        ?>
                         <option id="employee" value="2">کارمند</option>
+                        <?php
+                        endif;
+                        ?>
                         <option id="student" value="3">دانشجو</option>
                     </select>
                 </div>

@@ -13,9 +13,8 @@ require '../layout/haeder.php';
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">نویسنده</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="نویسنده را وارد کنید"
-                           name="author" value="">
+                    <input type="hidden" class="form-control" id="exampleInputEmail1"
+                           name="author" value="<?=$_SESSION['user_id']?>">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">عنوان</label>

@@ -3,7 +3,9 @@
 
 require '../layout/haeder.php';
 
-
+$conn= DBConnection();
+$data=getAllReshteTahsili($conn);
+//var_dump($data);die;
 ?>
 
 
@@ -32,6 +34,18 @@ require '../layout/haeder.php';
                         <option value="عمومي">عمومي</option>
                         <option value="پایه">پایه</option>
                         <option value="کارآموزی">کارآموزی</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="type">رشته تحصیلی</label>
+                    <select class="form-control" id="type" name="resteh_tahsili_id">
+                        <?php
+                        foreach ($data as $key):
+                        ?>
+                        <option value="<?=$key->id ?>"><?= $key->name ?></option>
+                        <?php
+                        endforeach;
+                        ?>
                     </select>
                 </div>
 

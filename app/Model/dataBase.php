@@ -89,6 +89,24 @@ function getmartabe_elmi($id, $connection)
 
 }
 
+function getgrade_all_id($id, $connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `grade_all` WHERE grade_all.teacher_id=:id  ");
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
+function getchoose_lesson_info_all_id($id, $connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `choose_lesson_info_all` WHERE choose_lesson_info_all.teacher_id=:id  ");
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
 function getgrade_id($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `garde`  WHERE chooseLesson_id=:id  ");
@@ -446,12 +464,13 @@ function createLessonCourse($connection, $data)
 {
     try {
         extract($data);
-        $stmt = $connection->prepare("INSERT INTO `lesson_course` (name, code, type, saat_amali, saat_teori, pishniaz, code_pishniaz, 
+        $stmt = $connection->prepare("INSERT INTO `lesson_course` (resteh_tahsili_id,name, code, type, saat_amali, saat_teori, pishniaz, code_pishniaz, 
 vahed_amali, vahed_teori, created_at)
-                                        VALUES (:name, :code, :type, :saat_amali, :saat_teori, :pishniaz, :code_pishniaz, 
+                                        VALUES (:resteh_tahsili_id,:name, :code, :type, :saat_amali, :saat_teori, :pishniaz, :code_pishniaz, 
                                         :vahed_amali, :vahed_teori, :created_at)");
         $stmt->bindparam(':name', $name);
         $stmt->bindparam(':code', $code, PDO::PARAM_INT);
+        $stmt->bindparam(':resteh_tahsili_id', $resteh_tahsili_id, PDO::PARAM_INT);
         $stmt->bindparam(':type', $type);
         $stmt->bindparam(':saat_amali', $saat_amali, PDO::PARAM_INT);
         $stmt->bindparam(':saat_teori', $saat_teori, PDO::PARAM_INT);
@@ -519,6 +538,15 @@ function lessonCourse_Get_id($id, $conn)
     $statement->bindparam("id", $id);
     $statement->execute();
     $lessonCourse_id = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $lessonCourse_id ? $lessonCourse_id : false;
+}
+function lessonCourse_reshtehtahsili_Get_id($id, $conn)
+{
+    $statement = $conn->prepare("SELECT * FROM `lesson_course` WHERE lesson_course.resteh_tahsili_id=:id");
+    $statement->bindparam("id", $id);
+    $statement->execute();
+    $lessonCourse_id = $statement->fetchAll(PDO::FETCH_OBJ);
 
     return $lessonCourse_id ? $lessonCourse_id : false;
 }
@@ -1009,6 +1037,39 @@ function getid_classroom_group($connection,$id)
 function getid_user_end($connection,$id)
 {
     $stmt = $connection->prepare("SELECT * FROM `user` WHERE  `id`=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+    $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+function getid_student_all_end($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `student_all` WHERE  `user_id_student`=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+    $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+function getid_teacher_all_end($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `teacher_all` WHERE  `teacher_user_id`=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+    $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+function getid_persentation_end($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `presentation_capacity` WHERE presentation_capacity.teacher_id=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+    $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+
+function getid_news_end($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `news` WHERE news.author=:id  ");
     $stmt->bindparam("id", $id);
     $stmt->execute();
     $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
