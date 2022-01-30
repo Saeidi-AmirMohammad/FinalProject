@@ -10,8 +10,9 @@ $classroom = getAllClassRoom($conn);
 $dataPresentaio=getAllPresentaion($conn);
 $per_now=getid_persentation_end($conn,$_SESSION['user_id']);
 //echo  "<pre>";
-//var_dump($dataPresentaio);die;
+//var_dump($_SESSION);die;
 //echo  "</pre>";
+
 ?>
 
 <?php
@@ -258,7 +259,14 @@ if ( $_SESSION["user_type"]==3):
                         </tr>
                         <tr>
                             <?php
-                            foreach ($presentaion
+
+                            $d=getid_student_all_end($conn,$_SESSION['user_id']);
+                         //   var_dump($d[0]->reshteTahsili_id);
+
+                            $reshteh=$d[0]->reshteTahsili_id;
+                           $dd= getid_presentation_reshteh_($conn,$reshteh);
+                         //  var_dump($dd);die;
+                            foreach ($dd
                             as $key):
                             ?>
                             <td><?= $key->id ?>

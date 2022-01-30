@@ -215,7 +215,11 @@ if ( $_SESSION["user_type"]==3):
                         </tr>
                         <tr>
                             <?php
-                            foreach ($getAllchoose_lesson_info_all
+
+                        //    $d=getid_student_all_end($conn,$_SESSION['user_id']);
+                        $dd=getid_choose_lesson_info_all_studentid_end($conn,$_SESSION['user_id']);
+                         //   var_dump($dd);
+                            foreach ($dd
                             as $key):
                             ?>
                             <td><?= $key->choose_lesson_id ?>

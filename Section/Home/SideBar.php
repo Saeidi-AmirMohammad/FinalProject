@@ -89,12 +89,7 @@
                       </p>
                   </a>
                   <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="/view/news/create.php" class="nav-link <?php if ($url=='/view/news/create.php'){ echo 'active';}else {echo '';} ?>">
-                              <i class="fa fa-circle-o nav-icon"></i>
-                              <p>ایجاد خبر</p>
-                          </a>
-                      </li>
+
                       <li class="nav-item">
                           <a href="/view/news/all.php" class="nav-link <?php if ($url=='/view/news/all.php'){ echo 'active';}else {echo '';} ?>">
                               <i class="fa fa-circle-o nav-icon"></i>

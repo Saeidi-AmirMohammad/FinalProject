@@ -39,8 +39,11 @@ if ( $_SESSION["user_type"]==3):
                         <td><?= $key->id ?>
 
                         </td>
-
-                        <td><?= $key->author ?></td>
+                        <?php
+                        $user_now=getid_user_end($conn,$key->author);
+                        //   var_dump($user_now);
+                        ?>
+                        <td><?=  $user_now[0]->fname .  $user_now[0]->lname ?></td>
                         <td><?= $key->title ?></td>
                         <td><?= $key->description ?></td>
                         <td>
@@ -64,7 +67,7 @@ if ( $_SESSION["user_type"]==3):
 <?php
 endif;
 
-if ( $_SESSION["user_type"]==2 ||  $_SESSION["user_type"]==1 ||  $_SESSION["user_type"]==4 ):
+if ( $_SESSION["user_type"]==2 ||   $_SESSION["user_type"]==4 ):
 ?>
 <div class="row">
     <div class="col-12">
@@ -135,6 +138,63 @@ if ( $_SESSION["user_type"]==2 ||  $_SESSION["user_type"]==1 ||  $_SESSION["user
 
 <?php
 endif;
+if ( $_SESSION["user_type"]==1 ):
+?>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">جدول اخبار</h3>
+
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <th>شناسه خبر</th>
+                        <th>نویسنده</th>
+                        <th>عنوان خبر</th>
+                        <th>متن خبر</th>
+                        <th>تاریخ</th>
+                    </tr>
+                    <tr>
+                        <?php
+                        foreach ($data
+                        as $key):
+                        ?>
+                        <td><?= $key->id ?>
+
+                        </td>
+
+                        <?php
+                        $user_now=getid_user_end($conn,$key->author);
+                     //   var_dump($user_now);
+                        ?>
+                        <td><?=  $user_now[0]->fname .  $user_now[0]->lname ?></td>
+                        <td><?= $key->title ?></td>
+                        <td><?= $key->description ?></td>
+                        <td>
+                            <?php
+                            convert_to_Jalali($key->date)
+                            ?>
+                        </td>
+                    </tr>
+                    <?php
+                    endforeach;
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+<?php
+endif;
+
 ?>
 
 <?php

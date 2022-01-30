@@ -43,7 +43,7 @@ if ( $_SESSION["user_type"]==3):
                     </tr>
                     <tr>
                         <?php
-                        $get_now=getgrade_all_id($_SESSION['user_id'],$conn);
+                        $get_now=getgrade_all_student_id($_SESSION['user_id'],$conn);
 
                         foreach ($get_now
                         as $key):

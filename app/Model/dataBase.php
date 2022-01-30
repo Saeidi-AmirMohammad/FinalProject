@@ -89,9 +89,36 @@ function getmartabe_elmi($id, $connection)
 
 }
 
+function getstudentreshteTahsili_id_($id, $connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM user 
+    INNER JOIN student
+    ON user.id = student.user_id_student   WHERE student.reshteTahsili_id=:id  ");
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+function getstudentreshteTahsili_id_2($id, $connection)
+{
+    $stmt = $connection->prepare("SELECT user.id'student_id', presentation.id, lesson_course.name'lesson_course_name' , educational_group.name'educational_group_name' , user.fname'teacher_fname' , user.lname'teacher_lname' , classroom.class_code , presentation.capacity, presentation.day, presentation.class_time ,presentation.presentation_code , presentation_reshteh.resteh_tahsili_id FROM presentation INNER JOIN lesson_course ON presentation.lessonCourse_id=lesson_course.id INNER JOIN educational_group ON presentation.educationalGroup_id=educational_group.id INNER JOIN user ON user.type_id=1 AND presentation.teacher_id=user.id INNER JOIN classroom ON presentation.classRoom_id=classroom.id INNER JOIN presentation_reshteh on presentation_reshteh.id=presentation.id WHERE presentation_reshteh.resteh_tahsili_id=:id  ");
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+
 function getgrade_all_id($id, $connection)
 {
     $stmt = $connection->prepare("SELECT * FROM `grade_all` WHERE grade_all.teacher_id=:id  ");
+    $stmt->bindparam("id", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+
+}
+function getgrade_all_student_id($id, $connection)
+{
+    $stmt = $connection->prepare("SELECT * FROM `grade_all` WHERE grade_all.student_id=:id  ");
     $stmt->bindparam("id", $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
@@ -120,8 +147,7 @@ function getgrade_id($id, $connection)
 function getpresentation_id( )
 {
     $stmt = DBConnection()->prepare("
-SELECT user.id'student_id',  presentation.id,  lesson_course.name'lesson_course_name' , educational_group.name'educational_group_name' , user.fname'teacher_fname' , user.lname'teacher_lname' , classroom.class_code , presentation.capacity, presentation.day, presentation.class_time ,presentation.presentation_code FROM presentation INNER JOIN lesson_course ON presentation.lessonCourse_id=lesson_course.id INNER JOIN educational_group ON presentation.educationalGroup_id=educational_group.id INNER JOIN user ON user.type_id=1 AND presentation.teacher_id=user.id INNER JOIN classroom ON presentation.classRoom_id=classroom.id  
-
+    SELECT user.id'student_id', presentation.id, lesson_course.name'lesson_course_name' , educational_group.name'educational_group_name' , user.fname'teacher_fname' , user.lname'teacher_lname' , classroom.class_code , presentation.capacity, presentation.day, presentation.class_time ,presentation.presentation_code , presentation_reshteh.resteh_tahsili_id FROM presentation INNER JOIN lesson_course ON presentation.lessonCourse_id=lesson_course.id INNER JOIN educational_group ON presentation.educationalGroup_id=educational_group.id INNER JOIN user ON user.type_id=1 AND presentation.teacher_id=user.id INNER JOIN classroom ON presentation.classRoom_id=classroom.id INNER JOIN presentation_reshteh on presentation_reshteh.id=presentation.id 
 ");
 
     $stmt->execute();
@@ -1050,6 +1076,14 @@ function getid_student_all_end($connection,$id)
     $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
     return $data ? $data : false;
 }
+function getid_choose_lesson_info_all_studentid_end($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `choose_lesson_info_all` WHERE choose_lesson_info_all.student_id=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+    $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
 function getid_teacher_all_end($connection,$id)
 {
     $stmt = $connection->prepare("SELECT * FROM `teacher_all` WHERE  `teacher_user_id`=:id ");
@@ -1061,6 +1095,14 @@ function getid_teacher_all_end($connection,$id)
 function getid_persentation_end($connection,$id)
 {
     $stmt = $connection->prepare("SELECT * FROM `presentation_capacity` WHERE presentation_capacity.teacher_id=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+    $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+function getid_presentation_reshteh_($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `presentation_reshteh` WHERE presentation_reshteh.resteh_tahsili_id=:id ");
     $stmt->bindparam("id", $id);
     $stmt->execute();
     $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
