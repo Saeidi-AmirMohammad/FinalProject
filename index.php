@@ -1,6 +1,7 @@
 <?php
 require "./Section/index/header.php";
 require  __DIR__."/bootstrap/autoload.php";
+
 ?>
 <body class="img js-fullheight" style="background-image: url(./Public/IndexAssist/Image/login_bg.jpg);">
 <section class="ftco-section">

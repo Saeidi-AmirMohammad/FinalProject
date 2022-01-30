@@ -9,7 +9,9 @@ $data=getgrade_id($_GET['choose_lesson_id'],$conn);
 echo "<pre>";
 //var_dump($data);
 echo "</pre>";
-
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 
 

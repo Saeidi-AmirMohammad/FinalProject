@@ -3,6 +3,9 @@
 require __DIR__."/../../Section/Home/header.php";
 require __DIR__."/../../bootstrap/autoload.php";
 login_before('../../index.php');
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 //http_response_code(404);
 //include('../../404.html'); // provide your own HTML for the error page
 //die();

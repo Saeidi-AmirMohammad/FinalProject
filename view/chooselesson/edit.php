@@ -21,7 +21,9 @@ echo "<pre>";
 //$get= getpresentation_id(23 , $conn);
 //var_dump($get[0]);die;
 echo "</pre>";
-
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 
 <form role="form" action="../../app/Controll/ChooseLesson/editController.php" method="post">

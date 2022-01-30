@@ -13,6 +13,9 @@ $_SESSION['edit'] = $_GET['edit'];
 $presentation = presentation_Get_id($id, $conn);
 //$get=getAllPresentaion($conn);
 //var_dump($presentation);
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 <?php
 //var_dump($presentation);

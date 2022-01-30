@@ -1,5 +1,11 @@
 <?php
 require __DIR__ . '/../../../bootstrap/autoload.php';
+
+
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
+
 $conn=DBConnection();
 foreach ($_POST['delete'] as $key){
         chooselesson_delete_id($key,$conn);

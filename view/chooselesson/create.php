@@ -14,7 +14,9 @@ echo "<pre>";
 //$get= getpresentation_id(23 , $conn);
 //var_dump($get[0]);die;
 echo "</pre>";
-
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 <?php
 if ($_SESSION['user_type']==3):

@@ -1,6 +1,18 @@
 <?php
 require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
+
+
+
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
+
+
+
+
+
+
 //var_dump($_POST);die;
 if (isPost()) {
     extract($_POST);

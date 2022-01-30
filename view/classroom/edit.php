@@ -7,6 +7,9 @@ $connect = DBConnection();
 
 $id=$_GET['edit'];
 $classroom= classroom_Get_id($id,$connect);
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 
 

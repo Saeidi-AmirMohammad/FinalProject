@@ -3,7 +3,9 @@
 require '../layout/haeder.php';
 $conn = DBConnection();
 $data = getAllEducationalGroup($conn);
-
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 
 

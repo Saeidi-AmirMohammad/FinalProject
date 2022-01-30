@@ -2,6 +2,16 @@
 require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
 
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
+
+
+
+
+
+
+
 $connect = DBConnection();
 
 

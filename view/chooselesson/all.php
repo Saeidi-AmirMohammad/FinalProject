@@ -15,6 +15,9 @@ $getAllchoose_lesson_info_all= getAllchoose_lesson_info_all($conn);
 //echo  "<pre>";
 //var_dump($getAllchoose_lesson_info_all);die;
 //echo  "</pre>";
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 
 <?php

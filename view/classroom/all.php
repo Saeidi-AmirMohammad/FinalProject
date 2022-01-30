@@ -4,7 +4,9 @@
 require '../layout/haeder.php';
 $conn = DBConnection();
 $data = getAllClassRoom($conn);
-
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 
 

@@ -7,6 +7,9 @@ $connect = DBConnection();
 
 $id=$_GET['edit'];
 $type= educationalgroup_Get_id($id,$connect);
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 ?>
 
 

@@ -6,7 +6,9 @@ $id = $_SESSION['edit'];
 $user= user_Get_id($id,$connect);
 $id = $user->id;
 $employee = getAllemploy($id, $connect);
-
+if (!isset($_SESSION['user'])) {
+    header('Location: /index.php ');
+}
 foreach ($employee as $key):
 ?>
 
