@@ -47,12 +47,7 @@ if (! getallper_choose_exist($presentation_id,$connect)){
             $_SESSION['massage'] = 'باموفقیت ثبت شد';
             $_SESSION['type'] = 'success';
         }
-//        else{
-//            $error=false;
-//            $_SESSION['error'] = true;
-//            $_SESSION['massage'] = 'کد ملی ، ایمیل ، شماره شناسنامه و تلفن همراه نمی توانند تکراری باشند';
-//            $_SESSION['type'] = 'danger';
-//        }
+
     }else{
         $error=false;
         $_SESSION['error'] = true;

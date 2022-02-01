@@ -369,7 +369,7 @@ function getLoginUser($connection, $m_code)
     return $user ? $user : false;
 }
 
-function createUser($connection, $data)
+function createUser_Common($connection, $data)
 {
     extract($data);
     $stmt = $connection->prepare("INSERT INTO `user` (fname, lname, email, tell, m_code, address, serial_number, 
@@ -1045,6 +1045,14 @@ function getidlesson_course($connection,$id)
 function getideducational_group($connection,$id)
 {
     $stmt = $connection->prepare("SELECT * FROM `educational_group` WHERE  `id`=:id ");
+    $stmt->bindparam("id", $id);
+    $stmt->execute();
+     $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array
+    return $data ? $data : false;
+}
+function getidreshteh_tahsili_group($connection,$id)
+{
+    $stmt = $connection->prepare("SELECT * FROM `reshte_tahsili`  WHERE  `id`=:id ");
     $stmt->bindparam("id", $id);
     $stmt->execute();
      $data= $stmt->fetchAll(PDO::FETCH_OBJ); //Convert Tabel To Array

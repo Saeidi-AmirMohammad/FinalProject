@@ -11,6 +11,7 @@ function login_after($location= "../view/home.php"){
         reDirect($location);
     }
 }
+
 function login_before($location=__DIR__."/../index.php"){
     if(! isset($_SESSION['user'])){
         reDirect($location);
@@ -53,20 +54,6 @@ function old($field)
     return  $a;
 }
 
-//function alertMe($error = false , $title = "عمليات موفقيت آميز بود" , $type = "info"){
-//    if ($error == false){
-//        return "";
-//    }
-//echo "<script type=\"text/javascript\">$(document).ready(function(){
-//  swal({
-//    position: \"top-end\",
-//    type: '{$type}',
-//    title: '{$title}',
-//    showConfirmButton: false,
-////    timer: 1500
-//  })
-//});</script>";
-//}
 function alertMe($error = false , $title  , $type){
     if ($error == false){
         return "";
@@ -86,7 +73,6 @@ echo "
 </div>
 ";
 }
-
 
 function convert($in_post_date){
     //شمسی به میلادی
@@ -119,7 +105,6 @@ function convert_to_Jalali($in_post_date){
     }
 }
 
-
 function toEnNumber($input) {
     $replace_pairs = array(
         '۰' => '0', '۱' => '1', '۲' => '2', '۳' => '3', '۴' => '4', '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9',
@@ -128,7 +113,6 @@ function toEnNumber($input) {
 
     return strtr( $input, $replace_pairs );
 }
-
 
 function validation_requre($item){
     $counter_error=0;

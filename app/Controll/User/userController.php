@@ -1,24 +1,9 @@
 <?php
 require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
-//$n=\Carbon\Carbon::now();
-//$date = jdate();
-echo "<pre>";
+
+
 var_dump($_POST);
-
-echo "</pre>";
-
-//function user_func()
-//{
-//    extract($_POST);
-//    commonality_student($type, $fname, $lname, $email, $tell, $m_code, $address, $serial_number, $jender, $father_name, $birthday_place, $mazhab, $university);
-//
-//    reDirect("../../../view/user/all.php");
-//}
-//
-//
-
-
 
 /*---------------------------teacher--------------------------------*/
 
@@ -26,7 +11,7 @@ echo "</pre>";
 function teacher_func()
 {
     extract($_POST);
-    commonality($type, $fname,
+ teacher_All_ispost($type, $fname,
         $lname, $email,
         $tell, $m_code,
         $address, $serial_number,
@@ -42,63 +27,38 @@ function teacher_func()
     reDirect("../../../view/user/all.php");
 }
 
-function commonality($type, $fname,
-                     $lname, $email,
-                     $tell, $m_code,
-                     $address, $serial_number,
-                     $jender, $father_name,
-                     $birthday_place, $mazhab,
-                     $university, $codeModares,
-                     $martabeElmi_id, $employmentType_id,
-                     $teachingType_id, $madrak_id,
-                     $educationalGroup_id, $hozeDoroos_id)
+function teacher_All_ispost($type, $fname,
+                            $lname, $email,
+                            $tell, $m_code,
+                            $address, $serial_number,
+                            $jender, $father_name,
+                            $birthday_place, $mazhab,
+                            $university, $codeModares,
+                            $martabeElmi_id, $employmentType_id,
+                            $teachingType_id, $madrak_id,
+                            $educationalGroup_id, $hozeDoroos_id)
 {
     $out_date = convert($_POST["birthday"]);
     if (isPost()) {
         extract($_POST);
-        create_user_($type, $fname, $lname, $email, $tell, $m_code, $address, $serial_number, $jender, $father_name, $birthday_place, $mazhab, $university, $out_date, $codeModares,
+        teacher_validation_and_create($type, $fname, $lname, $email, $tell, $m_code, $address, $serial_number, $jender, $father_name, $birthday_place, $mazhab, $university, $out_date, $codeModares,
             $martabeElmi_id, $employmentType_id,
             $teachingType_id, $madrak_id,
             $educationalGroup_id, $hozeDoroos_id);
 
-    } else {
-        $error = false;
-        $_SESSION['error'] = true;
-        $_SESSION['massage'] = 'لطفا درخواست خود را به صورت post ارسال کیند';
-        $_SESSION['type'] = 'danger';
     }
 }
 
-function un_commonality_teacher(
-    $teacher_user_id,
-    $codeModares,
-    $martabeElmi_id, $employmentType_id,
-    $teachingType_id, $madrak_id,
-    $educationalGroup_id, $hozeDoroos_id)
-{
-    if (isPost()) {
-        //  extract($_POST);
-        create_Teacher_($teacher_user_id, $codeModares,
-            $martabeElmi_id, $employmentType_id,
-            $teachingType_id, $madrak_id,
-            $educationalGroup_id, $hozeDoroos_id);
-    } else {
-        $error = false;
-        $_SESSION['error'] = true;
-        $_SESSION['massage'] = 'لطفا درخواست خود را به صورت post ارسال کیند';
-        $_SESSION['type'] = 'danger';
-    }
-}
 
-function create_user_($type, $fname, $lname, $email,
-                      $tell, $m_code, $address, $serial_number,
-                      $jender, $father_name, $birthday_place,
-                      $mazhab, $university, string $out_date, $codeModares,
-                      $martabeElmi_id, $employmentType_id,
-                      $teachingType_id, $madrak_id,
-                      $educationalGroup_id, $hozeDoroos_id)
+function teacher_validation_and_create($type, $fname, $lname, $email,
+                                       $tell, $m_code, $address, $serial_number,
+                                       $jender, $father_name, $birthday_place,
+                                       $mazhab, $university, string $out_date, $codeModares,
+                                       $martabeElmi_id, $employmentType_id,
+                                       $teachingType_id, $madrak_id,
+                                       $educationalGroup_id, $hozeDoroos_id)
 {
-    if (validate_user_(
+    if (validate_data(
         $type, $fname, $lname, $email, $tell, $m_code,
         $address, $serial_number, $jender, $father_name, $birthday_place,
         $mazhab, $university, $out_date, $codeModares,
@@ -107,49 +67,40 @@ function create_user_($type, $fname, $lname, $email,
         $educationalGroup_id, $hozeDoroos_id)) {
         $connect = DBConnection();
         $_POST['birthday'] = $out_date;
-        createUser($connect, $_POST);
+       $out= createUser_Common($connect, $_POST);
         $lastest_user = getlastestUserData($connect);
         $id_userNew = $lastest_user[0]->id;
         $teacher_user_id = $id_userNew;
-        un_commonality_teacher(
-            $teacher_user_id,
-            $codeModares,
+        $out2= createTeacher_un_commonality($connect, $teacher_user_id, $codeModares,
             $martabeElmi_id, $employmentType_id,
             $teachingType_id, $madrak_id,
             $educationalGroup_id, $hozeDoroos_id);
 
+        if (!($out) ||  !($out2)){
+            $_SESSION['error'] = true;
+            $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
+            $_SESSION['type'] = 'danger';
+            reDirect("../../../view/user/all.php");
+        }else{
+            $_SESSION['error'] = true;
+            $_SESSION['massage'] ='با موفقیت ایجاد شد';
+            $_SESSION['type'] = 'success';
+        }
+    }else{
+        $_SESSION['error'] = true;
+        $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
+        $_SESSION['type'] = 'danger';
+        reDirect("../../../view/user/all.php");
     }
 }
 
-function create_Teacher_(
-    $teacher_user_id,
-    $codeModares,
+function validate_data($type, $fname, $lname, $email,
+    $tell, $m_code, $address, $serial_number,
+    $jender, $father_name, $birthday_place, $mazhab, $university,
+                       string $out_date,
     $martabeElmi_id, $employmentType_id,
     $teachingType_id, $madrak_id,
-    $educationalGroup_id,
-    $hozeDoroos_id)
-{
-    if (validate_Teacer_($teacher_user_id, $codeModares,
-        $martabeElmi_id, $employmentType_id,
-        $teachingType_id, $madrak_id,
-        $educationalGroup_id, $hozeDoroos_id)) {
-        $connect = DBConnection();
-        // return $_POST;
-        createTeacher_un_commonality($connect, $teacher_user_id, $codeModares,
-            $martabeElmi_id, $employmentType_id,
-            $teachingType_id, $madrak_id,
-            $educationalGroup_id, $hozeDoroos_id);
-
-    }
-}
-
-function validate_user_($type, $fname, $lname, $email,
-                        $tell, $m_code, $address, $serial_number,
-                        $jender, $father_name, $birthday_place, $mazhab, $university,
-                        string $out_date,
-                              $martabeElmi_id, $employmentType_id,
-                            $teachingType_id, $madrak_id,
-                            $educationalGroup_id, $hozeDoroos_id
+    $educationalGroup_id, $hozeDoroos_id
 ): bool
 {
     return validation_requre([
@@ -176,34 +127,13 @@ function validate_user_($type, $fname, $lname, $email,
     ]);
 }
 
-function validate_Teacer_(
-    $teacher_user_id,
-    $codeModares,
-    $martabeElmi_id, $employmentType_id,
-    $teachingType_id, $madrak_id,
-    $educationalGroup_id, $hozeDoroos_id): bool
-{
-    return validation_requre([
-        htmlspecialchars($teacher_user_id),
-        htmlspecialchars($codeModares),
-        htmlspecialchars($martabeElmi_id),
-        htmlspecialchars($employmentType_id),
-        htmlspecialchars($teachingType_id),
-        is_numeric(htmlspecialchars($madrak_id)),
-        is_numeric(htmlspecialchars($educationalGroup_id)),
-        htmlspecialchars($hozeDoroos_id)
-    ]);
-}
-
-
-
 /*---------------------------teacher--------------------------------*/
 
 /*---------------------------employee--------------------------------*/
 function employee_func()
 {
     extract($_POST);
-    commonality_employ(
+    all_employ_ispost(
         $type, $fname,
         $lname, $email,
         $tell, $m_code,
@@ -215,52 +145,38 @@ function employee_func()
     reDirect("../../../view/user/all.php");
 }
 
-function commonality_employ(   $type, $fname,
-                               $lname, $email,
-                               $tell, $m_code,
-                               $address, $serial_number,
-                               $jender, $father_name,
-                               $birthday_place, $mazhab,
-                               $university, $codeStandard)
+function all_employ_ispost($type, $fname,
+                           $lname, $email,
+                           $tell, $m_code,
+                           $address, $serial_number,
+                           $jender, $father_name,
+                           $birthday_place, $mazhab,
+                           $university, $codeStandard)
 {
     $out_date = convert($_POST["birthday"]);
     if (isPost()) {
         extract($_POST);
-
-        create_user_employ(
+        validate_and_Create_employ(
             $type, $fname,
             $lname, $email,
             $tell, $m_code,
             $address, $serial_number,
             $jender, $father_name,
             $birthday_place, $mazhab,
-            $university,$out_date,
+            $university, $out_date,
             $codeStandard);
 
     }
 }
 
-function un_commonality_employ(
-    $employ_user_id,
-    $codeStandard
-)
-{
-    if (isPost()) {
-        create_employ_(
-            $employ_user_id,
-            $codeStandard
-        );
-    }
-}
-
-function create_user_employ(
+function validate_and_Create_employ(
     $type, $fname,
     $lname, $email,
     $tell, $m_code,
     $address, $serial_number,
     $jender, $father_name,
     $birthday_place, $mazhab,
-    $university,$out_date,
+    $university, $out_date,
     $codeStandard
 )
 {
@@ -271,52 +187,31 @@ function create_user_employ(
         $address, $serial_number,
         $jender, $father_name,
         $birthday_place, $mazhab,
-        $university,$out_date,
+        $university, $out_date,
         $codeStandard
     )) {
-
         $connect = DBConnection();
         $_POST['birthday'] = $out_date;
-        $user = createUser($connect, $_POST);
+        $out = createUser_Common($connect, $_POST);
         $lastest_user = getlastestUserData($connect);
         $id_userNew = $lastest_user[0]->id;
         $employ_user_id = $id_userNew;
-        echo "<pre>";
-        var_dump(  $type, $fname,
-            $lname, $email,
-            $tell, $m_code,
-            $address, $serial_number,
-            $jender, $father_name,
-            $birthday_place, $mazhab,
-            $university,$out_date,
-            $codeStandard, $employ_user_id
-
-        );
-        echo "</pre>";
-        un_commonality_employ(
-            $employ_user_id,
-            $codeStandard
-        );
-    }
-}
-
-function create_employ_(
-    $employ_user_id,
-    $codeStandard
-)
-{
-    if (validate_employ_(
-        $employ_user_id,
-        $codeStandard
-    )) {
-        $connect = DBConnection();
-        // return $_POST;
-        $user = createEmploy_un_commonality(
+        $out2=  createEmploy_un_commonality(
             $connect,
             $employ_user_id,
             $codeStandard
         );
 
+        if (!($out) ||  !($out2)){
+            $_SESSION['error'] = true;
+            $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
+            $_SESSION['type'] = 'danger';
+            reDirect("../../../view/user/all.php");
+        }else{
+            $_SESSION['error'] = true;
+            $_SESSION['massage'] ='با موفقیت ایجاد شد';
+            $_SESSION['type'] = 'success';
+        }
     }
 }
 
@@ -327,7 +222,7 @@ function validate_user_employ(
     $address, $serial_number,
     $jender, $father_name,
     $birthday_place, $mazhab,
-    $university,string $out_date,
+    $university, string $out_date,
     $codeStandard
 ): bool
 {
@@ -350,17 +245,6 @@ function validate_user_employ(
     ]);
 }
 
-function validate_employ_(
-    $employ_user_id,
-    $codeStandard): bool
-{
-    return validation_requre([
-        htmlspecialchars($employ_user_id),
-        htmlspecialchars($codeStandard),
-    ]);
-}
-
-
 
 /*---------------------------employee--------------------------------*/
 
@@ -370,7 +254,7 @@ function student_func()
 {
     extract($_POST);
 
-    commonality_student(
+    all_student(
         $type, $fname,
         $lname, $email,
         $tell, $m_code,
@@ -385,7 +269,7 @@ function student_func()
     reDirect("../../../view/user/all.php");
 }
 
-function commonality_student(
+function all_student(
     $type, $fname,
     $lname, $email,
     $tell, $m_code,
@@ -401,37 +285,14 @@ function commonality_student(
     $out_date = convert($_POST["birthday"]);
     if (isPost()) {
         extract($_POST);
-
-        create_user_student(
+        validate_and_create_student(
             $type, $fname,
             $lname, $email,
             $tell, $m_code,
             $address, $serial_number,
             $jender, $father_name,
             $birthday_place, $mazhab,
-            $university,$out_date, $codeDaneshjo,
-            $maghtae_id, $reshteTahsili_id,
-            $termVorod_id, $nobatePaziresh_id,
-            $vazeiateNezamVazife_id
-
-
-        );
-
-    }
-}
-
-function un_commonality_student(
-    $student_user_id,
-    $codeDaneshjo,
-    $maghtae_id, $reshteTahsili_id,
-    $termVorod_id, $nobatePaziresh_id,
-    $vazeiateNezamVazife_id
-)
-{
-    if (isPost()) {
-        create_student_(
-            $student_user_id,
-            $codeDaneshjo,
+            $university, $out_date, $codeDaneshjo,
             $maghtae_id, $reshteTahsili_id,
             $termVorod_id, $nobatePaziresh_id,
             $vazeiateNezamVazife_id
@@ -439,28 +300,29 @@ function un_commonality_student(
     }
 }
 
-function create_user_student(
+
+function validate_and_create_student(
     $type, $fname,
     $lname, $email,
     $tell, $m_code,
     $address, $serial_number,
     $jender, $father_name,
     $birthday_place, $mazhab,
-    $university,$out_date, $codeDaneshjo,
+    $university, $out_date, $codeDaneshjo,
     $maghtae_id, $reshteTahsili_id,
     $termVorod_id, $nobatePaziresh_id,
     $vazeiateNezamVazife_id
 
 )
 {
-    if (validate_user_student(
+    if (validate_student(
         $type, $fname,
         $lname, $email,
         $tell, $m_code,
         $address, $serial_number,
         $jender, $father_name,
         $birthday_place, $mazhab,
-        $university,$out_date, $codeDaneshjo,
+        $university, $out_date, $codeDaneshjo,
         $maghtae_id, $reshteTahsili_id,
         $termVorod_id, $nobatePaziresh_id,
         $vazeiateNezamVazife_id
@@ -469,39 +331,11 @@ function create_user_student(
 
         $connect = DBConnection();
         $_POST['birthday'] = $out_date;
-        createUser($connect, $_POST);
+        $out= createUser_Common($connect, $_POST);
         $lastest_user = getlastestUserData($connect);
         $id_userNew = $lastest_user[0]->id;
         $student_user_id = $id_userNew;
-
-        un_commonality_student(
-            $student_user_id,
-            $codeDaneshjo,
-            $maghtae_id, $reshteTahsili_id,
-            $termVorod_id, $nobatePaziresh_id,
-            $vazeiateNezamVazife_id
-        );
-    }
-}
-
-function create_student_(
-    $student_user_id,
-    $codeDaneshjo,
-    $maghtae_id, $reshteTahsili_id,
-    $termVorod_id, $nobatePaziresh_id,
-    $vazeiateNezamVazife_id
-)
-{
-    if (validate_student_(
-        $student_user_id,
-        $codeDaneshjo,
-        $maghtae_id, $reshteTahsili_id,
-        $termVorod_id, $nobatePaziresh_id,
-        $vazeiateNezamVazife_id
-    )) {
-        $connect = DBConnection();
-        // return $_POST;
-        createStudent_un_commonality(
+        $out2= createStudent_un_commonality(
             $connect,
             $student_user_id,
             $codeDaneshjo,
@@ -509,18 +343,27 @@ function create_student_(
             $termVorod_id, $nobatePaziresh_id,
             $vazeiateNezamVazife_id
         );
-
+        if (!($out) ||  !($out2)){
+            $_SESSION['error'] = true;
+            $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
+            $_SESSION['type'] = 'danger';
+            reDirect("../../../view/user/all.php");
+        }else{
+            $_SESSION['error'] = true;
+            $_SESSION['massage'] ='با موفقیت ایجاد شد';
+            $_SESSION['type'] = 'success';
+        }
     }
 }
 
-function validate_user_student(
+function validate_student(
     $type, $fname,
     $lname, $email,
     $tell, $m_code,
     $address, $serial_number,
     $jender, $father_name,
     $birthday_place, $mazhab,
-    $university,string $out_date, $codeDaneshjo,
+    $university, string $out_date, $codeDaneshjo,
     $maghtae_id, $reshteTahsili_id,
     $termVorod_id, $nobatePaziresh_id,
     $vazeiateNezamVazife_id
@@ -543,11 +386,11 @@ function validate_user_student(
         htmlspecialchars($mazhab),
         htmlspecialchars($university),
         htmlspecialchars($codeDaneshjo),
-       is_numeric(htmlspecialchars($maghtae_id)),
-       is_numeric(htmlspecialchars($reshteTahsili_id)),
-       is_numeric(htmlspecialchars($termVorod_id)),
-       is_numeric(htmlspecialchars($nobatePaziresh_id)),
-       is_numeric(htmlspecialchars($vazeiateNezamVazife_id))
+        is_numeric(htmlspecialchars($maghtae_id)),
+        is_numeric(htmlspecialchars($reshteTahsili_id)),
+        is_numeric(htmlspecialchars($termVorod_id)),
+        is_numeric(htmlspecialchars($nobatePaziresh_id)),
+        is_numeric(htmlspecialchars($vazeiateNezamVazife_id))
     ]);
 }
 
@@ -582,13 +425,12 @@ switch (true) {
     case $_POST['type'] == '3':
         student_func();
         break;
+    default:
+        $_SESSION['error'] = true;
+        $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
+        $_SESSION['type'] = 'danger';
+        reDirect("../../../view/user/all.php");
 }
-//user_func();
-//teacher_func();
-//student_func();
-//employee_func();
 
-
-
-
+//reDirect("../../../view/user/all.php");
 

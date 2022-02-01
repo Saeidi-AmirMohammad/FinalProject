@@ -45,7 +45,7 @@ function teacher_func()
     extract($_POST);
 
 
-    commonality($type, $fname,
+    teacher_All_ispost($type, $fname,
         $lname, $email,
         $tell, $m_code,
         $address, $serial_number,
@@ -91,7 +91,7 @@ function commonality($type, $fname,
     $out_date = convert($_POST["birthday"]);
     if (isPost()) {
         extract($_POST);
-        create_user_($type, $fname, $lname, $email, $tell, $m_code, $address, $serial_number, $jender, $father_name, $birthday_place, $mazhab, $university, $out_date, $codeModares,
+        teacher_validation_and_create($type, $fname, $lname, $email, $tell, $m_code, $address, $serial_number, $jender, $father_name, $birthday_place, $mazhab, $university, $out_date, $codeModares,
             $martabeElmi_id, $employmentType_id,
             $teachingType_id, $madrak_id,
             $educationalGroup_id, $hozeDoroos_id);
@@ -149,7 +149,7 @@ function create_user_($type, $fname, $lname, $email,
                       $teachingType_id, $madrak_id,
                       $educationalGroup_id, $hozeDoroos_id)
 {
-    if (validate_user_(
+    if (validate_data(
         $type, $fname, $lname, $email, $tell, $m_code,
         $address, $serial_number, $jender, $father_name, $birthday_place,
         $mazhab, $university, $out_date, $codeModares,
@@ -301,7 +301,7 @@ function validate_Teacer_(
 function employee_func()
 {
     extract($_POST);
-    commonality_employ(
+    all_employ_ispost(
         $type, $fname,
         $lname, $email,
         $tell, $m_code,
@@ -325,7 +325,7 @@ function commonality_employ(   $type, $fname,
     if (isPost()) {
         extract($_POST);
 
-        create_user_employ(
+        validate_and_Create_employ(
             $type, $fname,
             $lname, $email,
             $tell, $m_code,
@@ -391,7 +391,7 @@ function create_user_employ(
 
         $connect = DBConnection();
         $_POST['birthday'] = $out_date;
-        $user = createUser($connect, $_POST);
+        $user = createUser_Common($connect, $_POST);
         $lastest_user = getlastestUserData($connect);
         $id_userNew = $lastest_user[0]->id;
         $employ_user_id = $id_userNew;
@@ -503,7 +503,7 @@ function student_func()
 {
     extract($_POST);
 
-    commonality_student(
+    all_student(
         $type, $fname,
         $lname, $email,
         $tell, $m_code,
@@ -535,7 +535,7 @@ function commonality_student(
     if (isPost()) {
         extract($_POST);
 
-        create_user_student(
+        validate_and_create_student(
             $type, $fname,
             $lname, $email,
             $tell, $m_code,
@@ -602,7 +602,7 @@ function create_user_student(
 
 )
 {
-    if (validate_user_student(
+    if (validate_student(
         $type, $fname,
         $lname, $email,
         $tell, $m_code,
@@ -618,7 +618,7 @@ function create_user_student(
 
         $connect = DBConnection();
         $_POST['birthday'] = $out_date;
-        createUser($connect, $_POST);
+        createUser_Common($connect, $_POST);
         $lastest_user = getlastestUserData($connect);
         $id_userNew = $lastest_user[0]->id;
         $student_user_id = $id_userNew;

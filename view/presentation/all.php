@@ -42,8 +42,7 @@ if ( $_SESSION["user_type"]==1):
                     </tr>
                     <tr>
                         <?php
-                        foreach ($per_now
-                        as $key):
+                        foreach ($per_now as $key):
                         ?>
                         <td><?= $key->id ?>
 
@@ -175,9 +174,8 @@ if ( $_SESSION["user_type"]==4):
                             endforeach;
                             ?>
 
-
                             <?php
-                            $data_=  getideducational_group($conn,$key->educationalGroup_id);
+                            $data_=  getidreshteh_tahsili_group($conn,$key->resteh_tahsili_id);
                             foreach ($data_
                                      as $keyo):
                                 ?>
@@ -248,7 +246,8 @@ if ( $_SESSION["user_type"]==3):
                         <tr>
                             <th>شناسه ارائه</th>
                             <th>نام درس</th>
-                            <th>نام گروه درسی</th>
+<!--                          <th>نام گروه درسی</th>-->
+                            <th>رشته درسی</th>
                             <th>نام استاد</th>
                             <th>شماره کلاس</th>
                             <th>ظرفیت کلاس</th>
@@ -284,8 +283,9 @@ if ( $_SESSION["user_type"]==3):
                             ?>
 
 
+
                             <?php
-                            $data_=  getideducational_group($conn,$key->educationalGroup_id);
+                            $data_=  getidreshteh_tahsili_group($conn,$key->resteh_tahsili_id);
                             foreach ($data_
                                      as $keyo):
                                 ?>
@@ -398,9 +398,8 @@ if ( $_SESSION["user_type"]==2):
                             endforeach;
                             ?>
 
-
                             <?php
-                            $data_=  getideducational_group($conn,$key->educationalGroup_id);
+                            $data_=  getidreshteh_tahsili_group($conn,$key->resteh_tahsili_id);
                             foreach ($data_
                                      as $keyo):
                                 ?>
