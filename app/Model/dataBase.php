@@ -334,7 +334,7 @@ function user_update($id, $data, $conn)
 ,   `updated_at`=:updated_at
 WHERE  `id`=:id ");
         $statement->bindparam("id", $id, PDO::PARAM_INT);
-        $statement->bindparam("type_id", $type_id, PDO::PARAM_INT);
+        $statement->bindparam("type_id", $type, PDO::PARAM_INT);
         $statement->bindparam("fname", $fname);
         $statement->bindparam("lname", $lname);
         $statement->bindparam("email", $email);
@@ -1294,8 +1294,6 @@ function updateTeacher_un_commonality($connection, $teacher_user_id, $codeModare
                                       $teachingType_id, $madrak_id,
                                       $educationalGroup_id, $hozeDoroos_id)
 {
-
-
     $stmt = $connection->prepare("
 UPDATE `teacher` SET 
                   `teacher_user_id`=:teacher_user_id,
@@ -1306,8 +1304,7 @@ UPDATE `teacher` SET
                    `madrak_id`= :madrak_id,
                    `educationalGroup_id`=:educationalGroup_id,
                    `hozeDoroos_id`=:hozeDoroos_id,
-                   `updated_at`=:updated_at WHERE  `teacher_user_id`=:teacher_user_id   
-                                         
+                   `updated_at`=:updated_at  WHERE  `teacher_user_id`=:teacher_user_id        
     ");
     $stmt->bindparam(':teacher_user_id', $teacher_user_id, PDO::PARAM_INT);
     $stmt->bindparam(':codeModares', $codeModares);

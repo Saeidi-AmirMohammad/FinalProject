@@ -3,15 +3,11 @@ require __DIR__ . '/../../../bootstrap/autoload.php';
 login_before("../../../index.php");
 
 
-var_dump($_POST);
-
 /*---------------------------teacher--------------------------------*/
-
-
 function teacher_func()
 {
     extract($_POST);
- teacher_All_ispost($type, $fname,
+    teacher_All_ispost($type, $fname,
         $lname, $email,
         $tell, $m_code,
         $address, $serial_number,
@@ -67,26 +63,26 @@ function teacher_validation_and_create($type, $fname, $lname, $email,
         $educationalGroup_id, $hozeDoroos_id)) {
         $connect = DBConnection();
         $_POST['birthday'] = $out_date;
-       $out= createUser_Common($connect, $_POST);
+        $out = createUser_Common($connect, $_POST);
         $lastest_user = getlastestUserData($connect);
         $id_userNew = $lastest_user[0]->id;
         $teacher_user_id = $id_userNew;
-        $out2= createTeacher_un_commonality($connect, $teacher_user_id, $codeModares,
+        $out2 = createTeacher_un_commonality($connect, $teacher_user_id, $codeModares,
             $martabeElmi_id, $employmentType_id,
             $teachingType_id, $madrak_id,
             $educationalGroup_id, $hozeDoroos_id);
 
-        if (!($out) ||  !($out2)){
+        if (!($out) || !($out2)) {
             $_SESSION['error'] = true;
             $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
             $_SESSION['type'] = 'danger';
             reDirect("../../../view/user/all.php");
-        }else{
+        } else {
             $_SESSION['error'] = true;
-            $_SESSION['massage'] ='با موفقیت ایجاد شد';
+            $_SESSION['massage'] = 'با موفقیت ایجاد شد';
             $_SESSION['type'] = 'success';
         }
-    }else{
+    } else {
         $_SESSION['error'] = true;
         $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
         $_SESSION['type'] = 'danger';
@@ -196,20 +192,20 @@ function validate_and_Create_employ(
         $lastest_user = getlastestUserData($connect);
         $id_userNew = $lastest_user[0]->id;
         $employ_user_id = $id_userNew;
-        $out2=  createEmploy_un_commonality(
+        $out2 = createEmploy_un_commonality(
             $connect,
             $employ_user_id,
             $codeStandard
         );
 
-        if (!($out) ||  !($out2)){
+        if (!($out) || !($out2)) {
             $_SESSION['error'] = true;
             $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
             $_SESSION['type'] = 'danger';
             reDirect("../../../view/user/all.php");
-        }else{
+        } else {
             $_SESSION['error'] = true;
-            $_SESSION['massage'] ='با موفقیت ایجاد شد';
+            $_SESSION['massage'] = 'با موفقیت ایجاد شد';
             $_SESSION['type'] = 'success';
         }
     }
@@ -328,14 +324,13 @@ function validate_and_create_student(
         $vazeiateNezamVazife_id
 
     )) {
-
         $connect = DBConnection();
         $_POST['birthday'] = $out_date;
-        $out= createUser_Common($connect, $_POST);
+        $out = createUser_Common($connect, $_POST);
         $lastest_user = getlastestUserData($connect);
         $id_userNew = $lastest_user[0]->id;
         $student_user_id = $id_userNew;
-        $out2= createStudent_un_commonality(
+        $out2 = createStudent_un_commonality(
             $connect,
             $student_user_id,
             $codeDaneshjo,
@@ -343,14 +338,14 @@ function validate_and_create_student(
             $termVorod_id, $nobatePaziresh_id,
             $vazeiateNezamVazife_id
         );
-        if (!($out) ||  !($out2)){
+        if (!($out) || !($out2)) {
             $_SESSION['error'] = true;
             $_SESSION['massage'] = 'عملیات ناموفق لطفا برسی کنید';
             $_SESSION['type'] = 'danger';
             reDirect("../../../view/user/all.php");
-        }else{
+        } else {
             $_SESSION['error'] = true;
-            $_SESSION['massage'] ='با موفقیت ایجاد شد';
+            $_SESSION['massage'] = 'با موفقیت ایجاد شد';
             $_SESSION['type'] = 'success';
         }
     }
@@ -432,5 +427,4 @@ switch (true) {
         reDirect("../../../view/user/all.php");
 }
 
-//reDirect("../../../view/user/all.php");
 

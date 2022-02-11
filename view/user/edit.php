@@ -15,6 +15,7 @@ $user= user_Get_id($id,$connect);
 
 
 <form role="form" action="../../app/Controll/User/editController.php" method="post">
+
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
@@ -108,11 +109,12 @@ $user= user_Get_id($id,$connect);
                 </div>
                 <div class="form-group">
                     <label for="type">نوع کاربر</label>
-                    <select class="form-control" id="type" name="type" disabled >
+                    <select class="form-control" id="type"  disabled >
                         <option id="teacher"  value="1" <?= $user->type_id==='1' ? 'selected' :'' ?> >استاد</option>
                         <option id="employee"  value="2" <?= $user->type_id==='2' ? 'selected' :'' ?> >کارمند</option>
                         <option id="student"  value="3" <?= $user->type_id==='3' ? 'selected' :'' ?> >دانشجو</option>
                     </select>
+                    <input type="hidden" name="type" value="<?php echo  $user->type_id; ?>">
                 </div>
             </div>
         </div>
